@@ -81,26 +81,31 @@ public class PAMTask: RXMultipleImageSelectionSurveyTask {
 //        self.itemMinSpacing = jsonParser.YADLSpotAssessmentActivityMinSpacing
     }
     
-    convenience public init(identifier: String, propertiesFileName: String) {
+    convenience public init(identifier: String) {
         
-        guard let filePath = NSBundle.mainBundle().pathForResource(propertiesFileName, ofType: "json")
+        self.init(identifier: identifier, propertiesFileName: "PAM", bundle: NSBundle(forClass: PAMTask.self))
+    }
+    
+    convenience public init(identifier: String, propertiesFileName: String, bundle: NSBundle = NSBundle.mainBundle()) {
+        
+        guard let filePath = bundle.pathForResource(propertiesFileName, ofType: "json")
             else {
-                fatalError("Unable to location file with YADL Spot Assessment Section in main bundle")
+                fatalError("Unable to locate file PAM.json")
         }
         
         guard let fileContent = NSData(contentsOfFile: filePath)
             else {
-                fatalError("Unable to create NSData with file content (YADL Spot Assessment data)")
+                fatalError("Unable to create NSData with file content (PAM data)")
         }
         
         let spotAssessmentParameters = try! NSJSONSerialization.JSONObjectWithData(fileContent, options: NSJSONReadingOptions.MutableContainers)
         
-        self.init(identifier: identifier, json: spotAssessmentParameters)
+        self.init(identifier: identifier, json: spotAssessmentParameters, bundle: bundle)
     }
     
-    convenience public init(identifier: String, json: AnyObject) {
+    convenience public init(identifier: String, json: AnyObject, bundle: NSBundle = NSBundle.mainBundle()) {
         
-        let jsonParser = RKXJSONParser(json: json)
+        let jsonParser = RKXJSONParser(json: json, bundle: bundle)
         let steps = PAMTask.loadStepsFromJSON(jsonParser)
         
         self.init(identifier: identifier, steps: steps)

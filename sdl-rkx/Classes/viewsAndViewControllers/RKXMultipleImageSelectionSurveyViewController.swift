@@ -26,7 +26,8 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
     }
     
     override convenience init(step: ORKStep?) {
-        let framework = NSBundle(identifier: RKXBundleIdentifier)
+//        let framework = NSBundle(identifier: RKXBundleIdentifier)
+        let framework = NSBundle(forClass: RKXMultipleImageSelectionSurveyViewController.self)
         self.init(nibName: "RKXMultipleImageSelectionSurveyViewController", bundle: framework)
         self.step = step
         self.restorationIdentifier = step!.identifier

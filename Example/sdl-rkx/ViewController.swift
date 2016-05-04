@@ -99,7 +99,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
     }
     @IBAction func launchPAM(sender: AnyObject) {
         
-        let task = PAMTask(identifier: "PAM identifier", propertiesFileName: "PAM")
+        let task = PAMTask(identifier: "PAM identifier")
         
         self.launchAssessmentForTask(task)
         

@@ -104,7 +104,7 @@ class RKXJSONParser: NSObject {
         }
     }
     
-    class func loadPAMItemsFromJSON(itemParameters: [AnyObject]) -> [PAMItemStruct]? {
+    class func loadPAMItemsFromJSON(itemParameters: [AnyObject], bundle: NSBundle) -> [PAMItemStruct]? {
         return itemParameters.map { itemParameters in
             
             guard let itemDict = itemParameters as? [String: AnyObject],
@@ -115,7 +115,8 @@ class RKXJSONParser: NSObject {
             }
             
             let images: [UIImage] = imageTitles.map { imageTitle in
-                guard let image: UIImage = UIImage(named: imageTitle)
+//                guard let image: UIImage = UIImage(named: imageTitle)
+                guard let image: UIImage = UIImage(named: imageTitle, inBundle: bundle, compatibleWithTraitCollection: nil)
                     else {
                         fatalError("Image not found: \(imageTitle)")
                 }
@@ -232,7 +233,7 @@ class RKXJSONParser: NSObject {
                 return nil
         }
         
-        return RKXJSONParser.loadPAMItemsFromJSON(itemParameters)
+        return RKXJSONParser.loadPAMItemsFromJSON(itemParameters, bundle: self.bundle)
     }
     
     var PAMPrompt: String? {
@@ -305,8 +306,10 @@ class RKXJSONParser: NSObject {
     }
 
     let json: AnyObject!
-    init(json: AnyObject) {
+    let bundle: NSBundle!
+    init(json: AnyObject, bundle: NSBundle = NSBundle.mainBundle()) {
         self.json = json
+        self.bundle = bundle
         super.init()
         
     }
