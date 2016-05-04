@@ -36,13 +36,25 @@
                                     <action selector="launchSpotAssessment:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="8w2-ti-Xbn"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vzc-a7-6rY">
+                                <rect key="frame" x="284" y="114" width="32" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="bOQ-0G-tEo"/>
+                                </constraints>
+                                <state key="normal" title="PAM"/>
+                                <connections>
+                                    <action selector="launchPAM:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="j6W-Jn-6cF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="QGu-Pi-f66" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="7li-Uq-D7z"/>
                             <constraint firstItem="hpU-Kf-8WQ" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="U6g-Cp-CRN"/>
                             <constraint firstItem="hpU-Kf-8WQ" firstAttribute="top" secondItem="QGu-Pi-f66" secondAttribute="bottom" constant="18" id="VcW-Kl-T45"/>
+                            <constraint firstItem="vzc-a7-6rY" firstAttribute="top" secondItem="hpU-Kf-8WQ" secondAttribute="bottom" constant="8" symbolic="YES" id="VkC-uW-IcT"/>
                             <constraint firstItem="QGu-Pi-f66" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="d0Y-MD-Bok"/>
+                            <constraint firstItem="vzc-a7-6rY" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="dbe-2C-A8E"/>
                         </constraints>
                     </view>
                 </viewController>

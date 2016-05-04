@@ -7,9 +7,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RKXMultipleImageSelectionSurveyViewController" customModule="sdl_rkx" customModuleProvider="target">
             <connections>
                 <outlet property="imagesCollectionView" destination="f9T-cm-e1F" id="ddB-1l-S6N"/>
-                <outlet property="nothingToReportButton" destination="Nwo-uo-Yk7" id="ihy-di-TtL"/>
+                <outlet property="nothingSelectedButton" destination="Nwo-uo-Yk7" id="jlj-Us-N4q"/>
                 <outlet property="questionTextView" destination="smm-rm-bsK" id="NXs-h1-bYR"/>
-                <outlet property="submitButton" destination="qbv-I2-T8Z" id="Wj7-cr-MCQ"/>
+                <outlet property="somethingSelectedButton" destination="qbv-I2-T8Z" id="FRu-dB-was"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -27,7 +27,7 @@
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbv-I2-T8Z" customClass="RKXBorderedButton" customModule="sdl_rkx" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbv-I2-T8Z" userLabel="SomethingSelectedButton" customClass="RKXBorderedButton" customModule="sdl_rkx" customModuleProvider="target">
                     <rect key="frame" x="226" y="532" width="148" height="60"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="GfG-te-0OI"/>
@@ -36,10 +36,10 @@
                         <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="submitSelected:" destination="-1" eventType="touchUpInside" id="kRX-Ex-Xyn"/>
+                        <action selector="somethingSelectedButtonPressed:" destination="-1" eventType="touchUpInside" id="bhe-b9-RR8"/>
                     </connections>
                 </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nwo-uo-Yk7" userLabel="Nothing To Report Button" customClass="RKXBorderedButton" customModule="sdl_rkx" customModuleProvider="target">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nwo-uo-Yk7" userLabel="NothingSelectedButton" customClass="RKXBorderedButton" customModule="sdl_rkx" customModuleProvider="target">
                     <rect key="frame" x="226" y="532" width="148" height="60"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="6P8-aW-KHU"/>
@@ -48,7 +48,7 @@
                         <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="submitSelected:" destination="-1" eventType="touchUpInside" id="ieY-Sx-pEN"/>
+                        <action selector="nothingSelectedButtonPressed:" destination="-1" eventType="touchUpInside" id="F7N-Te-YiW"/>
                     </connections>
                 </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="f9T-cm-e1F">

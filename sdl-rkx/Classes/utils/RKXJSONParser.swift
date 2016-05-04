@@ -50,6 +50,11 @@ public struct ItemStruct {
     var identifier: String
 }
 
+public struct PAMItemStruct {
+    var images: [UIImage]
+    var value: [String: AnyObject]
+}
+
 public struct ChoiceStruct {
     var text: String
     var value: protocol<NSCoding, NSCopying, NSObjectProtocol>
@@ -96,6 +101,28 @@ class RKXJSONParser: NSObject {
                     fatalError("Malformed Activity: \(activityParameter)")
             }
             return ItemStruct(image: image, description: description, identifier: identifier)
+        }
+    }
+    
+    class func loadPAMItemsFromJSON(itemParameters: [AnyObject]) -> [PAMItemStruct]? {
+        return itemParameters.map { itemParameters in
+            
+            guard let itemDict = itemParameters as? [String: AnyObject],
+                let imageTitles = itemDict["imageTitles"] as? [String],
+                let value = itemDict["value"] as? [String: AnyObject]
+                else {
+                    fatalError("Malformed PAM Item: \(itemParameters)")
+            }
+            
+            let images: [UIImage] = imageTitles.map { imageTitle in
+                guard let image: UIImage = UIImage(named: imageTitle)
+                    else {
+                        fatalError("Image not found: \(imageTitle)")
+                }
+                return image
+            }
+            
+            return PAMItemStruct(images: images, value: value)
         }
     }
     
@@ -189,6 +216,51 @@ class RKXJSONParser: NSObject {
         
         return RKXJSONParser.loadActivitiesFromJSON(activitiesParameters)
     }
+    
+    
+    var PAM: [String:AnyObject]? {
+        guard let pam = self.json.objectForKey("PAM") as? [String:AnyObject]
+            else {
+                return nil
+        }
+        return pam
+    }
+    
+    var PAMItems: [PAMItemStruct]? {
+        guard let itemParameters = self.PAM?["items"] as? [AnyObject]
+            else {
+                return nil
+        }
+        
+        return RKXJSONParser.loadPAMItemsFromJSON(itemParameters)
+    }
+    
+    var PAMPrompt: String? {
+        return self.PAM?[kPromptTag] as? String
+    }
+    
+    var PAMIdentifier: String? {
+        return self.PAM?[kIdentifierTag] as? String
+    }
+    
+    var PAMSummary: SummaryStruct? {
+        guard let summaryParameters = self.PAM?[kSummaryTag]
+            else {
+                return nil
+        }
+        
+        return RKXJSONParser.loadSummaryFromJSON(summaryParameters)
+    }
+    
+    var PAMNoActivitiesSummary: SummaryStruct? {
+        guard let summaryParameters = self.PAM?[kSummaryNoActivitiesTag]
+            else {
+                return nil
+        }
+        
+        return RKXJSONParser.loadSummaryFromJSON(summaryParameters)
+    }
+    
     
     var YADLSpotAssessmentOptions: [String: AnyObject]? {
         return self.YADLSpotAssessment?[kOptionsTag] as? [String: AnyObject]

@@ -1,6 +1,6 @@
 //
-//  YADLSpotAssessmentStepViewController.swift
-//  YADL
+//  RKXMultipleImageSelectionSurveyViewController.swift
+//  SDL-RKX
 //
 //  Created by James Kizer on 4/5/16.
 //  Copyright © 2016 Cornell Tech Foundry. All rights reserved.
@@ -18,8 +18,8 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
     
     @IBOutlet weak var questionTextView: UITextView!
     @IBOutlet weak var imagesCollectionView: UICollectionView!
-    @IBOutlet weak var submitButton: UIButton!
-    @IBOutlet weak var nothingToReportButton: UIButton!
+    @IBOutlet weak var somethingSelectedButton: UIButton!
+    @IBOutlet weak var nothingSelectedButton: UIButton!
     
     override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -38,23 +38,23 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
     }
     
     // Params for user to configure
-    var submitButtonColor: UIColor? {
+    var somethingSelectedButtonColor: UIColor? {
         didSet {
-            if let submitButton = self.submitButton as? RKXBorderedButton {
-                submitButton.configuredColor = self.submitButtonColor
+            if let somethingSelectedButton = self.somethingSelectedButton as? RKXBorderedButton {
+                somethingSelectedButton.configuredColor = self.somethingSelectedButtonColor
             }
         }
     }
     
-    var nothingToReportButtonColor: UIColor? {
+    var nothingSelectedButtonColor: UIColor? {
         didSet {
-            if let nothingToReportButton = self.nothingToReportButton as? RKXBorderedButton {
-                nothingToReportButton.configuredColor = self.nothingToReportButtonColor
+            if let nothingSelectedButton = self.nothingSelectedButton as? RKXBorderedButton {
+                nothingSelectedButton.configuredColor = self.nothingSelectedButtonColor
             }
         }
     }
     
-    var activityCellSelectedColor:UIColor? {
+    var itemCellSelectedColor:UIColor? {
         didSet {
             if let collectionView = self.imagesCollectionView {
                 collectionView.reloadData()
@@ -62,7 +62,7 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         }
     }
     
-    var activityCellSelectedOverlayImage: UIImage? = nil {
+    var itemCellSelectedOverlayImage: UIImage? = nil {
         didSet {
             if let collectionView = self.imagesCollectionView {
                 collectionView.reloadData()
@@ -71,16 +71,16 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
     }
     
     //collection view background color
-    var activityCollectionViewBackgroundColor = UIColor.clearColor() {
+    var itemCollectionViewBackgroundColor = UIColor.clearColor() {
         didSet {
             if let collectionView = self.imagesCollectionView {
-                collectionView.backgroundColor = activityCollectionViewBackgroundColor
+                collectionView.backgroundColor = self.itemCollectionViewBackgroundColor
             }
         }
     }
     
     //collectionViewLayout properties
-    var activitiesPerRow = 3 {
+    var itemsPerRow = 3 {
         didSet {
             if let collectionView = self.imagesCollectionView {
                 collectionView.collectionViewLayout.invalidateLayout()
@@ -88,7 +88,7 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         }
     }
     
-    var activityMinSpacing: CGFloat = 10.0 {
+    var itemMinSpacing: CGFloat = 10.0 {
         didSet {
             if let collectionView = self.imagesCollectionView {
                 collectionView.collectionViewLayout.invalidateLayout()
@@ -118,31 +118,31 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         }
     }
     
-    func setupOptionsFromTask(task: YADLSpotAssessmentTask) {
-        if let submitButtonColor = task.submitButtonColor {
-            self.submitButtonColor = submitButtonColor
+    func setupOptionsFromTask(task: RXMultipleImageSelectionSurveyTask) {
+        if let somethingSelectedButtonColor = task.somethingSelectedButtonColor {
+            self.somethingSelectedButtonColor = somethingSelectedButtonColor
         }
         
-        if let nothingToReportButtonColor = task.nothingToReportButtonColor {
-            self.nothingToReportButtonColor = nothingToReportButtonColor
+        if let nothingSelectedButtonColor = task.nothingSelectedButtonColor {
+            self.nothingSelectedButtonColor = nothingSelectedButtonColor
         }
         
-        if let activityCellSelectedColor = task.activityCellSelectedColor {
-            self.activityCellSelectedColor = activityCellSelectedColor
+        if let itemCellSelectedColor = task.itemCellSelectedColor {
+            self.itemCellSelectedColor = itemCellSelectedColor
         }
         
-        self.activityCellSelectedOverlayImage = task.activityCellSelectedOverlayImage
+        self.itemCellSelectedOverlayImage = task.itemCellSelectedOverlayImage
         
-        if let activityCollectionViewBackgroundColor = task.activityCollectionViewBackgroundColor {
-            self.activityCollectionViewBackgroundColor = activityCollectionViewBackgroundColor
+        if let itemCollectionViewBackgroundColor = task.itemCollectionViewBackgroundColor {
+            self.itemCollectionViewBackgroundColor = itemCollectionViewBackgroundColor
         }
         
-        if let activitiesPerRow = task.activitiesPerRow {
-            self.activitiesPerRow = activitiesPerRow
+        if let itemsPerRow = task.itemsPerRow {
+            self.itemsPerRow = itemsPerRow
         }
         
-        if let activityMinSpacing = task.activityMinSpacing {
-            self.activityMinSpacing = activityMinSpacing
+        if let itemMinSpacing = task.itemMinSpacing {
+            self.itemMinSpacing = itemMinSpacing
         }
     }
     
@@ -183,6 +183,14 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
                 return selectedAnswer.identifier
         }
     }
+    
+    func clearSelectedAnswers() {
+        if let selectedAnswers = self.selectedAnswers() {
+            selectedAnswers.forEach { selectedAnswer in
+                self.setSelectedForValue(selectedAnswer, selected: false)
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -192,14 +200,14 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         
         self.imagesCollectionView.delegate = self
         self.imagesCollectionView.dataSource = self
-        self.imagesCollectionView.backgroundColor = self.activityCollectionViewBackgroundColor
+        self.imagesCollectionView.backgroundColor = self.itemCollectionViewBackgroundColor
         
-        if let submitButton = self.submitButton as? RKXBorderedButton {
-            submitButton.configuredColor = self.submitButtonColor
+        if let somethingSelectedButton = self.somethingSelectedButton as? RKXBorderedButton {
+            somethingSelectedButton.configuredColor = self.somethingSelectedButtonColor
         }
         
-        if let nothingToReportButton = self.nothingToReportButton as? RKXBorderedButton {
-            nothingToReportButton.configuredColor = self.nothingToReportButtonColor
+        if let nothingSelectedButton = self.nothingSelectedButton as? RKXBorderedButton {
+            nothingSelectedButton.configuredColor = self.nothingSelectedButtonColor
         }
 
         if let step = self.step as? RKXMultipleImageSelectionSurveyStep {
@@ -207,29 +215,37 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         }
         
         if let taskViewController = self.taskViewController,
-            let task = taskViewController.task as? YADLSpotAssessmentTask {
+            let task = taskViewController.task as? RXMultipleImageSelectionSurveyTask {
             self.setupOptionsFromTask(task)
         }
         
         self.updateUI()
     }
+    
+    
 
     func updateUI() {
         //nothing to report button is visible IFF there are no selected images
         //submit button is visible IFF there are 1 or more selected images
         //submit button title contains the number of selected images
         if let selectedAnswers = self.selectedAnswers() {
+
+            self.somethingSelectedButton.setTitle(self.somethingSelectedButtonText, forState: UIControlState.Normal)
+            self.nothingSelectedButton.setTitle(self.nothingSelectedButtonText, forState: UIControlState.Normal)
             
-            if selectedAnswers.count > 0 {
-                self.submitButton.setTitle("Submit (\(selectedAnswers.count))", forState: UIControlState.Normal)
-            }
-            
-            self.submitButton.hidden = !(selectedAnswers.count > 0)
-            self.nothingToReportButton.hidden = (selectedAnswers.count > 0)
+            self.somethingSelectedButton.hidden = !(selectedAnswers.count > 0)
+            self.nothingSelectedButton.hidden = (selectedAnswers.count > 0)
         }
         
         //reload collection view
         self.imagesCollectionView.reloadData()
+    }
+    
+    func notifyDelegateAndMoveForward() {
+        if let delegate = self.delegate {
+            delegate.stepViewControllerResultDidChange(self)
+        }
+        self.goForward()
     }
     
     // MARK: - UICollectionView Methods
@@ -263,8 +279,8 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         }
         yadlCell.activityImage = imageChoice.normalStateImage
         yadlCell.selected = self.getSelectedForValue(imageChoice.value)!
-        yadlCell.selectedBackgroundColor = self.activityCellSelectedColor
-        if let selectedImage = self.activityCellSelectedOverlayImage {
+        yadlCell.selectedBackgroundColor = self.itemCellSelectedColor
+        if let selectedImage = self.itemCellSelectedOverlayImage {
             yadlCell.selectedOverlayImage = selectedImage
         }
         
@@ -275,37 +291,80 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         guard let imageChoice = self.imageChoiceAtIndex(indexPath.row)
             else { return }
         
-        self.setSelectedForValue(imageChoice.value, selected: !self.getSelectedForValue(imageChoice.value)!)
+        if !self.supportsMultipleSelection {
+            if let currentlySelected = self.getSelectedForValue(imageChoice.value) {
+                self.clearSelectedAnswers()
+                self.setSelectedForValue(imageChoice.value, selected: !currentlySelected)
+            }
+            else {
+                self.clearSelectedAnswers()
+            }
+        }
+        else {
+            self.setSelectedForValue(imageChoice.value, selected: !self.getSelectedForValue(imageChoice.value)!)
+        }
         
-        self.updateUI()
+        
+        if self.transitionOnSelection {
+            self.notifyDelegateAndMoveForward()
+        }
+        else {
+            self.updateUI()
+        }
+        
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let collectionViewWidth = collectionView.bounds.width
-        let cellWidth = (collectionViewWidth - CGFloat(self.activitiesPerRow + 1)*self.activityMinSpacing) / CGFloat(self.activitiesPerRow)
+        let cellWidth = (collectionViewWidth - CGFloat(self.itemsPerRow + 1)*self.itemMinSpacing) / CGFloat(self.itemsPerRow)
         return CGSize(width: cellWidth, height: cellWidth)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: self.activityMinSpacing, left: self.activityMinSpacing, bottom: self.activityMinSpacing, right: self.activityMinSpacing)
+        return UIEdgeInsets(top: self.itemMinSpacing, left: self.itemMinSpacing, bottom: self.itemMinSpacing, right: self.itemMinSpacing)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return self.activityMinSpacing
+        return self.itemMinSpacing
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return self.activityMinSpacing
+        return self.itemMinSpacing
+    }
+    
+    // MARK: - Subclass Functionality
+    var supportsMultipleSelection: Bool {
+        fatalError("Unimplemented")
+    }
+    
+    var transitionOnSelection: Bool {
+        fatalError("Unimplemented")
+    }
+    
+    // MARK: - Button Methods and Properties
+    // These must be overridden by subclasses
+    
+    var somethingSelectedButtonText: String {
+        fatalError("Unimplemented")
+    }
+    
+    var nothingSelectedButtonText: String {
+        fatalError("Unimplemented")
+    }
+    
+    @IBAction func somethingSelectedButtonPressed(sender: AnyObject) {
+        fatalError("Unimplemented")
+    }
+    
+    @IBAction func nothingSelectedButtonPressed(sender: AnyObject) {
+        fatalError("Unimplemented")
     }
     
     
-    @IBAction func submitSelected(sender: AnyObject) {
-        if let delegate = self.delegate {
-            delegate.stepViewControllerResultDidChange(self)
-        }
-        self.goForward()
-    }
+    //differing step behaviors
     
     
-
+    
+    
+    
 }

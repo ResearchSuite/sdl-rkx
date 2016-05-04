@@ -10,4 +10,8 @@ import UIKit
 
 class YADLSpotAssessmentStep: RKXMultipleImageSelectionSurveyStep {
 
+    override func stepViewControllerClass() -> AnyClass {
+        return YADLSpotAssessmentStepViewController.self
+    }
+    
 }

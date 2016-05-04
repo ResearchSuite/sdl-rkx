@@ -68,6 +68,9 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
                     .map { $0.identifier }
                 self.storeActivitiesForSpotAssessment(activityIdentifiers)
             }
+            else if let _ = taskViewController.task as? PAMTask {
+                print(taskViewController.result)
+            }
         }
         
         taskViewController.dismissViewControllerAnimated(true, completion: nil)
@@ -94,6 +97,13 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
          */
         presentViewController(taskViewController, animated: true, completion: nil)
     }
+    @IBAction func launchPAM(sender: AnyObject) {
+        
+        let task = PAMTask(identifier: "PAM identifier", propertiesFileName: "PAM")
+        
+        self.launchAssessmentForTask(task)
+        
+    }
     @IBAction func launchFullAssessment(sender: AnyObject) {
         
         //create a YADL full assessment task
@@ -109,5 +119,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
         
         self.launchAssessmentForTask(task)
     }
+    
+    
 }
 

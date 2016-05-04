@@ -1,0 +1,187 @@
+{
+    "PAM": {
+        "identifier":"PAMIdentifier",
+        "prompt":"Select the photo that best captures how you feel right now:",
+        "summary":{
+            "identifier": "PAM Summary Identifier",
+            "title":"Thanks",
+            "text":"Thank you for participating in PAM"
+        },
+        "noActivitiesSummary": {
+            "identifier": "PAM No Activities Summary Identifier",
+            "title":"Thanks",
+            "text":"You have no items to measure"
+        },
+        "options":{
+            "submitButtonColor":"#0080ff",
+            "nothingToReportButtonColor":"#FCC103",
+            "activityCellSelectedColor":"#7FEE7D",
+            "activityCellSelectedOverlayImageTitle":"first_tab",
+            "activityCollectionViewBackgroundColor":"#E9E9E9",
+            "activitiesPerRow":3,
+            "activityMinSpacing":10.0
+        },
+        "items":[
+        {
+            "imageTitles": [ "1_1", "1_2", "1_3" ],
+            "value": {
+                 "affect_valence": 0,
+                 "affect_arousal": 4,
+                 "positive_affect": 0,
+                 "negative_affect": 20,
+                 "mood": "afraid"
+            }
+                 },
+                 {
+                 "imageTitles": [ "2_1", "2_2", "2_3" ],
+                 "value": {
+                 "affect_valence": 1,
+                 "affect_arousal": 4,
+                 "positive_affect": 4,
+                 "negative_affect": 16,
+                 "mood": "tense"
+                 }
+                 },
+                 {
+                 "imageTitles": [ "3_1", "3_2", "3_3" ],
+                 "value": {
+                 "affect_valence": 2,
+                 "affect_arousal": 4,
+                 "positive_affect": 8,
+                 "negative_affect": 12,
+                 "mood": "excited"
+                 }
+                 },
+                 {
+                 "imageTitles": [ "4_1", "4_2", "4_3" ],
+                 "value": {
+                 "affect_valence": 3,
+                 "affect_arousal": 4,
+                 "positive_affect": 12,
+                 "negative_affect": 8,
+                 "mood": "delighted"
+                 }
+                 },
+                 {
+                 "imageTitles": [ "5_1", "5_2", "5_3" ],
+                 "value": {
+                 "affect_valence": 0,
+                 "affect_arousal": 3,
+                 "positive_affect": -1,
+                 "negative_affect": 19,
+                 "mood": "frustrated"
+                 }
+                 },
+                 {
+                 "imageTitles": [ "6_1", "6_2", "6_3" ],
+                 "value": {
+                 "affect_valence": 1,
+                 "affect_arousal": 3,
+                 "positive_affect": 3,
+                 "negative_affect": 15,
+                 "mood": "angry"
+                 }
+                 },
+                 {
+                 "imageTitles": [ "7_1", "7_2", "7_3" ],
+                 "value": {
+                 "affect_valence": 2,
+                 "affect_arousal": 3,
+                 "positive_affect": 7,
+                 "negative_affect": 11,
+                 "mood": "happy"
+                 }
+                 },
+                 {
+                 "imageTitles": [ "8_1", "8_2", "8_3" ],
+                 "value": {
+                 "affect_valence": 3,
+                 "affect_arousal": 3,
+                 "positive_affect": 11,
+                 "negative_affect": 7,
+                 "mood": "glad"
+                 }
+                 },
+                 {
+                 "imageTitles": [ "9_1", "9_2", "9_3" ],
+                 "value": {
+                 "affect_valence": 0,
+                 "affect_arousal": 2,
+                 "positive_affect": -2,
+                 "negative_affect": 18,
+                 "mood": "miserable"
+                 }
+                 },
+                 {
+                 "imageTitles": [ "10_1", "10_2", "10_3" ],
+                 "value": {
+                 "affect_valence": 1,
+                 "affect_arousal": 2,
+                 "positive_affect": 2,
+                 "negative_affect": 14,
+                 "mood": "sad"
+                 }
+                 },
+                 {
+                 "imageTitles": [ "11_1", "11_2", "11_3" ],
+                 "value": {
+                 "affect_valence": 2,
+                 "affect_arousal": 2,
+                 "positive_affect": 6,
+                 "negative_affect": 10,
+                 "mood": "calm"
+                 }
+                 },
+                 {
+                 "imageTitles": [ "12_1", "12_2", "12_3" ],
+                 "value": {
+                 "affect_valence": 3,
+                 "affect_arousal": 2,
+                 "positive_affect": 10,
+                 "negative_affect": 6,
+                 "mood": "satisfied"
+                 }
+                 },
+                 {
+                 "imageTitles": [ "13_1", "13_2", "13_3" ],
+                 "value": {
+                 "affect_valence": 0,
+                 "affect_arousal": 1,
+                 "positive_affect": -3,
+                 "negative_affect": 17,
+                 "mood": "gloomy"
+                 }
+                 },
+                 {
+                 "imageTitles": [ "14_1", "14_2", "14_3" ],
+                 "value": {
+                 "affect_valence": 1,
+                 "affect_arousal": 1,
+                 "positive_affect": 1,
+                 "negative_affect": 13,
+                 "mood": "tired"
+                 }
+                 },
+                 {
+                 "imageTitles": [ "15_1", "15_2", "15_3" ],
+                 "value": {
+                 "affect_valence": 2,
+                 "affect_arousal": 1,
+                 "positive_affect": 5,
+                 "negative_affect": 9,
+                 "mood": "sleepy"
+                 }
+                 },
+                 {
+                 "imageTitles": [ "16_1", "16_2", "16_3" ],
+                 "value": {
+                 "affect_valence": 3,
+                 "affect_arousal": 1,
+                 "positive_affect": 9,
+                 "negative_affect": 5,
+                 "mood": "serene"
+                 }
+                 }
+        ]
+    }
+}

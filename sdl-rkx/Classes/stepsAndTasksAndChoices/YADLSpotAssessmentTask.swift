@@ -9,7 +9,7 @@
 import UIKit
 import ResearchKit
 
-public class YADLSpotAssessmentTask: ORKOrderedTask {
+public class YADLSpotAssessmentTask: RXMultipleImageSelectionSurveyTask {
     
 //    public class func spotAssessmentResults(taskResult: ORKTaskResult) -> [ORKChoiceQuestionResult]? {
 //        if let stepResults = taskResult.results as? [ORKStepResult]
@@ -87,22 +87,22 @@ public class YADLSpotAssessmentTask: ORKOrderedTask {
         ]
     }
     
-    var submitButtonColor: UIColor?
-    var nothingToReportButtonColor: UIColor?
-    var activityCellSelectedColor:UIColor?
-    var activityCellSelectedOverlayImage: UIImage?
-    var activityCollectionViewBackgroundColor: UIColor?
-    var activitiesPerRow: Int?
-    var activityMinSpacing: CGFloat?
+//    var submitButtonColor: UIColor?
+//    var nothingToReportButtonColor: UIColor?
+//    var activityCellSelectedColor:UIColor?
+//    var activityCellSelectedOverlayImage: UIImage?
+//    var activityCollectionViewBackgroundColor: UIColor?
+//    var activitiesPerRow: Int?
+//    var activityMinSpacing: CGFloat?
     
     func configureOptions(jsonParser: RKXJSONParser) {
-        self.submitButtonColor = jsonParser.YADLSpotAssessmentSubmitButtonColor
-        self.nothingToReportButtonColor = jsonParser.YADLSpotAssessmentNothingToReportButtonColor
-        self.activityCellSelectedColor = jsonParser.YADLSpotAssessmentActivityCellSelectedColor
-        self.activityCellSelectedOverlayImage = jsonParser.YADLSpotAssessmentActivityCellSelectedOverlayImage
-        self.activityCollectionViewBackgroundColor = jsonParser.YADLSpotAssessmentActivityCollectionViewBackgroundColor
-        self.activitiesPerRow = jsonParser.YADLSpotAssessmentActivitiesPerRow
-        self.activityMinSpacing = jsonParser.YADLSpotAssessmentActivityMinSpacing
+        self.somethingSelectedButtonColor = jsonParser.YADLSpotAssessmentSubmitButtonColor
+        self.nothingSelectedButtonColor = jsonParser.YADLSpotAssessmentNothingToReportButtonColor
+        self.itemCellSelectedColor = jsonParser.YADLSpotAssessmentActivityCellSelectedColor
+        self.itemCellSelectedOverlayImage = jsonParser.YADLSpotAssessmentActivityCellSelectedOverlayImage
+        self.itemCollectionViewBackgroundColor = jsonParser.YADLSpotAssessmentActivityCollectionViewBackgroundColor
+        self.itemsPerRow = jsonParser.YADLSpotAssessmentActivitiesPerRow
+        self.itemMinSpacing = jsonParser.YADLSpotAssessmentActivityMinSpacing
     }
     
     convenience public init(identifier: String, propertiesFileName: String, activityIdentifiers: [String]? = nil) {

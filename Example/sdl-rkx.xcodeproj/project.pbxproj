@@ -11,6 +11,7 @@
 		4806C08C1CD7FDC80024BBB8 /* sdl_rkx.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4806C08A1CD7FDC70024BBB8 /* sdl_rkx.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4806C08F1CD7FDCC0024BBB8 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4806C08E1CD7FDCC0024BBB8 /* ResearchKit.framework */; };
 		4806C0901CD7FDCC0024BBB8 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4806C08E1CD7FDCC0024BBB8 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4852DACE1CD9691100D7B4C2 /* PAM.json in Resources */ = {isa = PBXBuildFile; fileRef = 4852DACD1CD9691100D7B4C2 /* PAM.json */; };
 		48CB54171CD80CA100D26F68 /* YADL.json in Resources */ = {isa = PBXBuildFile; fileRef = 48CB54161CD80CA000D26F68 /* YADL.json */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -55,6 +56,7 @@
 		36FA1E42E47494C7424DA65A /* Pods_sdl_rkx_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sdl_rkx_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4806C08A1CD7FDC70024BBB8 /* sdl_rkx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = sdl_rkx.framework; path = "/Users/jk/Library/Developer/Xcode/DerivedData/sdl-rkx-ezfobbiocdyjajdcuucywqqbdhzj/Build/Products/Debug-iphoneos/sdl-rkx/sdl_rkx.framework"; sourceTree = "<absolute>"; };
 		4806C08E1CD7FDCC0024BBB8 /* ResearchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ResearchKit.framework; path = "/Users/jk/Library/Developer/Xcode/DerivedData/sdl-rkx-ezfobbiocdyjajdcuucywqqbdhzj/Build/Products/Debug-iphoneos/ResearchKit/ResearchKit.framework"; sourceTree = "<absolute>"; };
+		4852DACD1CD9691100D7B4C2 /* PAM.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PAM.json; sourceTree = "<group>"; };
 		48CB54161CD80CA000D26F68 /* YADL.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = YADL.json; sourceTree = "<group>"; };
 		525025A37AA7852C42A505AE /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* sdl-rkx_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sdl-rkx_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				48CB54161CD80CA000D26F68 /* YADL.json */,
+				4852DACD1CD9691100D7B4C2 /* PAM.json */,
 				607FACD41AFB9204008FA782 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -280,6 +283,7 @@
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				48CB54171CD80CA100D26F68 /* YADL.json in Resources */,
+				4852DACE1CD9691100D7B4C2 /* PAM.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
