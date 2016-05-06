@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class PAMStepViewController: RKXMultipleImageSelectionSurveyViewController {
 
     // MARK: - Required by superclass

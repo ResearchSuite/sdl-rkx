@@ -45,7 +45,7 @@ public class RKXCopingMechanismDescriptor: RKXImageDescriptor {
                 fatalError("Cannot find image named \(imageTitle) in \(bundle)")
                 return nil
         }
-        return RKXImageChoiceWithAdditionalText(image: image, text: self.generalDescription, additionalText: self.specificDescription, value: self.identifier)
+        return RKXImageChoiceWithAdditionalText(image: image, text: self.specificDescription, additionalText: self.generalDescription, value: self.identifier)
     }
     
     override init(itemDictionary: [String: AnyObject]) {

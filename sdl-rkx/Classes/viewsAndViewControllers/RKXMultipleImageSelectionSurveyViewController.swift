@@ -20,6 +20,8 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
     @IBOutlet weak var imagesCollectionView: UICollectionView!
     @IBOutlet weak var somethingSelectedButton: UIButton!
     @IBOutlet weak var nothingSelectedButton: UIButton!
+    @IBOutlet weak var additionalTextView: UITextView!
+    @IBOutlet weak var additionalTextViewHeightConstraint: NSLayoutConstraint!
     
     override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -51,6 +53,14 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         didSet {
             if let nothingSelectedButton = self.nothingSelectedButton as? RKXBorderedButton {
                 nothingSelectedButton.configuredColor = self.nothingSelectedButtonColor
+            }
+        }
+    }
+    
+    var itemCellTextBackgroundColor:UIColor? {
+        didSet {
+            if let collectionView = self.imagesCollectionView {
+                collectionView.reloadData()
             }
         }
     }
@@ -113,9 +123,7 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
                 self.answerDictionary![imageChoice.value.hash] = RKXMultipleImageSelectionSurveyAnswerStruct(identifier: imageChoice.value, selected: false)
             }
             
-            if let questionTextView = self.questionTextView {
-                questionTextView.text = step.title
-            }
+            self.setupTextViews()
         }
     }
     
@@ -130,6 +138,10 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         
         if let itemCellSelectedColor = task.options?.itemCellSelectedColor {
             self.itemCellSelectedColor = itemCellSelectedColor
+        }
+        
+        if let itemCellTextBackgroundColor = task.options?.itemCellTextBackgroundColor {
+            self.itemCellTextBackgroundColor = itemCellTextBackgroundColor
         }
         
         self.itemCellSelectedOverlayImage = task.options?.itemCellSelectedOverlayImage
@@ -192,6 +204,30 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
             }
         }
     }
+    
+    var questionViewText: String? {
+        if let step = self.step as? RKXMultipleImageSelectionSurveyStep {
+            return step.title
+        }
+        else {
+            return ""
+        }
+    }
+    
+    var additionalTextViewText: String? {
+        return nil
+    }
+    
+    func setupTextViews() {
+        self.questionTextView?.text = self.questionViewText
+        self.additionalTextView?.text = self.additionalTextViewText
+        if let _ = self.additionalTextViewText {
+            self.additionalTextViewHeightConstraint?.constant = 40
+        }
+        else {
+            self.additionalTextViewHeightConstraint?.constant = 0
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -211,9 +247,7 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
             nothingSelectedButton.configuredColor = self.nothingSelectedButtonColor
         }
 
-        if let step = self.step as? RKXMultipleImageSelectionSurveyStep {
-            self.questionTextView.text = step.title
-        }
+        self.setupTextViews()
         
         if let taskViewController = self.taskViewController,
             let task = taskViewController.task as? RKXMultipleImageSelectionSurveyTask {
@@ -270,22 +304,27 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         return answerFormat.imageChoices.count
     }
     
+    func configureCellForImageChoice(missCell: RKXMultipleImageSelectionSurveyCollectionViewCell, imageChoice: ORKImageChoice) -> RKXMultipleImageSelectionSurveyCollectionViewCell {
+        
+        missCell.activityImage = imageChoice.normalStateImage
+        missCell.selected = self.getSelectedForValue(imageChoice.value)!
+        missCell.selectedBackgroundColor = self.itemCellSelectedColor
+        missCell.selectedOverlayImage = self.itemCellSelectedOverlayImage
+        missCell.textStackViewBackgroundColor = self.itemCellTextBackgroundColor
+        
+        return missCell
+    }
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("rkx_miss_cell", forIndexPath: indexPath)
         
-        guard let yadlCell = cell as? RKXMultipleImageSelectionSurveyCollectionViewCell,
+        guard let missCell = cell as? RKXMultipleImageSelectionSurveyCollectionViewCell,
             let imageChoice = self.imageChoiceAtIndex(indexPath.row)
         else {
             return cell
         }
-        yadlCell.activityImage = imageChoice.normalStateImage
-        yadlCell.selected = self.getSelectedForValue(imageChoice.value)!
-        yadlCell.selectedBackgroundColor = self.itemCellSelectedColor
-        if let selectedImage = self.itemCellSelectedOverlayImage {
-            yadlCell.selectedOverlayImage = selectedImage
-        }
         
-        return cell
+        return self.configureCellForImageChoice(missCell, imageChoice: imageChoice)
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -315,10 +354,14 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         
     }
     
+    var cellTextStackViewHeight: CGFloat {
+        return 0.0
+    }
+    
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let collectionViewWidth = collectionView.bounds.width
         let cellWidth = (collectionViewWidth - CGFloat(self.itemsPerRow + 1)*self.itemMinSpacing) / CGFloat(self.itemsPerRow)
-        return CGSize(width: cellWidth, height: cellWidth)
+        return CGSize(width: cellWidth, height: cellWidth + self.cellTextStackViewHeight)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {

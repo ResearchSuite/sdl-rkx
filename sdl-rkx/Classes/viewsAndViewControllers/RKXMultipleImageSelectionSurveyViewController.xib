@@ -6,6 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RKXMultipleImageSelectionSurveyViewController" customModule="sdl_rkx" customModuleProvider="target">
             <connections>
+                <outlet property="additionalTextView" destination="DgC-hf-nsP" id="gFU-eY-aGr"/>
+                <outlet property="additionalTextViewHeightConstraint" destination="U3a-p3-Pyx" id="L3W-jo-leM"/>
                 <outlet property="imagesCollectionView" destination="f9T-cm-e1F" id="ddB-1l-S6N"/>
                 <outlet property="nothingSelectedButton" destination="Nwo-uo-Yk7" id="jlj-Us-N4q"/>
                 <outlet property="questionTextView" destination="smm-rm-bsK" id="NXs-h1-bYR"/>
@@ -30,6 +32,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbv-I2-T8Z" userLabel="SomethingSelectedButton" customClass="RKXBorderedButton" customModule="sdl_rkx" customModuleProvider="target">
                     <rect key="frame" x="226" y="532" width="148" height="60"/>
                     <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="1xq-8v-vAA"/>
                         <constraint firstAttribute="height" constant="60" id="GfG-te-0OI"/>
                     </constraints>
                     <state key="normal" title="Submit (0)">
@@ -52,7 +55,7 @@
                     </connections>
                 </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="f9T-cm-e1F">
-                    <rect key="frame" x="0.0" y="60" width="600" height="464"/>
+                    <rect key="frame" x="0.0" y="100" width="600" height="424"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="v6x-xe-iEo">
                         <size key="itemSize" width="120" height="120"/>
@@ -61,6 +64,21 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Additional Text" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DgC-hf-nsP" userLabel="Additional Text View">
+                    <rect key="frame" x="0.0" y="60" width="600" height="40"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="6k5-Cc-BBU"/>
+                        <constraint firstAttribute="height" constant="40" id="U3a-p3-Pyx"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="6k5-Cc-BBU"/>
+                        </mask>
+                    </variation>
+                </textView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -72,12 +90,16 @@
                 <constraint firstItem="qbv-I2-T8Z" firstAttribute="centerY" secondItem="Nwo-uo-Yk7" secondAttribute="centerY" id="Gza-Wb-qIh"/>
                 <constraint firstAttribute="trailing" secondItem="qbv-I2-T8Z" secondAttribute="trailing" id="J1c-c3-uFy"/>
                 <constraint firstItem="qbv-I2-T8Z" firstAttribute="width" secondItem="Nwo-uo-Yk7" secondAttribute="width" id="LgG-RN-aV4"/>
+                <constraint firstItem="DgC-hf-nsP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="MBB-00-XQN"/>
                 <constraint firstItem="Nwo-uo-Yk7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Plr-Z2-uT6"/>
+                <constraint firstItem="f9T-cm-e1F" firstAttribute="top" secondItem="DgC-hf-nsP" secondAttribute="bottom" id="SNi-kv-DAk"/>
                 <constraint firstItem="qbv-I2-T8Z" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="TUn-Gz-tLD"/>
+                <constraint firstItem="DgC-hf-nsP" firstAttribute="top" secondItem="smm-rm-bsK" secondAttribute="bottom" id="VYm-Vq-81E"/>
                 <constraint firstAttribute="trailing" secondItem="smm-rm-bsK" secondAttribute="trailing" id="WEE-YN-sui"/>
                 <constraint firstItem="smm-rm-bsK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XdA-ff-VM0"/>
-                <constraint firstItem="f9T-cm-e1F" firstAttribute="top" secondItem="smm-rm-bsK" secondAttribute="bottom" id="Y9Y-UA-833"/>
+                <constraint firstItem="f9T-cm-e1F" firstAttribute="top" secondItem="smm-rm-bsK" secondAttribute="bottom" constant="60" id="Y9Y-UA-833"/>
                 <constraint firstAttribute="bottom" secondItem="Nwo-uo-Yk7" secondAttribute="bottom" constant="8" id="bhF-E4-8Rx"/>
+                <constraint firstAttribute="trailing" secondItem="DgC-hf-nsP" secondAttribute="trailing" id="dwF-vJ-Yz4"/>
                 <constraint firstItem="qbv-I2-T8Z" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="f5a-Uk-sBf"/>
                 <constraint firstAttribute="trailing" secondItem="f9T-cm-e1F" secondAttribute="trailing" id="fkV-jF-3y3"/>
                 <constraint firstItem="qbv-I2-T8Z" firstAttribute="centerX" secondItem="Nwo-uo-Yk7" secondAttribute="centerX" id="hbp-ys-IYh"/>
@@ -86,6 +108,7 @@
             </constraints>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="Y9Y-UA-833"/>
                     <exclude reference="1Du-mG-pxL"/>
                     <exclude reference="Giu-Ze-Rjg"/>
                     <exclude reference="Plr-Z2-uT6"/>

@@ -12,22 +12,31 @@ class RKXMultipleImageSelectionSurveyCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var activityImageView: UIImageView!
     @IBOutlet weak var checkImageView: UIImageView!
+    @IBOutlet weak var textStackView: UIStackView!
+    @IBOutlet weak var primaryTextLabel: UILabel!
+    @IBOutlet weak var secondaryTextLabel: UILabel!
     
     func setBackgroundColor() {
         if self.selected {
-            if let color = self.selectedBackgroundColor {
-                self.backgroundColor = color
-            }
-            else {
-                self.backgroundColor = self.tintColor
-            }
+            self.backgroundColor = self.selectedBackgroundColor ?? self.tintColor
         }
         else {
             self.backgroundColor = UIColor.clearColor()
         }
+        
+        let color = self.textStackViewBackgroundColor ?? UIColor.clearColor()
+        self.textStackView.backgroundColor = color
+        self.primaryTextLabel.backgroundColor = color
+        self.secondaryTextLabel.backgroundColor = color
     }
     
     var selectedBackgroundColor: UIColor? {
+        didSet {
+            setBackgroundColor()
+        }
+    }
+    
+    var textStackViewBackgroundColor: UIColor? {
         didSet {
             setBackgroundColor()
         }
@@ -61,4 +70,15 @@ class RKXMultipleImageSelectionSurveyCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    var primaryText: String? {
+        willSet(newPrimaryText) {
+            self.primaryTextLabel.text = newPrimaryText
+        }
+    }
+    
+    var secondaryText: String? {
+        willSet(newSecondaryText) {
+            self.secondaryTextLabel.text = newSecondaryText
+        }
+    }
 }

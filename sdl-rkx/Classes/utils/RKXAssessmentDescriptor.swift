@@ -26,6 +26,7 @@ let kChoiceColorTag = "color"
 let kOptionsSomethingSelectedButtonColorTag = "somethingSelectedButtonColor"
 let kOptionsNothingSelectedButtonColorTag = "nothingSelectedButtonColor"
 let kOptionsItemCellSelectedColorTag = "itemCellSelectedColor"
+let kOptionsItemCellTextBackgroundColorTag = "itemCellTextBackgroundColor"
 let kOptionsItemCollectionViewBackgroundColorTag = "itemCollectionViewBackgroundColor"
 let kOptionsItemCellSelectedOverlayImageTitleTag = "itemCellSelectedOverlayImageTitle"
 let kOptionsItemsPerRowTag = "itemsPerRow"
@@ -49,6 +50,7 @@ class RKXMultipleImageSelectionSurveyOptions: NSObject {
     var nothingSelectedButtonColor: UIColor?
     var itemCellSelectedColor:UIColor?
     var itemCellSelectedOverlayImage: UIImage?
+    var itemCellTextBackgroundColor: UIColor?
     var itemCollectionViewBackgroundColor: UIColor?
     var itemsPerRow: Int?
     var itemMinSpacing: CGFloat?
@@ -62,6 +64,7 @@ class RKXMultipleImageSelectionSurveyOptions: NSObject {
         self.nothingSelectedButtonColor = colorForOptionsAndKey(optionsDictionary, key: kOptionsNothingSelectedButtonColorTag)
         self.itemCellSelectedColor = colorForOptionsAndKey(optionsDictionary, key: kOptionsItemCellSelectedColorTag)
         self.itemCollectionViewBackgroundColor = colorForOptionsAndKey(optionsDictionary, key: kOptionsItemCollectionViewBackgroundColorTag)
+        self.itemCellTextBackgroundColor = colorForOptionsAndKey(optionsDictionary, key: kOptionsItemCellTextBackgroundColorTag)
         self.itemCellSelectedOverlayImage = {
             if let imageString = optionsDictionary[kOptionsItemCellSelectedOverlayImageTitleTag] as? String {
                 return UIImage(named: imageString)

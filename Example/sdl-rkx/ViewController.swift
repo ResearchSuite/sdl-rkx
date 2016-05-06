@@ -120,6 +120,11 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
         self.launchAssessmentForTask(task)
     }
     
+    @IBAction func launchMEDLFullAssessment(sender: AnyObject) {
+        let task = MEDLFullAssessmentTask(identifier: "MEDL Full Assessment Identifier", propertiesFileName: "MEDL")
+        
+        self.launchAssessmentForTask(task)
+    }
     
 }
 

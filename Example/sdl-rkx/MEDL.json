@@ -7,6 +7,16 @@
           "identifier":"MEDL Full Summary Identifier",
           "title":"Thanks",
           "text":"Thank you for participating in the MEDL Full Assessment"
+      },
+      "options":{
+          "somethingSelectedButtonColor":"#FCC103",
+          "nothingSelectedButtonColor":"#FCC103",
+          "itemCellTextBackgroundColor": "#FCC103",
+          "itemCellSelectedColor":"#7FEE7D",
+          "itemCellSelectedOverlayImageTitle":"first_tab",
+          "itemCollectionViewBackgroundColor":"#E9E9E9",
+          "itemsPerRow":2,
+          "itemMinSpacing":10.0
       }
     },
     "spot":{
@@ -39,10 +49,10 @@
         "category": "NSAID"
       },
       {
-        "identifier": "Advil",
-        "generalDescription": "ibuprofen",
-        "specificDescription": "Advil",
-        "imageTitle": "advil",
+        "identifier": "Aleve",
+        "generalDescription": "naproxen",
+        "specificDescription": "Aleve",
+        "imageTitle": "aleve",
         "category": "NSAID"
       },
 

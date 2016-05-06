@@ -46,15 +46,24 @@
                                     <action selector="launchPAM:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="j6W-Jn-6cF"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o6Z-5M-hdr">
+                                <rect key="frame" x="222" y="152" width="156" height="30"/>
+                                <state key="normal" title="MEDL Full Assessment"/>
+                                <connections>
+                                    <action selector="launchMEDLFullAssessment:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="NEG-lb-Tzl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="o6Z-5M-hdr" firstAttribute="top" secondItem="vzc-a7-6rY" secondAttribute="bottom" constant="8" id="325-6u-e9O"/>
                             <constraint firstItem="QGu-Pi-f66" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="7li-Uq-D7z"/>
                             <constraint firstItem="hpU-Kf-8WQ" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="U6g-Cp-CRN"/>
                             <constraint firstItem="hpU-Kf-8WQ" firstAttribute="top" secondItem="QGu-Pi-f66" secondAttribute="bottom" constant="18" id="VcW-Kl-T45"/>
                             <constraint firstItem="vzc-a7-6rY" firstAttribute="top" secondItem="hpU-Kf-8WQ" secondAttribute="bottom" constant="8" symbolic="YES" id="VkC-uW-IcT"/>
                             <constraint firstItem="QGu-Pi-f66" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="d0Y-MD-Bok"/>
                             <constraint firstItem="vzc-a7-6rY" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="dbe-2C-A8E"/>
+                            <constraint firstItem="o6Z-5M-hdr" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="gvO-EV-Nt3"/>
                         </constraints>
                     </view>
                 </viewController>
