@@ -218,15 +218,14 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         return nil
     }
     
+    var additionalTextViewHeight: CGFloat {
+        return 0.0
+    }
+    
     func setupTextViews() {
         self.questionTextView?.text = self.questionViewText
         self.additionalTextView?.text = self.additionalTextViewText
-        if let _ = self.additionalTextViewText {
-            self.additionalTextViewHeightConstraint?.constant = 40
-        }
-        else {
-            self.additionalTextViewHeightConstraint?.constant = 0
-        }
+        self.additionalTextViewHeightConstraint?.constant = self.additionalTextViewHeight
     }
 
     override func viewDidLoad() {

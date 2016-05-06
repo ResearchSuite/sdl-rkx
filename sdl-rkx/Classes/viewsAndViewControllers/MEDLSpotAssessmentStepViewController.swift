@@ -1,5 +1,5 @@
 //
-//  MEDLFullAssessmentStepViewController.swift
+//  MEDLSpotAssessmentStepViewController.swift
 //  Pods
 //
 //  Created by James Kizer on 5/6/16.
@@ -9,8 +9,8 @@
 import UIKit
 import ResearchKit
 
-class MEDLFullAssessmentCategoryStepViewController: RKXMultipleImageSelectionSurveyViewController {
-    
+class MEDLSpotAssessmentStepViewController: RKXMultipleImageSelectionSurveyViewController {
+
     override var additionalTextViewText: String? {
         return (self.step as? MEDLFullAssessmentCategoryStep)?.category
     }
@@ -50,11 +50,16 @@ class MEDLFullAssessmentCategoryStepViewController: RKXMultipleImageSelectionSur
     }
     
     override var somethingSelectedButtonText: String {
-        return "Next"
+        if let selectedAnswers = self.selectedAnswers() {
+            return "Submit (\(selectedAnswers.count))"
+        }
+        else {
+            return "Submit (0)"
+        }
     }
     
     override var nothingSelectedButtonText: String {
-        return "Next"
+        return "Nothing To Report"
     }
     
     @IBAction override func somethingSelectedButtonPressed(sender: AnyObject) {

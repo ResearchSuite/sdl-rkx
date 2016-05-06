@@ -11,6 +11,7 @@ import ResearchKit
 import sdl_rkx
 
 let kActivityIdentifiers = "activity_identifiers"
+let kMedicationIdentifiers = "medication_identifiers"
 
 class ViewController: UIViewController, ORKTaskViewControllerDelegate {
     
@@ -39,6 +40,16 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
         return NSUserDefaults().arrayForKey(kActivityIdentifiers) as? [String]
     }
     
+    func storeMedicationsForSpotAssessment(medications: [String]) {
+        NSUserDefaults().setObject(medications, forKey: kMedicationIdentifiers)
+    }
+    
+    func loadMedicationsForSpotAssessment() -> [String]? {
+        return NSUserDefaults().arrayForKey(kMedicationIdentifiers) as? [String]
+    }
+    
+    
+    
     
     
     // MARK: ORKTaskViewControllerDelegate
@@ -46,7 +57,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
     func taskViewController(taskViewController: ORKTaskViewController, didFinishWithReason reason: ORKTaskViewControllerFinishReason, error: NSError?) {
         
         if reason == ORKTaskViewControllerFinishReason.Completed {
-            //iff full task, extract results and store for filtering
+            //if YADL full task, extract results and store for filtering
             if let _ = taskViewController.task as? YADLFullAssessmentTask,
                 let results:[ORKChoiceQuestionResult] = YADLFullAssessmentTask.fullAssessmentResults(taskViewController.result)
             {
@@ -67,6 +78,21 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
                     }
                     .map { $0.identifier }
                 self.storeActivitiesForSpotAssessment(activityIdentifiers)
+            }
+            //if YADL full task, extract results and store for filtering
+            if let _ = taskViewController.task as? MEDLFullAssessmentTask,
+                let results:[ORKChoiceQuestionResult] = MEDLFullAssessmentTask.fullAssessmentResults(taskViewController.result)
+            {
+                print(results)
+                let copingIdentifiers: [String] = results.reduce([], combine: { (acc, result) -> [String] in
+                    if let identifiers = result.answer as? [String] {
+                        return acc + identifiers
+                    }
+                    else {
+                        return acc
+                    }
+                })
+                self.storeMedicationsForSpotAssessment(copingIdentifiers)
             }
             else if let _ = taskViewController.task as? PAMTask {
                 print(taskViewController.result)
@@ -122,6 +148,12 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
     
     @IBAction func launchMEDLFullAssessment(sender: AnyObject) {
         let task = MEDLFullAssessmentTask(identifier: "MEDL Full Assessment Identifier", propertiesFileName: "MEDL")
+        
+        self.launchAssessmentForTask(task)
+    }
+    
+    @IBAction func launchMEDLSpotAssessment(sender: AnyObject) {
+        let task = MEDLSpotAssessmentTask(identifier: "MEDL Spot Assessment", propertiesFileName: "MEDL", itemIdentifiers: self.loadMedicationsForSpotAssessment())
         
         self.launchAssessmentForTask(task)
     }

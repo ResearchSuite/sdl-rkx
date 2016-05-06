@@ -11,6 +11,19 @@ import ResearchKit
 
 public class MEDLFullAssessmentTask: RKXMultipleImageSelectionSurveyTask {
 
+    public class func fullAssessmentResults(taskResult: ORKTaskResult) -> [ORKChoiceQuestionResult]? {
+        if let stepResults = taskResult.results as? [ORKStepResult]
+        {
+            print(stepResults)
+            stepResults.forEach { print($0) }
+            return stepResults.map { stepResult in
+                return stepResult.firstResult as? ORKChoiceQuestionResult
+                }
+                .flatMap{ $0 }
+        }
+        else { return nil }
+    }
+    
     class func defaultOptions() -> RKXMultipleImageSelectionSurveyOptions {
         let options = RKXMultipleImageSelectionSurveyOptions()
         options.somethingSelectedButtonColor = UIColor.blueColor()
