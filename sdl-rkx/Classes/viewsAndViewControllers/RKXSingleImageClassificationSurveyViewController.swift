@@ -21,7 +21,7 @@ class RKXSingleImageClassificationSurveyViewController: ORKStepViewController {
     }
     
     override convenience init(step: ORKStep?) {
-        let framework = NSBundle(identifier: RKXBundleIdentifier)
+        let framework = NSBundle(forClass: RKXSingleImageClassificationSurveyViewController.self)
         self.init(nibName: "RKXSingleImageClassificationSurveyViewController", bundle: framework)
         self.step = step
         self.restorationIdentifier = step!.identifier

@@ -196,7 +196,7 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let framework = NSBundle(identifier: RKXBundleIdentifier)
+        let framework = NSBundle(forClass: RKXMultipleImageSelectionSurveyViewController.self)
         self.imagesCollectionView.registerNib(UINib(nibName: "RKXMultipleImageSelectionSurveyCollectionViewCell", bundle: framework), forCellWithReuseIdentifier: "rkx_miss_cell")
         
         self.imagesCollectionView.delegate = self
