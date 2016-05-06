@@ -6,4 +6,4 @@
 //  Copyright © 2016 Cornell Tech Foundry. All rights reserved.
 //
 
-let RKXBundleIdentifier = "edu.cornell.tech.foundry.sdl-rkx"
+//let RKXBundleIdentifier = "edu.cornell.tech.foundry.sdl-rkx"

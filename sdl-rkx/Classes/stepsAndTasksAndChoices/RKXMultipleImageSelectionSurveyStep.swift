@@ -16,8 +16,8 @@ class RKXMultipleImageSelectionSurveyStep: ORKQuestionStep {
     }
     
     init(identifier: String,
-         title: String,
-         answerFormat: ORKImageChoiceAnswerFormat ) {
+         title: String?,
+         answerFormat: ORKImageChoiceAnswerFormat? ) {
         
         super.init(identifier: identifier)
         self.title = title

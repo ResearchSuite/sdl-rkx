@@ -1,0 +1,94 @@
+{
+  "MEDL": {
+    "full":{
+      "identifier":"MEDL Full Identifier",
+      "prompt":"Did you use any of these to manage your back pain during the last month?",
+      "summary":{
+          "identifier":"MEDL Full Summary Identifier",
+          "title":"Thanks",
+          "text":"Thank you for participating in the MEDL Full Assessment"
+      }
+    },
+    "spot":{
+      "identifier":"MEDL Spot Identifier",
+      "prompt":"Did you use any of these to manage your back pain today?",
+      "summary":{
+          "identifier":"MEDL Spot Summary Identifier",
+          "title":"Thanks",
+          "text":"Thank you for participating in the MEDL Full Assessment"
+      },
+      "noActivitiesSummary": {
+          "identifier":"MEDL Spot No Activities Identifier",
+          "title":"Thanks",
+          "text":"You have no medications to measure"
+      }
+    },
+    "medications": [
+      {
+        "identifier": "Motrin",
+        "generalDescription": "ibuprofen",
+        "specificDescription": "Motrin",
+        "imageTitle": "motrin",
+        "category": "NSAID"
+      },
+      {
+        "identifier": "Advil",
+        "generalDescription": "ibuprofen",
+        "specificDescription": "Advil",
+        "imageTitle": "advil",
+        "category": "NSAID"
+      },
+      {
+        "identifier": "Advil",
+        "generalDescription": "ibuprofen",
+        "specificDescription": "Advil",
+        "imageTitle": "advil",
+        "category": "NSAID"
+      },
+
+      {
+        "identifier": "Flexeril",
+        "generalDescription": "cyclobenzaprine",
+        "specificDescription": "Flexeril",
+        "imageTitle": "cyclobenzaprine",
+        "category": "Muscle Relaxants"
+      },
+      {
+        "identifier": "Robaxin",
+        "generalDescription": "methocarbamol",
+        "specificDescription": "Robaxin",
+        "imageTitle": "methocarbamol",
+        "category": "Muscle Relaxants"
+      },
+      {
+        "identifier": "Soma",
+        "generalDescription": "carisoprodol",
+        "specificDescription": "Soma",
+        "imageTitle": "Soma",
+        "category": "Muscle Relaxants"
+      },
+
+      {
+        "identifier": "Ultram",
+        "generalDescription": "tramadol",
+        "specificDescription": "Ultram",
+        "imageTitle": "tramadol",
+        "category": "Opioids"
+      },
+      {
+        "identifier": "Codeine",
+        "generalDescription": "",
+        "specificDescription": "Codeine",
+        "imageTitle": "codeine",
+        "category": "Opioids"
+      },
+      {
+        "identifier": "Zohydro ER",
+        "generalDescription": "hydrocodone",
+        "specificDescription": "Zohydro ER",
+        "imageTitle": "hydrocodone",
+        "category": "Opioids"
+      }
+    ]
+  }
+}

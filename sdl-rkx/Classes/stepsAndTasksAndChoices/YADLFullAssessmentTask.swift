@@ -22,102 +22,61 @@ public class YADLFullAssessmentTask: RKXSingleImageClassificationSurveyTask {
         else { return nil }
     }
     
-    //note that this is a Class method, the steps array needs to be passed to the init function
-    class func loadStepsFromJSON(jsonParser: RKXJSONParser) -> [ORKStep]? {
-        
-        guard let identifier = jsonParser.YADLFullAssessmentIdentifier
+    required public init(identifier: String, json: AnyObject) {
+
+        guard let completeJSON = json as? [String: AnyObject],
+        let typeJSON = completeJSON["YADL"] as? [String: AnyObject],
+        let assessmentJSON = typeJSON["full"] as? [String: AnyObject],
+        let itemJSONArray = typeJSON["activities"] as? [AnyObject]
             else {
-                fatalError("Missing or Malformed Prompt")
+                fatalError("JSON Parse Error")
         }
         
-        guard let prompt = jsonParser.YADLFullAssessmentPrompt
-            else {
-                fatalError("Missing or Malformed Prompt")
-        }
+        let items:[RKXActivityDescriptor] = itemJSONArray.map { (itemJSON: AnyObject) in
+            guard let itemDictionary = itemJSON as? [String: AnyObject]
+                else
+                {
+                return nil
+            }
+            return RKXActivityDescriptor(itemDictionary: itemDictionary)
+        }.flatMap { $0 }
         
-        guard let choices = jsonParser.YADLFullAssessmentChoices
-            else {
-                fatalError("Missing or Malformed Choices")
-        }
+        let assessment = YADLFullAssessmentDescriptor(assessmentDictionary: assessmentJSON)
         
-        guard let activities = jsonParser.activities
-            else {
-                fatalError("Missing or Malformed Activities")
-        }
-        
-        guard let summary = jsonParser.YADLFullAssessmentSummary
-            else {
-                fatalError("Missing or Malformed Summary")
-        }
-        
-        guard let noActivitiesSummary = jsonParser.YADLFullAssessmentNoActivitiesSummary
-            else {
-                fatalError("Missing or Malformed No Activities Summary")
-        }
-        
-        if activities.count == 0 {
-            let summaryStep = ORKInstructionStep(identifier: kYADLFullAssessmentSummaryID)
+        if items.count == 0 {
+            guard let noActivitiesSummary = assessment.noItemsSummary
+                else {
+                    fatalError("No activities and no activity summary")
+            }
+            let summaryStep = ORKInstructionStep(identifier: noActivitiesSummary.identifier)
             summaryStep.title = noActivitiesSummary.title
             summaryStep.text = noActivitiesSummary.text
-            return [summaryStep]
+            super.init(identifier: identifier, steps: [summaryStep])
         }
-        
-        let textChoices = choices.map { choice in
-            return RKXTextChoiceWithColor(text: choice.text, value: choice.value, color: choice.color)
-        }
-        
-        let answerFormat = ORKAnswerFormat.choiceAnswerFormatWithStyle(.SingleChoice, textChoices: textChoices)
-        
-        var steps: [ORKStep] = activities.map { activity in
+        else {
+            let textChoices = assessment.choices!.map { choice in
+                return RKXTextChoiceWithColor(text: choice.text, value: choice.value, color: choice.color)
+            }
             
-            return RKXSingleImageClassificationSurveyStep(identifier: activity.identifier, title: activity.description, text: prompt, image: activity.image, answerFormat: answerFormat)
+            let answerFormat = ORKAnswerFormat.choiceAnswerFormatWithStyle(.SingleChoice, textChoices: textChoices)
+            var steps: [ORKStep] = items.map { item in
+                guard let image = UIImage(named: item.imageTitle)
+                    else {
+                        fatalError("Cannot find image named \(item.imageTitle)")
+                }
+                return YADLFullAssessmentStep(identifier: item.identifier, title: item.activityDescription, text: assessment.prompt, image: image, answerFormat: answerFormat)
+            }
             
+            if let summary = assessment.summary {
+                let summaryStep = ORKInstructionStep(identifier: summary.identifier)
+                summaryStep.title = summary.title
+                summaryStep.text = summary.text
+                
+                steps.append(summaryStep)
+            }
+            
+            super.init(identifier: identifier, steps: steps)
         }
-        
-        let summaryStep = ORKInstructionStep(identifier: kYADLFullAssessmentSummaryID)
-        summaryStep.title = summary.title
-        summaryStep.text = summary.text
-        
-        steps.append(summaryStep)
-        
-        return steps
-    }
-    
-    convenience public init(identifier: String, json: AnyObject) {
-        
-        let jsonParser = RKXJSONParser(json: json)
-        
-        guard let identifier = jsonParser.YADLFullAssessmentIdentifier
-            else {
-                fatalError("Missing or Malformed Prompt")
-        }
-        
-        guard let prompt = jsonParser.YADLFullAssessmentPrompt
-            else {
-                fatalError("Missing or Malformed Prompt")
-        }
-        
-        guard let choices = jsonParser.YADLFullAssessmentChoices
-            else {
-                fatalError("Missing or Malformed Choices")
-        }
-        
-        guard let activities = jsonParser.activities
-            else {
-                fatalError("Missing or Malformed Activities")
-        }
-        
-        guard let summary = jsonParser.YADLFullAssessmentSummary
-            else {
-                fatalError("Missing or Malformed Summary")
-        }
-        
-        guard let noActivitiesSummary = jsonParser.YADLFullAssessmentNoActivitiesSummary
-            else {
-                fatalError("Missing or Malformed No Activities Summary")
-        }
-        
-        self.init(identifier: identifier, prompt: prompt, choices: choices, items: activities, summary: summary, noActivitiesSummary: noActivitiesSummary)
     }
     
     convenience public init(identifier: String, propertiesFileName: String) {
@@ -135,40 +94,6 @@ public class YADLFullAssessmentTask: RKXSingleImageClassificationSurveyTask {
         let spotAssessmentParameters = try! NSJSONSerialization.JSONObjectWithData(fileContent, options: NSJSONReadingOptions.MutableContainers)
         
         self.init(identifier: identifier, json: spotAssessmentParameters)
-    }
-    
-    required public init(identifier: String,
-                  prompt: String,
-                  choices: [ChoiceStruct],
-                  items: [ItemStruct],
-                  summary: SummaryStruct,
-                  noActivitiesSummary: SummaryStruct) {
-
-        if items.count == 0 {
-            let summaryStep = ORKInstructionStep(identifier: noActivitiesSummary.identifier)
-            summaryStep.title = noActivitiesSummary.title
-            summaryStep.text = noActivitiesSummary.text
-            super.init(identifier: identifier, steps: [summaryStep])
-        }
-        else {
-            
-            let textChoices = choices.map { choice in
-                return RKXTextChoiceWithColor(text: choice.text, value: choice.value, color: choice.color)
-            }
-            
-            let answerFormat = ORKAnswerFormat.choiceAnswerFormatWithStyle(.SingleChoice, textChoices: textChoices)
-            var steps: [ORKStep] = items.map { item in
-                return YADLFullAssessmentStep(identifier: item.identifier, title: item.description, text: prompt, image: item.image, answerFormat: answerFormat)
-            }
-            
-            let summaryStep = ORKInstructionStep(identifier: summary.identifier)
-            summaryStep.title = summary.title
-            summaryStep.text = summary.text
-            
-            steps.append(summaryStep)
-            
-            super.init(identifier: identifier, steps: steps)
-        }
     }
     
     required public init(coder aDecoder: NSCoder) {

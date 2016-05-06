@@ -9,7 +9,7 @@
 import UIKit
 import ResearchKit
 
-public class YADLSpotAssessmentTask: RXMultipleImageSelectionSurveyTask {
+public class YADLSpotAssessmentTask: RKXMultipleImageSelectionSurveyTask {
     
 //    public class func spotAssessmentResults(taskResult: ORKTaskResult) -> [ORKChoiceQuestionResult]? {
 //        if let stepResults = taskResult.results as? [ORKStepResult]
@@ -21,89 +21,6 @@ public class YADLSpotAssessmentTask: RXMultipleImageSelectionSurveyTask {
 //        }
 //        else { return nil }
 //    }
-    
-    //note that this is a Class method, the steps array needs to be passed to the init function
-    class func loadStepsFromJSON(jsonParser: RKXJSONParser, activityIdentifiers: [String]?) -> [ORKStep]? {
-        
-        
-        guard let prompt = jsonParser.YADLSpotAssessmentPrompt
-            else {
-                fatalError("Missing or Malformed Prompt")
-        }
-        
-        guard let identifier = jsonParser.YADLSpotAssessmentIdentifier
-            else {
-                fatalError("Missing or Malformed Identifier")
-        }
-        
-        guard let activities = jsonParser.activities
-            else {
-                fatalError("Missing or Malformed Activities")
-        }
-        
-        guard let summary = jsonParser.YADLSpotAssessmentSummary
-            else {
-                fatalError("Missing or Malformed Summary")
-        }
-        
-        guard let noActivitiesSummary = jsonParser.YADLSpotAssessmentNoActivitiesSummary
-            else {
-                fatalError("Missing or Malformed No Activities Summary")
-        }
-        
-        let imageChoices = activities
-        .filter { activity in
-            if let identifiers = activityIdentifiers {
-                return identifiers.contains(activity.identifier)
-            }
-            else {
-                return true
-            }
-        }
-        .map { activity in
-            
-            return ORKImageChoice(normalImage: activity.image, selectedImage: nil, text: activity.description, value: activity.identifier)
-            
-        }
-        
-        if (imageChoices.count == 0) {
-            let summaryStep = ORKInstructionStep(identifier: kYADLSpotAssessmentSummaryID)
-            summaryStep.title = noActivitiesSummary.title
-            summaryStep.text = noActivitiesSummary.text
-            return [summaryStep]
-        }
-        
-        let answerFormat = ORKAnswerFormat.choiceAnswerFormatWithImageChoices(imageChoices)
-        
-        let spotAssessmentStep = YADLSpotAssessmentStep(identifier: identifier, title: prompt, answerFormat: answerFormat)
-  
-        let summaryStep = ORKInstructionStep(identifier: kYADLSpotAssessmentSummaryID)
-        summaryStep.title = summary.title
-        summaryStep.text = summary.text
-        
-        return [
-            spotAssessmentStep,
-            summaryStep
-        ]
-    }
-    
-//    var submitButtonColor: UIColor?
-//    var nothingToReportButtonColor: UIColor?
-//    var activityCellSelectedColor:UIColor?
-//    var activityCellSelectedOverlayImage: UIImage?
-//    var activityCollectionViewBackgroundColor: UIColor?
-//    var activitiesPerRow: Int?
-//    var activityMinSpacing: CGFloat?
-    
-    func configureOptions(jsonParser: RKXJSONParser) {
-        self.somethingSelectedButtonColor = jsonParser.YADLSpotAssessmentSubmitButtonColor
-        self.nothingSelectedButtonColor = jsonParser.YADLSpotAssessmentNothingToReportButtonColor
-        self.itemCellSelectedColor = jsonParser.YADLSpotAssessmentActivityCellSelectedColor
-        self.itemCellSelectedOverlayImage = jsonParser.YADLSpotAssessmentActivityCellSelectedOverlayImage
-        self.itemCollectionViewBackgroundColor = jsonParser.YADLSpotAssessmentActivityCollectionViewBackgroundColor
-        self.itemsPerRow = jsonParser.YADLSpotAssessmentActivitiesPerRow
-        self.itemMinSpacing = jsonParser.YADLSpotAssessmentActivityMinSpacing
-    }
     
     convenience public init(identifier: String, propertiesFileName: String, activityIdentifiers: [String]? = nil) {
 
@@ -123,12 +40,71 @@ public class YADLSpotAssessmentTask: RXMultipleImageSelectionSurveyTask {
     }
     
     convenience public init(identifier: String, json: AnyObject, activityIdentifiers: [String]? = nil) {
+
+        guard let completeJSON = json as? [String: AnyObject],
+            let typeJSON = completeJSON["YADL"] as? [String: AnyObject],
+            let assessmentJSON = typeJSON["spot"] as? [String: AnyObject],
+            let itemJSONArray = typeJSON["activities"] as? [AnyObject]
+            else {
+                fatalError("JSON Parse Error")
+        }
         
-        let jsonParser = RKXJSONParser(json: json)
-        let steps = YADLSpotAssessmentTask.loadStepsFromJSON(jsonParser, activityIdentifiers: activityIdentifiers)
+        let items:[RKXActivityDescriptor] = itemJSONArray.map { (itemJSON: AnyObject) in
+            guard let itemDictionary = itemJSON as? [String: AnyObject]
+                else
+            {
+                return nil
+            }
+            return RKXActivityDescriptor(itemDictionary: itemDictionary)
+            }.flatMap { $0 }
+        
+        let imageChoices: [ORKImageChoice] = items
+            .filter { activity in
+                if let identifiers = activityIdentifiers {
+                    return identifiers.contains(activity.identifier)
+                }
+                else {
+                    return true
+                }
+            }
+            .map(RKXImageDescriptor.imageChoiceForDescriptor())
+            //dont forget to unwrap optionals!!
+            .flatMap { $0 }
+        
+        let assessment = RKXMultipleImageSelectionSurveyDescriptor(assessmentDictionary: assessmentJSON)
+        
+        let steps: [ORKStep] = {
+            if (imageChoices.count == 0) {
+                guard let noActivitiesSummary = assessment.noItemsSummary
+                    else {
+                        fatalError("No activities and no activity summary")
+                }
+                let summaryStep = ORKInstructionStep(identifier: noActivitiesSummary.identifier)
+                summaryStep.title = noActivitiesSummary.title
+                summaryStep.text = noActivitiesSummary.text
+                return [summaryStep]
+            }
+            else {
+                
+                let answerFormat = ORKAnswerFormat.choiceAnswerFormatWithImageChoices(imageChoices)
+                
+                let spotAssessmentStep = YADLSpotAssessmentStep(identifier: identifier, title: assessment.prompt, answerFormat: answerFormat)
+                
+                var steps: [ORKStep] = [spotAssessmentStep]
+                
+                if let summary = assessment.summary {
+                    let summaryStep = ORKInstructionStep(identifier: summary.identifier)
+                    summaryStep.title = summary.title
+                    summaryStep.text = summary.text
+                    steps.append(summaryStep)
+                }
+                
+                return steps
+            }
+        }()
         
         self.init(identifier: identifier, steps: steps)
-        self.configureOptions(jsonParser)
+        self.options = assessment.options
     }
     
     override init(identifier: String, steps: [ORKStep]?) {

@@ -12,6 +12,8 @@
 		4806C08F1CD7FDCC0024BBB8 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4806C08E1CD7FDCC0024BBB8 /* ResearchKit.framework */; };
 		4806C0901CD7FDCC0024BBB8 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4806C08E1CD7FDCC0024BBB8 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		48CB54171CD80CA100D26F68 /* YADL.json in Resources */ = {isa = PBXBuildFile; fileRef = 48CB54161CD80CA000D26F68 /* YADL.json */; };
+		48E086B91CDBB6B000099E13 /* MEDL.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48E086B81CDBB6AF00099E13 /* MEDL.xcassets */; };
+		48E086BB1CDBB75700099E13 /* MEDL.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E086BA1CDBB75700099E13 /* MEDL.json */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -56,6 +58,8 @@
 		4806C08A1CD7FDC70024BBB8 /* sdl_rkx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = sdl_rkx.framework; path = "/Users/jk/Library/Developer/Xcode/DerivedData/sdl-rkx-ezfobbiocdyjajdcuucywqqbdhzj/Build/Products/Debug-iphoneos/sdl-rkx/sdl_rkx.framework"; sourceTree = "<absolute>"; };
 		4806C08E1CD7FDCC0024BBB8 /* ResearchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ResearchKit.framework; path = "/Users/jk/Library/Developer/Xcode/DerivedData/sdl-rkx-ezfobbiocdyjajdcuucywqqbdhzj/Build/Products/Debug-iphoneos/ResearchKit/ResearchKit.framework"; sourceTree = "<absolute>"; };
 		48CB54161CD80CA000D26F68 /* YADL.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = YADL.json; sourceTree = "<group>"; };
+		48E086B81CDBB6AF00099E13 /* MEDL.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MEDL.xcassets; sourceTree = "<group>"; };
+		48E086BA1CDBB75700099E13 /* MEDL.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MEDL.json; sourceTree = "<group>"; };
 		525025A37AA7852C42A505AE /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* sdl-rkx_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sdl-rkx_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -121,6 +125,8 @@
 			children = (
 				607FACDC1AFB9204008FA782 /* YADL.xcassets */,
 				48CB54161CD80CA000D26F68 /* YADL.json */,
+				48E086B81CDBB6AF00099E13 /* MEDL.xcassets */,
+				48E086BA1CDBB75700099E13 /* MEDL.json */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -285,9 +291,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				48E086B91CDBB6B000099E13 /* MEDL.xcassets in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* YADL.xcassets in Resources */,
 				48CB54171CD80CA100D26F68 /* YADL.json in Resources */,
+				48E086BB1CDBB75700099E13 /* MEDL.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

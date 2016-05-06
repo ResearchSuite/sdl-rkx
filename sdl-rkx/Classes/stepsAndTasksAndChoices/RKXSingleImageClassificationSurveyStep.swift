@@ -18,10 +18,10 @@ class RKXSingleImageClassificationSurveyStep: ORKQuestionStep {
     }
 
     init(identifier: String,
-         title: String,
-         text: String,
-         image: UIImage,
-         answerFormat: ORKAnswerFormat ) {
+         title: String?,
+         text: String?,
+         image: UIImage?,
+         answerFormat: ORKAnswerFormat? ) {
         
 
         super.init(identifier: identifier)

@@ -104,7 +104,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
         self.launchAssessmentForTask(task)
         
     }
-    @IBAction func launchFullAssessment(sender: AnyObject) {
+    @IBAction func launchYADLFullAssessment(sender: AnyObject) {
         
         //create a YADL full assessment task
         let task = YADLFullAssessmentTask(identifier: "YADL Full Assessment Identifier", propertiesFileName: "YADL")
@@ -112,7 +112,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
         self.launchAssessmentForTask(task)
     }
     
-    @IBAction func launchSpotAssessment(sender: AnyObject) {
+    @IBAction func launchYADLSpotAssessment(sender: AnyObject) {
         //create a YADL spot assessment task
 //        let task = YADLSpotAssessmentTask(identifier: "YADL Spot Assessment Identifier", propertiesFileName: "YADL")
         let task = YADLSpotAssessmentTask(identifier: "YADL Spot Assessment Identifier", propertiesFileName: "YADL", activityIdentifiers: self.loadActivitiesForSpotAssessment())

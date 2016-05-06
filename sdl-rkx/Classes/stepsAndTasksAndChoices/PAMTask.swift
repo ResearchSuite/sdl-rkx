@@ -9,76 +9,15 @@
 import UIKit
 import ResearchKit
 
-public class PAMTask: RXMultipleImageSelectionSurveyTask {
+public class PAMTask: RKXMultipleImageSelectionSurveyTask {
 
-    class func loadStepsFromJSON(jsonParser: RKXJSONParser) -> [ORKStep]? {
-        
-        
-        guard let prompt = jsonParser.PAMPrompt
-            else {
-                fatalError("Missing or Malformed Prompt")
-        }
-        
-        guard let identifier = jsonParser.PAMIdentifier
-            else {
-                fatalError("Missing or Malformed Identifier")
-        }
-        
-        guard let items = jsonParser.PAMItems
-            else {
-                fatalError("Missing or Malformed Items")
-        }
-        
-        guard let summary = jsonParser.PAMSummary
-            else {
-                fatalError("Missing or Malformed Summary")
-        }
-        
-        guard let noActivitiesSummary = jsonParser.PAMNoActivitiesSummary
-            else {
-                fatalError("Missing or Malformed No Activities Summary")
-        }
-        
-        let imageChoices = items.map { item in
-                
-                return PAMImageChoice(images: item.images, value: item.value)
-                
-        }
-        
-        if (imageChoices.count == 0) {
-            let summaryStep = ORKInstructionStep(identifier: kYADLSpotAssessmentSummaryID)
-            summaryStep.title = noActivitiesSummary.title
-            summaryStep.text = noActivitiesSummary.text
-            return [summaryStep]
-        }
-        
-        let answerFormat = ORKAnswerFormat.choiceAnswerFormatWithImageChoices(imageChoices)
-        
-        let spotAssessmentStep = PAMStep(identifier: identifier, title: prompt, answerFormat: answerFormat)
-        
-        let summaryStep = ORKInstructionStep(identifier: kYADLSpotAssessmentSummaryID)
-        summaryStep.title = summary.title
-        summaryStep.text = summary.text
-        
-        return [
-            spotAssessmentStep,
-            summaryStep
-        ]
-    }
-
-    func configureOptions(jsonParser: RKXJSONParser) {
-        self.somethingSelectedButtonColor = UIColor.blueColor()
-        self.nothingSelectedButtonColor = UIColor.blueColor()
-        self.itemCellSelectedColor = UIColor.clearColor()
-        self.itemsPerRow = 4
-        self.itemMinSpacing = 4
-//        self.somethingSelectedButtonColor = jsonParser.YADLSpotAssessmentSubmitButtonColor
-//        self.nothingSelectedButtonColor = jsonParser.YADLSpotAssessmentNothingToReportButtonColor
-//        self.itemCellSelectedColor = jsonParser.YADLSpotAssessmentActivityCellSelectedColor
-//        self.itemCellSelectedOverlayImage = jsonParser.YADLSpotAssessmentActivityCellSelectedOverlayImage
-//        self.itemCollectionViewBackgroundColor = jsonParser.YADLSpotAssessmentActivityCollectionViewBackgroundColor
-//        self.itemsPerRow = jsonParser.YADLSpotAssessmentActivitiesPerRow
-//        self.itemMinSpacing = jsonParser.YADLSpotAssessmentActivityMinSpacing
+    class func defaultOptions() -> RKXMultipleImageSelectionSurveyOptions {
+        let options = RKXMultipleImageSelectionSurveyOptions()
+        options.somethingSelectedButtonColor = UIColor.blueColor()
+        options.nothingSelectedButtonColor = UIColor.blueColor()
+        options.itemsPerRow = 4
+        options.itemMinSpacing = 4
+        return options
     }
     
     convenience public init(identifier: String) {
@@ -86,7 +25,7 @@ public class PAMTask: RXMultipleImageSelectionSurveyTask {
         self.init(identifier: identifier, propertiesFileName: "PAM", bundle: NSBundle(forClass: PAMTask.self))
     }
     
-    convenience public init(identifier: String, propertiesFileName: String, bundle: NSBundle = NSBundle.mainBundle()) {
+    convenience init(identifier: String, propertiesFileName: String, bundle: NSBundle = NSBundle.mainBundle()) {
         
         guard let filePath = bundle.pathForResource(propertiesFileName, ofType: "json")
             else {
@@ -103,13 +42,66 @@ public class PAMTask: RXMultipleImageSelectionSurveyTask {
         self.init(identifier: identifier, json: spotAssessmentParameters, bundle: bundle)
     }
     
-    convenience public init(identifier: String, json: AnyObject, bundle: NSBundle = NSBundle.mainBundle()) {
+    convenience init(identifier: String, json: AnyObject, bundle: NSBundle = NSBundle.mainBundle()) {
         
-        let jsonParser = RKXJSONParser(json: json, bundle: bundle)
-        let steps = PAMTask.loadStepsFromJSON(jsonParser)
+        
+        guard let completeJSON = json as? [String: AnyObject],
+            let typeJSON = completeJSON["PAM"] as? [String: AnyObject],
+            let assessmentJSON = typeJSON as? [String: AnyObject],
+            let itemJSONArray = typeJSON["affects"] as? [AnyObject]
+            else {
+                fatalError("JSON Parse Error")
+        }
+        
+        let items:[RKXAffectDescriptor] = itemJSONArray.map { (itemJSON: AnyObject) in
+            guard let itemDictionary = itemJSON as? [String: AnyObject]
+                else
+            {
+                return nil
+            }
+            return RKXAffectDescriptor(itemDictionary: itemDictionary)
+            }.flatMap { $0 }
+        
+        let imageChoices: [ORKImageChoice] = items
+            .map(RKXImageDescriptor.imageChoiceForDescriptor(bundle))
+            //dont forget to unwrap optionals!!
+            .flatMap { $0 }
+        
+        let assessment = RKXMultipleImageSelectionSurveyDescriptor(assessmentDictionary: assessmentJSON)
+        
+        let steps: [ORKStep] = {
+            if (imageChoices.count == 0) {
+                guard let noActivitiesSummary = assessment.noItemsSummary
+                    else {
+                        fatalError("No activities and no activity summary")
+                }
+                let summaryStep = ORKInstructionStep(identifier: noActivitiesSummary.identifier)
+                summaryStep.title = noActivitiesSummary.title
+                summaryStep.text = noActivitiesSummary.text
+                return [summaryStep]
+            }
+            else {
+                
+                let answerFormat = ORKAnswerFormat.choiceAnswerFormatWithImageChoices(imageChoices)
+                
+                let pamStep = PAMStep(identifier: identifier, title: assessment.prompt, answerFormat: answerFormat)
+                
+                var steps: [ORKStep] = [pamStep]
+                
+                if let summary = assessment.summary {
+                    let summaryStep = ORKInstructionStep(identifier: summary.identifier)
+                    summaryStep.title = summary.title
+                    summaryStep.text = summary.text
+                    steps.append(summaryStep)
+                }
+                
+                return steps
+            }
+        }()
         
         self.init(identifier: identifier, steps: steps)
-        self.configureOptions(jsonParser)
+        self.options = PAMTask.defaultOptions()
+        
     }
     
     override init(identifier: String, steps: [ORKStep]?) {

@@ -119,30 +119,30 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         }
     }
     
-    func setupOptionsFromTask(task: RXMultipleImageSelectionSurveyTask) {
-        if let somethingSelectedButtonColor = task.somethingSelectedButtonColor {
+    func setupOptionsFromTask(task: RKXMultipleImageSelectionSurveyTask) {
+        if let somethingSelectedButtonColor = task.options?.somethingSelectedButtonColor {
             self.somethingSelectedButtonColor = somethingSelectedButtonColor
         }
         
-        if let nothingSelectedButtonColor = task.nothingSelectedButtonColor {
+        if let nothingSelectedButtonColor = task.options?.nothingSelectedButtonColor {
             self.nothingSelectedButtonColor = nothingSelectedButtonColor
         }
         
-        if let itemCellSelectedColor = task.itemCellSelectedColor {
+        if let itemCellSelectedColor = task.options?.itemCellSelectedColor {
             self.itemCellSelectedColor = itemCellSelectedColor
         }
         
-        self.itemCellSelectedOverlayImage = task.itemCellSelectedOverlayImage
+        self.itemCellSelectedOverlayImage = task.options?.itemCellSelectedOverlayImage
         
-        if let itemCollectionViewBackgroundColor = task.itemCollectionViewBackgroundColor {
+        if let itemCollectionViewBackgroundColor = task.options?.itemCollectionViewBackgroundColor {
             self.itemCollectionViewBackgroundColor = itemCollectionViewBackgroundColor
         }
         
-        if let itemsPerRow = task.itemsPerRow {
+        if let itemsPerRow = task.options?.itemsPerRow {
             self.itemsPerRow = itemsPerRow
         }
         
-        if let itemMinSpacing = task.itemMinSpacing {
+        if let itemMinSpacing = task.options?.itemMinSpacing {
             self.itemMinSpacing = itemMinSpacing
         }
     }
@@ -216,7 +216,7 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         }
         
         if let taskViewController = self.taskViewController,
-            let task = taskViewController.task as? RXMultipleImageSelectionSurveyTask {
+            let task = taskViewController.task as? RKXMultipleImageSelectionSurveyTask {
             self.setupOptionsFromTask(task)
         }
         
