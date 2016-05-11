@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4806C08B1CD7FDC80024BBB8 /* sdl_rkx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4806C08A1CD7FDC70024BBB8 /* sdl_rkx.framework */; };
-		4806C08C1CD7FDC80024BBB8 /* sdl_rkx.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4806C08A1CD7FDC70024BBB8 /* sdl_rkx.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4806C08F1CD7FDCC0024BBB8 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4806C08E1CD7FDCC0024BBB8 /* ResearchKit.framework */; };
-		4806C0901CD7FDCC0024BBB8 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4806C08E1CD7FDCC0024BBB8 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		48CB54171CD80CA100D26F68 /* YADL.json in Resources */ = {isa = PBXBuildFile; fileRef = 48CB54161CD80CA000D26F68 /* YADL.json */; };
 		48E086B91CDBB6B000099E13 /* MEDL.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48E086B81CDBB6AF00099E13 /* MEDL.xcassets */; };
 		48E086BB1CDBB75700099E13 /* MEDL.json in Resources */ = {isa = PBXBuildFile; fileRef = 48E086BA1CDBB75700099E13 /* MEDL.json */; };
@@ -41,8 +37,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4806C0901CD7FDCC0024BBB8 /* ResearchKit.framework in Embed Frameworks */,
-				4806C08C1CD7FDC80024BBB8 /* sdl_rkx.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -55,8 +49,6 @@
 		0B5D7FA889AB2B00F8F1A0D6 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		2E0FFD9D5CC712A712E45FA3 /* Pods_sdl_rkx_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sdl_rkx_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		36FA1E42E47494C7424DA65A /* Pods_sdl_rkx_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sdl_rkx_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4806C08A1CD7FDC70024BBB8 /* sdl_rkx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = sdl_rkx.framework; path = "/Users/jk/Library/Developer/Xcode/DerivedData/sdl-rkx-ezfobbiocdyjajdcuucywqqbdhzj/Build/Products/Debug-iphoneos/sdl-rkx/sdl_rkx.framework"; sourceTree = "<absolute>"; };
-		4806C08E1CD7FDCC0024BBB8 /* ResearchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ResearchKit.framework; path = "/Users/jk/Library/Developer/Xcode/DerivedData/sdl-rkx-ezfobbiocdyjajdcuucywqqbdhzj/Build/Products/Debug-iphoneos/ResearchKit/ResearchKit.framework"; sourceTree = "<absolute>"; };
 		48CB54161CD80CA000D26F68 /* YADL.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = YADL.json; sourceTree = "<group>"; };
 		48E086B81CDBB6AF00099E13 /* MEDL.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MEDL.xcassets; sourceTree = "<group>"; };
 		48E086BA1CDBB75700099E13 /* MEDL.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MEDL.json; sourceTree = "<group>"; };
@@ -81,9 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4806C08B1CD7FDC80024BBB8 /* sdl_rkx.framework in Frameworks */,
 				F92E18C5581C3C8076752932 /* Pods_sdl_rkx_Example.framework in Frameworks */,
-				4806C08F1CD7FDCC0024BBB8 /* ResearchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,8 +102,6 @@
 		406F204728F77E5276D21FDC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4806C08A1CD7FDC70024BBB8 /* sdl_rkx.framework */,
-				4806C08E1CD7FDCC0024BBB8 /* ResearchKit.framework */,
 				36FA1E42E47494C7424DA65A /* Pods_sdl_rkx_Example.framework */,
 				2E0FFD9D5CC712A712E45FA3 /* Pods_sdl_rkx_Tests.framework */,
 			);

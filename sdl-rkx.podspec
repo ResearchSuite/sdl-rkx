@@ -31,8 +31,10 @@ Pod::Spec.new do |s|
   s.source_files = 'sdl-rkx/Classes/**/*'
 
   # s.resource_bundles = {
-  #   'sdl-rkx' => ['sdl-rkx/Assets/*.png']
+  #   'sdl-rkx' => ['sdl-rkx/Assets/PAM.*']
   # }
+
+  s.resources = 'sdl-rkx/Assets/PAM.xcassets', 'sdl-rkx/Assets/PAM.json'
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
