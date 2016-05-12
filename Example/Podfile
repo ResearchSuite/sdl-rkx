@@ -5,14 +5,18 @@ use_frameworks!
 
 target 'sdl-rkx_Example' do
   pod 'sdl-rkx', :path => '../'
-  pod 'ResearchKit', :git => 'https://github.com/ResearchKit/ResearchKit.git'
+  pod 'ResearchKit', '~> 1.3'
 end
 
 target 'sdl-rkx_Tests' do
   pod 'sdl-rkx', :path => '../'
-  pod 'ResearchKit', :git => 'https://github.com/ResearchKit/ResearchKit.git'
+  pod 'ResearchKit', '~> 1.3'
 end
 
+#allows ResearchKit to build,
+#per https://github.com/ResearchKit/ResearchKit/issues/679
+#and https://github.com/cornelltech/sdl-rkx/issues/1
+#Remove once resolved
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|

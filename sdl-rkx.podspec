@@ -20,5 +20,9 @@ Pod::Spec.new do |s|
 
   s.resources = 'sdl-rkx/Assets/PAM.xcassets', 'sdl-rkx/Assets/PAM.json'
 
+  #currently fails lint'ing due to duplicate symbol errors when linking 1.3
+  #see https://github.com/ResearchKit/ResearchKit/issues/679
+  #and https://github.com/cornelltech/sdl-rkx/issues/1
+  #Remove once resolved
   s.dependency 'ResearchKit', '~> 1.3'
 end
