@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  yadl
+//  sdl-rkx
 //
 //  Created by James Kizer on 04/28/2016.
 //  Copyright (c) 2016 Cornell Tech Foundry. All rights reserved.

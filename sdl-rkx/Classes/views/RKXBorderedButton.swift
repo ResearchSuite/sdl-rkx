@@ -3,7 +3,7 @@
 //  SDL-RKX
 //
 //  Created by James Kizer on 4/29/16.
-//
+//  Copyright © 2016 Cornell Tech Foundry. All rights reserved.
 //
 
 import UIKit

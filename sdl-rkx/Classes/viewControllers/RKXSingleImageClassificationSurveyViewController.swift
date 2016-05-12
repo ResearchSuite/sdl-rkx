@@ -1,6 +1,6 @@
 //
-//  YADLFullAssessmentStepViewController.swift
-//  YADL
+//  RKXSingleImageClassificationSurveyViewController.swift
+//  sdl-rkx
 //
 //  Created by James Kizer on 4/5/16.
 //  Copyright © 2016 Cornell Tech Foundry. All rights reserved.
