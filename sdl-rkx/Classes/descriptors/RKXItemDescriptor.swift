@@ -72,7 +72,7 @@ public class RKXActivityDescriptor: RKXImageDescriptor {
     
     override init(itemDictionary: [String: AnyObject]) {
         super.init(itemDictionary: itemDictionary)
-        self.activityDescription = itemDictionary["activityDescription"] as? String
+        self.activityDescription = itemDictionary["description"] as? String
         self.imageTitle = itemDictionary["imageTitle"] as? String
     }
 }
