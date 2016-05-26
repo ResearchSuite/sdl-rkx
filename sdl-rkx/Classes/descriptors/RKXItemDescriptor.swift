@@ -43,7 +43,6 @@ public class RKXCopingMechanismDescriptor: RKXImageDescriptor {
         guard let image = UIImage(named: self.imageTitle)
             else {
                 fatalError("Cannot find image named \(imageTitle) in \(bundle)")
-                return nil
         }
         return RKXImageChoiceWithAdditionalText(image: image, text: self.specificDescription, additionalText: self.generalDescription, value: self.identifier)
     }
@@ -65,7 +64,6 @@ public class RKXActivityDescriptor: RKXImageDescriptor {
         guard let image = UIImage(named: self.imageTitle)
             else {
                 fatalError("Cannot find image named \(imageTitle) in \(bundle)")
-                return nil
         }
         return ORKImageChoice(normalImage: image, selectedImage: nil, text: self.activityDescription, value: self.identifier)
     }
@@ -86,7 +84,6 @@ public class RKXAffectDescriptor: RKXImageDescriptor {
             guard let image = UIImage(named: imageTitle, inBundle: bundle, compatibleWithTraitCollection: nil)
             else{
                fatalError("Cannot find image named \(imageTitle) in \(bundle)")
-                return nil
             }
             return image
         }

@@ -47,12 +47,12 @@ public class PAMTask: RKXMultipleImageSelectionSurveyTask {
         
         guard let completeJSON = json as? [String: AnyObject],
             let typeJSON = completeJSON["PAM"] as? [String: AnyObject],
-            let assessmentJSON = typeJSON as? [String: AnyObject],
             let itemJSONArray = typeJSON["affects"] as? [AnyObject]
             else {
                 fatalError("JSON Parse Error")
         }
         
+        let assessmentJSON = typeJSON
         let items:[RKXAffectDescriptor] = itemJSONArray.map { (itemJSON: AnyObject) in
             guard let itemDictionary = itemJSON as? [String: AnyObject]
                 else
