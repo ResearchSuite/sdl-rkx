@@ -7,7 +7,7 @@ The [Small Data Lab](http://smalldata.io) ResearchKit Extensions package is the 
  - iOS 9.0+
  - Xcode 7.3+
 
-## Installation
+## InstallationNeil
 
 ### CocoaPods
 
