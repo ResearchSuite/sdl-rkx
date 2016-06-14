@@ -1,6 +1,6 @@
 # sdl-rkx
 
-The [Small Data Lab](http://smalldata.io) ResearchKit Extensions package is the easiest way to include SDL visual surveys (YADL, MEDL, PAM) into a ResearchKit application.
+The [Small Data Lab](http://smalldata.io) ResearchKit Extensions package is the easiest way to include SDL visual surveys ([YADL](http://yadl.smalldata.io), MEDL, PAM) into a ResearchKit application.
 
 ## Requirements
 
