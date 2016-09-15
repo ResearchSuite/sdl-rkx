@@ -61,7 +61,7 @@ public class MEDLSpotAssessmentTask: RKXMultipleImageSelectionSurveyTask {
             .flatMap { $0 }
         
         let assessment = RKXMultipleImageSelectionSurveyDescriptor(assessmentDictionary: assessmentJSON)
-        
+        let options = assessment.options;
         let steps: [ORKStep] = {
             if (imageChoices.count == 0) {
                 guard let noItemSummary = assessment.noItemsSummary
@@ -77,7 +77,7 @@ public class MEDLSpotAssessmentTask: RKXMultipleImageSelectionSurveyTask {
                 
                 let answerFormat = ORKAnswerFormat.choiceAnswerFormatWithImageChoices(imageChoices)
                 
-                let spotAssessmentStep = MEDLSpotAssessmentStep(identifier: identifier, title: assessment.prompt, answerFormat: answerFormat)
+                let spotAssessmentStep = MEDLSpotAssessmentStep(identifier: identifier, title: assessment.prompt, answerFormat: answerFormat, options: options)
                 
                 var steps: [ORKStep] = [spotAssessmentStep]
                 
@@ -93,7 +93,6 @@ public class MEDLSpotAssessmentTask: RKXMultipleImageSelectionSurveyTask {
         }()
         
         self.init(identifier: identifier, steps: steps)
-        self.options = assessment.options
     }
     
     override init(identifier: String, steps: [ORKStep]?) {

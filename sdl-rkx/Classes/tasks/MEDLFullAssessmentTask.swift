@@ -89,6 +89,7 @@ public class MEDLFullAssessmentTask: RKXMultipleImageSelectionSurveyTask {
         
         let assessment = RKXMultipleImageSelectionSurveyDescriptor(assessmentDictionary: assessmentJSON)
         
+        let options = assessment.options ?? MEDLFullAssessmentTask.defaultOptions();
         let steps: [ORKStep] = {
             if (categories.count == 0) {
                 guard let noActivitiesSummary = assessment.noItemsSummary
@@ -111,7 +112,7 @@ public class MEDLFullAssessmentTask: RKXMultipleImageSelectionSurveyTask {
                     
                     let answerFormat = ORKAnswerFormat.choiceAnswerFormatWithImageChoices(imageChoices)
                     
-                    let assessmentStep = MEDLFullAssessmentCategoryStep(identifier: category, title: assessment.prompt, category: category, answerFormat: answerFormat)
+                    let assessmentStep = MEDLFullAssessmentCategoryStep(identifier: category, title: assessment.prompt, category: category, answerFormat: answerFormat, options: options)
                     
                     return assessmentStep
                 }
@@ -128,7 +129,6 @@ public class MEDLFullAssessmentTask: RKXMultipleImageSelectionSurveyTask {
         }()
         
         self.init(identifier: identifier, steps: steps)
-        self.options = assessment.options ?? MEDLFullAssessmentTask.defaultOptions()
         
     }
     

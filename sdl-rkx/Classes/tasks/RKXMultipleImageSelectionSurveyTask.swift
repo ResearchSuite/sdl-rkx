@@ -10,5 +10,5 @@ import UIKit
 import ResearchKit
 
 public class RKXMultipleImageSelectionSurveyTask: ORKOrderedTask {
-    var options: RKXMultipleImageSelectionSurveyOptions?
+//    var options: RKXMultipleImageSelectionSurveyOptions?
 }

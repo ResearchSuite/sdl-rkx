@@ -20,9 +20,10 @@ class MEDLFullAssessmentCategoryStep: RKXMultipleImageSelectionSurveyStep {
     init(identifier: String,
          title: String?,
          category: String?,
-         answerFormat: ORKImageChoiceAnswerFormat? ) {
+         answerFormat: ORKImageChoiceAnswerFormat?,
+         options: RKXMultipleImageSelectionSurveyOptions?) {
         
-        super.init(identifier: identifier, title: title, answerFormat: answerFormat)
+        super.init(identifier: identifier, title: title, answerFormat: answerFormat, options: options)
         self.category = category
         
     }

@@ -88,7 +88,7 @@ public class YADLSpotAssessmentTask: RKXMultipleImageSelectionSurveyTask {
                 
                 let answerFormat = ORKAnswerFormat.choiceAnswerFormatWithImageChoices(imageChoices)
                 
-                let spotAssessmentStep = YADLSpotAssessmentStep(identifier: identifier, title: assessment.prompt, answerFormat: answerFormat)
+                let spotAssessmentStep = YADLSpotAssessmentStep(identifier: identifier, title: assessment.prompt, answerFormat: answerFormat, options: assessment.options)
                 
                 var steps: [ORKStep] = [spotAssessmentStep]
                 
@@ -104,7 +104,6 @@ public class YADLSpotAssessmentTask: RKXMultipleImageSelectionSurveyTask {
         }()
         
         self.init(identifier: identifier, steps: steps)
-        self.options = assessment.options
     }
     
     override init(identifier: String, steps: [ORKStep]?) {

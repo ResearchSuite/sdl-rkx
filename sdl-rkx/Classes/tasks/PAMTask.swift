@@ -84,7 +84,7 @@ public class PAMTask: RKXMultipleImageSelectionSurveyTask {
                 
                 let answerFormat = ORKAnswerFormat.choiceAnswerFormatWithImageChoices(imageChoices)
                 
-                let pamStep = PAMStep(identifier: identifier, title: assessment.prompt, answerFormat: answerFormat)
+                let pamStep = PAMStep(identifier: identifier, title: assessment.prompt, answerFormat: answerFormat, options: PAMTask.defaultOptions())
                 
                 var steps: [ORKStep] = [pamStep]
                 
@@ -100,7 +100,6 @@ public class PAMTask: RKXMultipleImageSelectionSurveyTask {
         }()
         
         self.init(identifier: identifier, steps: steps)
-        self.options = PAMTask.defaultOptions()
         
     }
     

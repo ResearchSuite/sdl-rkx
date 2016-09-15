@@ -45,16 +45,19 @@ class RKXSingleImageClassificationSurveyViewController: ORKStepViewController {
     var answer: protocol<NSCoding, NSCopying, NSObjectProtocol>?
     
     override var result: ORKStepResult? {
-        let parentResult = super.result
+        guard let parentResult = super.result else {
+            return nil
+        }
+        
         if let answer = self.answer {
             let step = self.step as? RKXSingleImageClassificationSurveyStep
             
             let questionResult = ORKChoiceQuestionResult(identifier: step!.identifier)
             questionResult.choiceAnswers = [answer]
-            questionResult.startDate = parentResult?.startDate
-            questionResult.endDate = parentResult?.endDate
+            questionResult.startDate = parentResult.startDate
+            questionResult.endDate = parentResult.endDate
             
-            parentResult?.results = [questionResult]
+            parentResult.results = [questionResult]
         }
 
         return parentResult

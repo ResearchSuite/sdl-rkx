@@ -11,18 +11,21 @@ import ResearchKit
 
 class RKXMultipleImageSelectionSurveyStep: ORKQuestionStep {
 
-    func stepViewControllerClass() -> AnyClass {
+    var options: RKXMultipleImageSelectionSurveyOptions?
+    
+    override func stepViewControllerClass() -> AnyClass {
         return RKXMultipleImageSelectionSurveyViewController.self
     }
     
     init(identifier: String,
          title: String?,
-         answerFormat: ORKImageChoiceAnswerFormat? ) {
+         answerFormat: ORKImageChoiceAnswerFormat?,
+         options: RKXMultipleImageSelectionSurveyOptions?) {
         
         super.init(identifier: identifier)
         self.title = title
         self.answerFormat = answerFormat
-        
+        self.options = options
     }
     
     required init(coder aDecoder: NSCoder) {

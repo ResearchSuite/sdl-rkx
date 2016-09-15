@@ -36,6 +36,10 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         self.restorationClass = RKXMultipleImageSelectionSurveyViewController.self
     }
     
+    override convenience init(step: ORKStep?, result: ORKResult?) {
+        self.init(step: step)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -127,48 +131,82 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         }
     }
     
-    func setupOptionsFromTask(task: RKXMultipleImageSelectionSurveyTask) {
-        if let somethingSelectedButtonColor = task.options?.somethingSelectedButtonColor {
+    func setupOptions(options: RKXMultipleImageSelectionSurveyOptions) {
+        if let somethingSelectedButtonColor = options.somethingSelectedButtonColor {
             self.somethingSelectedButtonColor = somethingSelectedButtonColor
         }
         
-        if let nothingSelectedButtonColor = task.options?.nothingSelectedButtonColor {
+        if let nothingSelectedButtonColor = options.nothingSelectedButtonColor {
             self.nothingSelectedButtonColor = nothingSelectedButtonColor
         }
         
-        if let itemCellSelectedColor = task.options?.itemCellSelectedColor {
+        if let itemCellSelectedColor = options.itemCellSelectedColor {
             self.itemCellSelectedColor = itemCellSelectedColor
         }
         
-        if let itemCellTextBackgroundColor = task.options?.itemCellTextBackgroundColor {
+        if let itemCellTextBackgroundColor = options.itemCellTextBackgroundColor {
             self.itemCellTextBackgroundColor = itemCellTextBackgroundColor
         }
         
-        self.itemCellSelectedOverlayImage = task.options?.itemCellSelectedOverlayImage
+        self.itemCellSelectedOverlayImage = options.itemCellSelectedOverlayImage
         
-        if let itemCollectionViewBackgroundColor = task.options?.itemCollectionViewBackgroundColor {
+        if let itemCollectionViewBackgroundColor = options.itemCollectionViewBackgroundColor {
             self.itemCollectionViewBackgroundColor = itemCollectionViewBackgroundColor
         }
         
-        if let itemsPerRow = task.options?.itemsPerRow {
+        if let itemsPerRow = options.itemsPerRow {
             self.itemsPerRow = itemsPerRow
         }
         
-        if let itemMinSpacing = task.options?.itemMinSpacing {
+        if let itemMinSpacing = options.itemMinSpacing {
             self.itemMinSpacing = itemMinSpacing
         }
     }
     
+//    func setupOptionsFromTask(task: RKXMultipleImageSelectionSurveyTask) {
+//        if let somethingSelectedButtonColor = task.options?.somethingSelectedButtonColor {
+//            self.somethingSelectedButtonColor = somethingSelectedButtonColor
+//        }
+//        
+//        if let nothingSelectedButtonColor = task.options?.nothingSelectedButtonColor {
+//            self.nothingSelectedButtonColor = nothingSelectedButtonColor
+//        }
+//        
+//        if let itemCellSelectedColor = task.options?.itemCellSelectedColor {
+//            self.itemCellSelectedColor = itemCellSelectedColor
+//        }
+//        
+//        if let itemCellTextBackgroundColor = task.options?.itemCellTextBackgroundColor {
+//            self.itemCellTextBackgroundColor = itemCellTextBackgroundColor
+//        }
+//        
+//        self.itemCellSelectedOverlayImage = task.options?.itemCellSelectedOverlayImage
+//        
+//        if let itemCollectionViewBackgroundColor = task.options?.itemCollectionViewBackgroundColor {
+//            self.itemCollectionViewBackgroundColor = itemCollectionViewBackgroundColor
+//        }
+//        
+//        if let itemsPerRow = task.options?.itemsPerRow {
+//            self.itemsPerRow = itemsPerRow
+//        }
+//        
+//        if let itemMinSpacing = task.options?.itemMinSpacing {
+//            self.itemMinSpacing = itemMinSpacing
+//        }
+//    }
+    
     override var result: ORKStepResult? {
-        let parentResult = super.result
+        guard let parentResult = super.result else {
+            return nil
+        }
         let step = self.step as? RKXMultipleImageSelectionSurveyStep
         
         let questionResult = ORKChoiceQuestionResult(identifier: step!.identifier)
         questionResult.choiceAnswers = self.selectedAnswers()
-        questionResult.startDate = parentResult?.startDate
-        questionResult.endDate = parentResult?.endDate
+        questionResult.startDate = parentResult.startDate
+        questionResult.endDate = parentResult.endDate
         
-        parentResult?.results = [questionResult]
+        parentResult.results = [questionResult]
         
         return parentResult
     }
@@ -248,10 +286,15 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
 
         self.setupTextViews()
         
-        if let taskViewController = self.taskViewController,
-            let task = taskViewController.task as? RKXMultipleImageSelectionSurveyTask {
-            self.setupOptionsFromTask(task)
+        if let step = self.step as? RKXMultipleImageSelectionSurveyStep,
+            let options = step.options {
+            self.setupOptions(options)
         }
+        
+//        if let taskViewController = self.taskViewController,
+//            let task = taskViewController.task as? RKXMultipleImageSelectionSurveyTask {
+//            self.setupOptionsFromTask(task)
+//        }
         
         self.updateUI()
     }
