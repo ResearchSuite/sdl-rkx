@@ -12,17 +12,17 @@
             {
                "text":"Easy",
                "value":"easy",
-               "color":"#69D2E7"
+               "color":"#258313"
             },
             {
                "text":"Moderate",
                "value":"moderate",
-               "color":"#E0E4CC"
+               "color":"#F0743E"
             },
             {
                "text":"Hard",
                "value":"hard",
-               "color":"#F38630"
+               "color":"#D20005"
             }
          ]
       },
@@ -44,17 +44,11 @@
             "nothingSelectedButtonColor":"#FCC103",
             "itemCellSelectedColor":"#7FEE7D",
             "itemCellSelectedOverlayImageTitle":"first_tab",
-            "itemCollectionViewBackgroundColor":"#E9E9E9",
             "itemsPerRow":3,
             "itemMinSpacing":10.0
          }
       },
       "activities":[
-         {
-            "imageTitle":"Bathing",
-            "description":"Bathing",
-            "identifier":"Bathing"
-         },
          {
             "imageTitle":"BedToChair",
             "description":"Bed To Chair",
@@ -64,11 +58,6 @@
             "imageTitle":"Dressing",
             "description":"Dressing",
             "identifier":"Dressing"
-         },
-         {
-            "imageTitle":"Eating",
-            "description":"Eating",
-            "identifier":"Eating"
          },
          {
             "imageTitle":"Housework",
@@ -81,16 +70,6 @@
             "identifier":"Lifting"
          },
          {
-            "imageTitle":"ManagingFinances",
-            "description":"Managing Finances",
-            "identifier":"ManagingFinances"
-         },
-         {
-            "imageTitle":"PreparingFood",
-            "description":"Meal Prep",
-            "identifier":"PreparingFood"
-         },
-         {
             "imageTitle":"Shopping",
             "description":"Shopping",
             "identifier":"Shopping"
@@ -99,16 +78,6 @@
             "imageTitle":"ShortWalk",
             "description":"Talking a short walk",
             "identifier":"ShortWalk"
-         },
-         {
-            "imageTitle":"TakingMeds",
-            "description":"Taking Medication",
-            "identifier":"TakingMeds"
-         },
-         {
-            "imageTitle":"Toilet",
-            "description":"Using the toilet",
-            "identifier":"Toilet"
          },
          {
             "imageTitle":"WalkingUpStairs",

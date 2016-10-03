@@ -36,7 +36,7 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         self.restorationClass = RKXMultipleImageSelectionSurveyViewController.self
     }
     
-    override convenience init(step: ORKStep?, result: ORKResult?) {
+    convenience init(step: ORKStep?, result: ORKResult?) {
         self.init(step: step)
     }
     
@@ -275,6 +275,8 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         self.imagesCollectionView.delegate = self
         self.imagesCollectionView.dataSource = self
         self.imagesCollectionView.backgroundColor = self.itemCollectionViewBackgroundColor
+//        self.imagesCollectionView.layer.borderWidth = 1.0
+//        self.imagesCollectionView.layer.borderColor = UIColor.lightGrayColor().CGColor
         
         if let somethingSelectedButton = self.somethingSelectedButton as? RKXBorderedButton {
             somethingSelectedButton.configuredColor = self.somethingSelectedButtonColor
