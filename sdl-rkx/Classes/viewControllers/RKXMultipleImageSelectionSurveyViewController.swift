@@ -36,7 +36,7 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         self.restorationClass = RKXMultipleImageSelectionSurveyViewController.self
     }
     
-    convenience init(step: ORKStep?, result: ORKResult?) {
+    convenience override init(step: ORKStep?, result: ORKResult?) {
         self.init(step: step)
     }
     

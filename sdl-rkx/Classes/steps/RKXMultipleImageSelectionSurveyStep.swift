@@ -13,7 +13,7 @@ class RKXMultipleImageSelectionSurveyStep: ORKQuestionStep {
 
     var options: RKXMultipleImageSelectionSurveyOptions?
     
-    func stepViewControllerClass() -> AnyClass {
+    override func stepViewControllerClass() -> AnyClass {
         return RKXMultipleImageSelectionSurveyViewController.self
     }
     
