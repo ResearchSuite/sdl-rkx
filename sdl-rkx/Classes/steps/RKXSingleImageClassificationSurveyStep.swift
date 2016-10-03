@@ -13,7 +13,7 @@ class RKXSingleImageClassificationSurveyStep: ORKQuestionStep {
 
     var image: UIImage?
     
-    override func stepViewControllerClass() -> AnyClass {
+    func stepViewControllerClass() -> AnyClass {
         return RKXSingleImageClassificationSurveyViewController.self
     }
 

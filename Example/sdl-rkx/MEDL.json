@@ -14,7 +14,6 @@
           "itemCellTextBackgroundColor": "#FCC103",
           "itemCellSelectedColor":"#7FEE7D",
           "itemCellSelectedOverlayImageTitle":"first_tab",
-          "itemCollectionViewBackgroundColor":"#E9E9E9",
           "itemsPerRow":2,
           "itemMinSpacing":10.0
       }
@@ -38,7 +37,6 @@
           "itemCellTextBackgroundColor": "#FCC103",
           "itemCellSelectedColor":"#7FEE7D",
           "itemCellSelectedOverlayImageTitle":"first_tab",
-          "itemCollectionViewBackgroundColor":"#E9E9E9",
           "itemsPerRow":2,
           "itemMinSpacing":10.0
       }
@@ -86,29 +84,51 @@
         "specificDescription": "Soma",
         "imageTitle": "Soma",
         "category": "Muscle Relaxants"
-      },
-
-      {
-        "identifier": "Ultram",
-        "generalDescription": "tramadol",
-        "specificDescription": "Ultram",
-        "imageTitle": "tramadol",
-        "category": "Opioids"
-      },
-      {
-        "identifier": "Codeine",
-        "generalDescription": "",
-        "specificDescription": "Codeine",
-        "imageTitle": "codeine",
-        "category": "Opioids"
-      },
-      {
-        "identifier": "Zohydro ER",
-        "generalDescription": "hydrocodone",
-        "specificDescription": "Zohydro ER",
-        "imageTitle": "hydrocodone",
-        "category": "Opioids"
-      }
+                    },
+                    
+                    {
+                    "identifier": "Ultram",
+                    "generalDescription": "tramadol",
+                    "specificDescription": "Ultram",
+                    "imageTitle": "tramadol",
+                    "category": "Opioids"
+                    },
+                    {
+                    "identifier": "Codeine",
+                    "generalDescription": "",
+                    "specificDescription": "Codeine",
+                    "imageTitle": "codeine",
+                    "category": "Opioids"
+                    },
+                    {
+                    "identifier": "Zohydro ER",
+                    "generalDescription": "hydrocodone",
+                    "specificDescription": "Zohydro ER",
+                    "imageTitle": "hydrocodone",
+                    "category": "Opioids"
+                    },
+                    
+                    {
+                    "identifier": "Yoga",
+                    "generalDescription": "",
+                    "specificDescription": "Yoga",
+                    "imageTitle": "Yoga",
+                    "category": "Activities"
+                    },
+                    {
+                    "identifier": "Swimming",
+                    "generalDescription": "",
+                    "specificDescription": "Swimming",
+                    "imageTitle": "swimming",
+                    "category": "Activities"
+                    },
+                    {
+                    "identifier": "Meditation",
+                    "generalDescription": "",
+                    "specificDescription": "Meditation",
+                    "imageTitle": "Meditation",
+                    "category": "Activities"
+                    }
     ]
   }
 }
