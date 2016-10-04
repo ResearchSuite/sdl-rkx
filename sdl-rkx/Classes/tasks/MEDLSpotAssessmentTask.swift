@@ -9,23 +9,23 @@
 import UIKit
 import ResearchKit
 
-public class MEDLSpotAssessmentTask: RKXMultipleImageSelectionSurveyTask {
+open class MEDLSpotAssessmentTask: RKXMultipleImageSelectionSurveyTask {
 
     convenience public init(identifier: String, propertiesFileName: String, itemIdentifiers: [String]? = nil) {
         
-        guard let filePath = NSBundle.mainBundle().pathForResource(propertiesFileName, ofType: "json")
+        guard let filePath = Bundle.main.path(forResource: propertiesFileName, ofType: "json")
             else {
                 fatalError("Unable to location file with YADL Spot Assessment Section in main bundle")
         }
         
-        guard let fileContent = NSData(contentsOfFile: filePath)
+        guard let fileContent = try? Data(contentsOf: URL(fileURLWithPath: filePath))
             else {
                 fatalError("Unable to create NSData with file content (YADL Spot Assessment data)")
         }
         
-        let spotAssessmentParameters = try! NSJSONSerialization.JSONObjectWithData(fileContent, options: NSJSONReadingOptions.MutableContainers)
+        let spotAssessmentParameters = try! JSONSerialization.jsonObject(with: fileContent, options: JSONSerialization.ReadingOptions.mutableContainers)
         
-        self.init(identifier: identifier, json: spotAssessmentParameters, itemIdentifiers: itemIdentifiers)
+        self.init(identifier: identifier, json: spotAssessmentParameters as AnyObject, itemIdentifiers: itemIdentifiers)
     }
     
     convenience public init(identifier: String, json: AnyObject, itemIdentifiers: [String]? = nil) {
@@ -75,7 +75,7 @@ public class MEDLSpotAssessmentTask: RKXMultipleImageSelectionSurveyTask {
             }
             else {
                 
-                let answerFormat = ORKAnswerFormat.choiceAnswerFormatWithImageChoices(imageChoices)
+                let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: imageChoices)
                 
                 let spotAssessmentStep = MEDLSpotAssessmentStep(identifier: identifier, title: assessment.prompt, answerFormat: answerFormat, options: options)
                 

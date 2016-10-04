@@ -9,7 +9,7 @@
 import UIKit
 import ResearchKit
 
-public class YADLSpotAssessmentTask: RKXMultipleImageSelectionSurveyTask {
+open class YADLSpotAssessmentTask: RKXMultipleImageSelectionSurveyTask {
     
 //    public class func spotAssessmentResults(taskResult: ORKTaskResult) -> [ORKChoiceQuestionResult]? {
 //        if let stepResults = taskResult.results as? [ORKStepResult]
@@ -24,19 +24,19 @@ public class YADLSpotAssessmentTask: RKXMultipleImageSelectionSurveyTask {
     
     convenience public init(identifier: String, propertiesFileName: String, activityIdentifiers: [String]? = nil) {
 
-        guard let filePath = NSBundle.mainBundle().pathForResource(propertiesFileName, ofType: "json")
+        guard let filePath = Bundle.main.path(forResource: propertiesFileName, ofType: "json")
             else {
                 fatalError("Unable to location file with YADL Spot Assessment Section in main bundle")
         }
         
-        guard let fileContent = NSData(contentsOfFile: filePath)
+        guard let fileContent = try? Data(contentsOf: URL(fileURLWithPath: filePath))
             else {
                 fatalError("Unable to create NSData with file content (YADL Spot Assessment data)")
         }
         
-        let spotAssessmentParameters = try! NSJSONSerialization.JSONObjectWithData(fileContent, options: NSJSONReadingOptions.MutableContainers)
+        let spotAssessmentParameters = try! JSONSerialization.jsonObject(with: fileContent, options: JSONSerialization.ReadingOptions.mutableContainers)
         
-        self.init(identifier: identifier, json: spotAssessmentParameters, activityIdentifiers: activityIdentifiers)
+        self.init(identifier: identifier, json: spotAssessmentParameters as AnyObject, activityIdentifiers: activityIdentifiers)
     }
     
     convenience public init(identifier: String, json: AnyObject, activityIdentifiers: [String]? = nil) {
@@ -86,7 +86,7 @@ public class YADLSpotAssessmentTask: RKXMultipleImageSelectionSurveyTask {
             }
             else {
                 
-                let answerFormat = ORKAnswerFormat.choiceAnswerFormatWithImageChoices(imageChoices)
+                let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: imageChoices)
                 
                 let spotAssessmentStep = YADLSpotAssessmentStep(identifier: identifier, title: assessment.prompt, answerFormat: answerFormat, options: assessment.options)
                 

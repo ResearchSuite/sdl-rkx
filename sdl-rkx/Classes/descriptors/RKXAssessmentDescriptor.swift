@@ -32,13 +32,13 @@ let kOptionsItemCellSelectedOverlayImageTitleTag = "itemCellSelectedOverlayImage
 let kOptionsItemsPerRowTag = "itemsPerRow"
 let kOptionsItemMinSpacingTag = "itemMinSpacing"
 
-func getStringForKeyStrings(keys: [String], optionsDictionary: [String: AnyObject]) -> String? {
+func getStringForKeyStrings(_ keys: [String], optionsDictionary: [String: AnyObject]) -> String? {
     return keys.map { key in
         return optionsDictionary[key] as? String
     }.flatMap { $0 }.first
 }
 
-func colorForOptionsAndKey(options: [String: AnyObject], key: String) -> UIColor? {
+func colorForOptionsAndKey(_ options: [String: AnyObject], key: String) -> UIColor? {
     if let colorString = options[key] as? String {
         return UIColor(hexString: colorString)
     }
@@ -82,14 +82,14 @@ class RKXMultipleImageSelectionSurveyOptions: NSObject {
 
 class RKXChoiceDescriptor: NSObject {
     var text: String!
-    var value: protocol<NSCoding, NSCopying, NSObjectProtocol>!
+    var value: NSCoding & NSCopying & NSObjectProtocol
     var color: UIColor?
     
     init?(choiceDictionary: [String: AnyObject]?) {
         super.init()
         guard let choiceDictionary = choiceDictionary,
             let text = choiceDictionary[kChoiceTextTag] as? String,
-            let value = choiceDictionary[kChoiceValueTag] as? protocol<NSCoding, NSCopying, NSObjectProtocol>
+            let value = choiceDictionary[kChoiceValueTag] as? NSCoding & NSCopying & NSObjectProtocol
             else {
                 return nil
         }

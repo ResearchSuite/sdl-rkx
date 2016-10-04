@@ -30,9 +30,9 @@ class RKXBorderedButton: UIButton {
         self.layer.cornerRadius = 5.0
     }
     
-    func setBorderAndTitleColor(color: UIColor) {
-        self.setTitleColor(color, forState: .Normal)
-        self.layer.borderColor = color.CGColor
+    func setBorderAndTitleColor(_ color: UIColor) {
+        self.setTitleColor(color, for: UIControlState())
+        self.layer.borderColor = color.cgColor
     }
     var configuredColor: UIColor? {
         didSet {
@@ -56,9 +56,9 @@ class RKXBorderedButton: UIButton {
         }
     }
     
-    override func intrinsicContentSize() -> CGSize {
-        let superSize = super.intrinsicContentSize()
-        return CGSizeMake(superSize.width + 20.0, superSize.height)
+    override var intrinsicContentSize : CGSize {
+        let superSize = super.intrinsicContentSize
+        return CGSize(width: superSize.width + 20.0, height: superSize.height)
     }
 
 }

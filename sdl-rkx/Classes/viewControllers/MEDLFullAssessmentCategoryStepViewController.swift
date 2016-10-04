@@ -23,7 +23,7 @@ class MEDLFullAssessmentCategoryStepViewController: RKXMultipleImageSelectionSur
         return 40.0
     }
     
-    override func configureCellForImageChoice(missCell: RKXMultipleImageSelectionSurveyCollectionViewCell, imageChoice: ORKImageChoice) -> RKXMultipleImageSelectionSurveyCollectionViewCell {
+    override func configureCellForImageChoice(_ missCell: RKXMultipleImageSelectionSurveyCollectionViewCell, imageChoice: ORKImageChoice) -> RKXMultipleImageSelectionSurveyCollectionViewCell {
         
         let missCell = super.configureCellForImageChoice(missCell, imageChoice: imageChoice)
         
@@ -57,11 +57,11 @@ class MEDLFullAssessmentCategoryStepViewController: RKXMultipleImageSelectionSur
         return "Next"
     }
     
-    @IBAction override func somethingSelectedButtonPressed(sender: AnyObject) {
+    @IBAction override func somethingSelectedButtonPressed(_ sender: AnyObject) {
         self.notifyDelegateAndMoveForward()
     }
     
-    @IBAction override func nothingSelectedButtonPressed(sender: AnyObject) {
+    @IBAction override func nothingSelectedButtonPressed(_ sender: AnyObject) {
         self.notifyDelegateAndMoveForward()
     }
 }

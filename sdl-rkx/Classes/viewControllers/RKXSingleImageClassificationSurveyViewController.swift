@@ -16,12 +16,12 @@ class RKXSingleImageClassificationSurveyViewController: ORKStepViewController {
     @IBOutlet weak var questionTextView: UITextView!
     @IBOutlet weak var buttonStackView: UIStackView!
     
-    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
+    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
     override convenience init(step: ORKStep?) {
-        let framework = NSBundle(forClass: RKXSingleImageClassificationSurveyViewController.self)
+        let framework = Bundle(for: RKXSingleImageClassificationSurveyViewController.self)
         self.init(nibName: "RKXSingleImageClassificationSurveyViewController", bundle: framework)
         self.step = step
         self.restorationIdentifier = step!.identifier
@@ -42,7 +42,7 @@ class RKXSingleImageClassificationSurveyViewController: ORKStepViewController {
         }
     }
     
-    var answer: protocol<NSCoding, NSCopying, NSObjectProtocol>?
+    var answer: NSCoding & NSCopying & NSObjectProtocol
     
     override var result: ORKStepResult? {
         guard let parentResult = super.result else {
@@ -79,18 +79,18 @@ class RKXSingleImageClassificationSurveyViewController: ORKStepViewController {
         self.setupQuestionTextView(step)
     }
     
-    func setupQuestionTextView(step: RKXSingleImageClassificationSurveyStep) {
+    func setupQuestionTextView(_ step: RKXSingleImageClassificationSurveyStep) {
         
         self.questionTextView.text = step.text
-        self.questionTextView.textAlignment = NSTextAlignment.Center
-        self.questionTextView.font = UIFont.boldSystemFontOfSize(18.0)
+        self.questionTextView.textAlignment = NSTextAlignment.center
+        self.questionTextView.font = UIFont.boldSystemFont(ofSize: 18.0)
         
     }
     
     //note that this was setupButtons, but changed due to namespace conlict
     func setupDifficultyButtons() {
         
-        self.buttonStackView.layoutMarginsRelativeArrangement = true
+        self.buttonStackView.isLayoutMarginsRelativeArrangement = true
         
         //clear existing buttons, if any
         if let buttons = self.buttons {
@@ -111,24 +111,24 @@ class RKXSingleImageClassificationSurveyViewController: ORKStepViewController {
                 fatalError("Answer Format Type must be ORKTextChoiceAnswerFormat")
         }
         
-        self.buttons = answerFormat.textChoices.enumerate().map { (i, textChoice) in
-            let button = RKXBorderedButton(type: UIButtonType.System)
-            button.setTitle(textChoice.text, forState: .Normal)
+        self.buttons = answerFormat.textChoices.enumerated().map { (i, textChoice) in
+            let button = RKXBorderedButton(type: UIButtonType.system)
+            button.setTitle(textChoice.text, for: .normal)
             
             if let textChoiceWithColor = textChoice as? RKXTextChoiceWithColor {
                 button.configuredColor = textChoiceWithColor.color
             }
             
-            let heightContraint = NSLayoutConstraint(item: button, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: self.buttonHeight)
+            let heightContraint = NSLayoutConstraint(item: button, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: self.buttonHeight)
             button.addConstraint(heightContraint)
             
-            button.addTarget(self, action: #selector(RKXSingleImageClassificationSurveyViewController.textChoiceButtonSelected(_:)), forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(RKXSingleImageClassificationSurveyViewController.textChoiceButtonSelected(_:)), for: .touchUpInside)
             
             return button
         }
         
         self.buttonHeightContraints = self.buttons!.map { button in
-            let constraint: NSLayoutConstraint = NSLayoutConstraint(item: button, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: self.buttonHeight)
+            let constraint: NSLayoutConstraint = NSLayoutConstraint(item: button, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: self.buttonHeight)
             button.addConstraint(constraint)
             return constraint
         }
@@ -136,7 +136,7 @@ class RKXSingleImageClassificationSurveyViewController: ORKStepViewController {
         self.buttons?.forEach(self.buttonStackView.addArrangedSubview)
     }
     
-    func textChoiceAtIndex(index: Int) -> ORKTextChoice? {
+    func textChoiceAtIndex(_ index: Int) -> ORKTextChoice? {
         
         guard let step = self.step as? RKXSingleImageClassificationSurveyStep,
             let answerFormat = step.answerFormat as? ORKTextChoiceAnswerFormat
@@ -148,10 +148,10 @@ class RKXSingleImageClassificationSurveyViewController: ORKStepViewController {
     }
     
     
-    func textChoiceButtonSelected(button: UIButton) {
+    func textChoiceButtonSelected(_ button: UIButton) {
         
         
-        if let buttonIndex = self.buttons?.indexOf(button),
+        if let buttonIndex = self.buttons?.index(of: button),
             let textChoice = self.textChoiceAtIndex(buttonIndex) {
             
             self.answer = textChoice.value
@@ -164,7 +164,7 @@ class RKXSingleImageClassificationSurveyViewController: ORKStepViewController {
         
     }
 
-    @IBAction func skipButtonPressed(sender: AnyObject) {
+    @IBAction func skipButtonPressed(_ sender: AnyObject) {
         self.goForward()
     }
 

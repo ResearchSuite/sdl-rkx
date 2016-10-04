@@ -12,11 +12,11 @@ import ResearchKit
 class RKXTextChoiceWithColor: ORKTextChoice {
     
     var color: UIColor?
-    init(text: String, value: protocol<NSCoding, NSCopying, NSObjectProtocol>) {
+    init(text: String, value: NSCoding & NSCopying & NSObjectProtocol) {
         super.init(text: text, detailText: nil, value: value, exclusive: false)
     }
     
-    convenience init(text: String, value: protocol<NSCoding, NSCopying, NSObjectProtocol>, color: UIColor?) {
+    convenience init(text: String, value: NSCoding & NSCopying & NSObjectProtocol, color: UIColor?) {
         self.init(text: text, value: value)
         self.color = color
     }

@@ -12,7 +12,7 @@ import ResearchKit
 class PAMImageChoice: ORKImageChoice {
 
     let images: [UIImage]
-    required init(images: [UIImage], value: protocol<NSCoding, NSCopying, NSObjectProtocol>) {
+    required init(images: [UIImage], value: NSCoding & NSCopying & NSObjectProtocol) {
         self.images = images
         super.init(normalImage: nil, selectedImage: nil, text: nil, value: value)
     }

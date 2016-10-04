@@ -9,12 +9,12 @@
 import UIKit
 import ResearchKit
 
-public class PAMTask: RKXMultipleImageSelectionSurveyTask {
+open class PAMTask: RKXMultipleImageSelectionSurveyTask {
 
     class func defaultOptions() -> RKXMultipleImageSelectionSurveyOptions {
         let options = RKXMultipleImageSelectionSurveyOptions()
-        options.somethingSelectedButtonColor = UIColor.blueColor()
-        options.nothingSelectedButtonColor = UIColor.blueColor()
+        options.somethingSelectedButtonColor = UIColor.blue
+        options.nothingSelectedButtonColor = UIColor.blue
         options.itemsPerRow = 4
         options.itemMinSpacing = 4
         return options
@@ -22,27 +22,27 @@ public class PAMTask: RKXMultipleImageSelectionSurveyTask {
     
     convenience public init(identifier: String) {
         
-        self.init(identifier: identifier, propertiesFileName: "PAM", bundle: NSBundle(forClass: PAMTask.self))
+        self.init(identifier: identifier, propertiesFileName: "PAM", bundle: Bundle(for: PAMTask.self))
     }
     
-    convenience init(identifier: String, propertiesFileName: String, bundle: NSBundle = NSBundle.mainBundle()) {
+    convenience init(identifier: String, propertiesFileName: String, bundle: Bundle = Bundle.main) {
         
-        guard let filePath = bundle.pathForResource(propertiesFileName, ofType: "json")
+        guard let filePath = bundle.path(forResource: propertiesFileName, ofType: "json")
             else {
                 fatalError("Unable to locate file PAM.json")
         }
         
-        guard let fileContent = NSData(contentsOfFile: filePath)
+        guard let fileContent = try? Data(contentsOf: URL(fileURLWithPath: filePath))
             else {
                 fatalError("Unable to create NSData with file content (PAM data)")
         }
         
-        let spotAssessmentParameters = try! NSJSONSerialization.JSONObjectWithData(fileContent, options: NSJSONReadingOptions.MutableContainers)
+        let spotAssessmentParameters = try! JSONSerialization.jsonObject(with: fileContent, options: JSONSerialization.ReadingOptions.mutableContainers)
         
-        self.init(identifier: identifier, json: spotAssessmentParameters, bundle: bundle)
+        self.init(identifier: identifier, json: spotAssessmentParameters as AnyObject, bundle: bundle)
     }
     
-    convenience init(identifier: String, json: AnyObject, bundle: NSBundle = NSBundle.mainBundle()) {
+    convenience init(identifier: String, json: AnyObject, bundle: Bundle = Bundle.main) {
         
         
         guard let completeJSON = json as? [String: AnyObject],
@@ -82,7 +82,7 @@ public class PAMTask: RKXMultipleImageSelectionSurveyTask {
             }
             else {
                 
-                let answerFormat = ORKAnswerFormat.choiceAnswerFormatWithImageChoices(imageChoices)
+                let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: imageChoices)
                 
                 let pamStep = PAMStep(identifier: identifier, title: assessment.prompt, answerFormat: answerFormat, options: PAMTask.defaultOptions())
                 

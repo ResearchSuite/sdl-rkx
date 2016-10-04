@@ -13,7 +13,7 @@ class RKXImageChoiceWithAdditionalText: ORKImageChoice {
 
     var additionalText: String?
     
-    required init(image: UIImage, text: String?, additionalText: String?, value: protocol<NSCoding, NSCopying, NSObjectProtocol>) {
+    required init(image: UIImage, text: String?, additionalText: String?, value: NSCoding & NSCopying & NSObjectProtocol) {
         self.additionalText = additionalText
         super.init(normalImage: image, selectedImage: nil, text: text, value: value)
     }

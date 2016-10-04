@@ -26,11 +26,11 @@ class PAMStepViewController: RKXMultipleImageSelectionSurveyViewController {
         return "Reload Images"
     }
     
-    @IBAction override func somethingSelectedButtonPressed(sender: AnyObject) {
+    @IBAction override func somethingSelectedButtonPressed(_ sender: AnyObject) {
         fatalError("Unimplemented")
     }
     
-    @IBAction override func nothingSelectedButtonPressed(sender: AnyObject) {
+    @IBAction override func nothingSelectedButtonPressed(_ sender: AnyObject) {
         //reloading the UI should cause the cells to be reloaded,
         //which means images will be chosen at random
         self.updateUI()

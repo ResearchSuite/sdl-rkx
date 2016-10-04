@@ -9,6 +9,6 @@
 import UIKit
 import ResearchKit
 
-public class RKXSingleImageClassificationSurveyTask: ORKOrderedTask {
+open class RKXSingleImageClassificationSurveyTask: ORKOrderedTask {
 
 }

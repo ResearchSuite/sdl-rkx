@@ -9,9 +9,9 @@
 import UIKit
 import ResearchKit
 
-public class MEDLFullAssessmentTask: RKXMultipleImageSelectionSurveyTask {
+open class MEDLFullAssessmentTask: RKXMultipleImageSelectionSurveyTask {
 
-    public class func fullAssessmentResults(taskResult: ORKTaskResult) -> [ORKChoiceQuestionResult]? {
+    open class func fullAssessmentResults(_ taskResult: ORKTaskResult) -> [ORKChoiceQuestionResult]? {
         if let stepResults = taskResult.results as? [ORKStepResult]
         {
             print(stepResults)
@@ -26,8 +26,8 @@ public class MEDLFullAssessmentTask: RKXMultipleImageSelectionSurveyTask {
     
     class func defaultOptions() -> RKXMultipleImageSelectionSurveyOptions {
         let options = RKXMultipleImageSelectionSurveyOptions()
-        options.somethingSelectedButtonColor = UIColor.blueColor()
-        options.nothingSelectedButtonColor = UIColor.blueColor()
+        options.somethingSelectedButtonColor = UIColor.blue
+        options.nothingSelectedButtonColor = UIColor.blue
         options.itemsPerRow = 4
         options.itemMinSpacing = 4
         return options
@@ -35,19 +35,19 @@ public class MEDLFullAssessmentTask: RKXMultipleImageSelectionSurveyTask {
     
     convenience public init(identifier: String, propertiesFileName: String) {
         
-        guard let filePath = NSBundle.mainBundle().pathForResource(propertiesFileName, ofType: "json")
+        guard let filePath = Bundle.main.path(forResource: propertiesFileName, ofType: "json")
             else {
                 fatalError("Unable to locate file \(propertiesFileName)")
         }
         
-        guard let fileContent = NSData(contentsOfFile: filePath)
+        guard let fileContent = try? Data(contentsOf: URL(fileURLWithPath: filePath))
             else {
                 fatalError("Unable to create NSData with file content (YADL Spot Assessment data)")
         }
         
-        let json = try! NSJSONSerialization.JSONObjectWithData(fileContent, options: NSJSONReadingOptions.MutableContainers)
+        let json = try! JSONSerialization.jsonObject(with: fileContent, options: JSONSerialization.ReadingOptions.mutableContainers)
         
-        self.init(identifier: identifier, json: json)
+        self.init(identifier: identifier, json: json as AnyObject)
     }
     
     convenience public init(identifier: String, json: AnyObject) {
@@ -69,7 +69,7 @@ public class MEDLFullAssessmentTask: RKXMultipleImageSelectionSurveyTask {
             return RKXCopingMechanismDescriptor(itemDictionary: itemDictionary)
             }.flatMap { $0 }
         
-        let categories = items.reduce([String](), combine: { (acc, item) -> [String] in
+        let categories = items.reduce([String](), { (acc, item) -> [String] in
             if acc.contains(item.category) {
                 return acc
             }
@@ -110,7 +110,7 @@ public class MEDLFullAssessmentTask: RKXMultipleImageSelectionSurveyTask {
                         //dont forget to unwrap optionals!!
                         .flatMap { $0 }
                     
-                    let answerFormat = ORKAnswerFormat.choiceAnswerFormatWithImageChoices(imageChoices)
+                    let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: imageChoices)
                     
                     let assessmentStep = MEDLFullAssessmentCategoryStep(identifier: category, title: assessment.prompt, category: category, answerFormat: answerFormat, options: options)
                     

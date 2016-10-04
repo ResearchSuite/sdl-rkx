@@ -32,11 +32,11 @@ class YADLSpotAssessmentStepViewController: RKXMultipleImageSelectionSurveyViewC
         return "Nothing To Report"
     }
     
-    @IBAction override func somethingSelectedButtonPressed(sender: AnyObject) {
+    @IBAction override func somethingSelectedButtonPressed(_ sender: AnyObject) {
         self.notifyDelegateAndMoveForward()
     }
     
-    @IBAction override func nothingSelectedButtonPressed(sender: AnyObject) {
+    @IBAction override func nothingSelectedButtonPressed(_ sender: AnyObject) {
         self.notifyDelegateAndMoveForward()
     }
 }

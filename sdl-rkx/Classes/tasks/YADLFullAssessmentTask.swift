@@ -9,9 +9,9 @@
 import UIKit
 import ResearchKit
 
-public class YADLFullAssessmentTask: RKXSingleImageClassificationSurveyTask {
+open class YADLFullAssessmentTask: RKXSingleImageClassificationSurveyTask {
 
-    public class func fullAssessmentResults(taskResult: ORKTaskResult) -> [ORKChoiceQuestionResult]? {
+    open class func fullAssessmentResults(_ taskResult: ORKTaskResult) -> [ORKChoiceQuestionResult]? {
         if let stepResults = taskResult.results as? [ORKStepResult]
         {
             return stepResults.map { stepResult in
@@ -58,7 +58,7 @@ public class YADLFullAssessmentTask: RKXSingleImageClassificationSurveyTask {
                 return RKXTextChoiceWithColor(text: choice.text, value: choice.value, color: choice.color)
             }
             
-            let answerFormat = ORKAnswerFormat.choiceAnswerFormatWithStyle(.SingleChoice, textChoices: textChoices)
+            let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .singleChoice, textChoices: textChoices)
             var steps: [ORKStep] = items.map { item in
                 guard let image = UIImage(named: item.imageTitle)
                     else {
@@ -81,19 +81,19 @@ public class YADLFullAssessmentTask: RKXSingleImageClassificationSurveyTask {
     
     convenience public init(identifier: String, propertiesFileName: String) {
         
-        guard let filePath = NSBundle.mainBundle().pathForResource(propertiesFileName, ofType: "json")
+        guard let filePath = Bundle.main.path(forResource: propertiesFileName, ofType: "json")
             else {
                 fatalError("Unable to location file with YADL Full Assessment Section in main bundle")
         }
         
-        guard let fileContent = NSData(contentsOfFile: filePath)
+        guard let fileContent = try? Data(contentsOf: URL(fileURLWithPath: filePath))
             else {
                 fatalError("Unable to create NSData with file content (YADL Full Assessment data)")
         }
         
-        let spotAssessmentParameters = try! NSJSONSerialization.JSONObjectWithData(fileContent, options: NSJSONReadingOptions.MutableContainers)
+        let spotAssessmentParameters = try! JSONSerialization.jsonObject(with: fileContent, options: JSONSerialization.ReadingOptions.mutableContainers)
         
-        self.init(identifier: identifier, json: spotAssessmentParameters)
+        self.init(identifier: identifier, json: spotAssessmentParameters as AnyObject)
     }
     
     required public init(coder aDecoder: NSCoder) {

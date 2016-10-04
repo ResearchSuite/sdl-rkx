@@ -17,14 +17,14 @@ class RKXMultipleImageSelectionSurveyCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var secondaryTextLabel: UILabel!
     
     func setBackgroundColor() {
-        if self.selected {
+        if self.isSelected {
             self.backgroundColor = self.selectedBackgroundColor ?? self.tintColor
         }
         else {
-            self.backgroundColor = UIColor.clearColor()
+            self.backgroundColor = UIColor.clear
         }
         
-        let color = self.textStackViewBackgroundColor ?? UIColor.clearColor()
+        let color = self.textStackViewBackgroundColor ?? UIColor.clear
         self.textStackView.backgroundColor = color
         self.primaryTextLabel.backgroundColor = color
         self.secondaryTextLabel.backgroundColor = color
@@ -52,7 +52,7 @@ class RKXMultipleImageSelectionSurveyCollectionViewCell: UICollectionViewCell {
     var activityImage: UIImage? {
         willSet(newActivityImage) {
             self.activityImageView.layer.borderWidth = 1
-            self.activityImageView.layer.borderColor = UIColor.lightGrayColor().CGColor
+            self.activityImageView.layer.borderColor = UIColor.lightGray.cgColor
             self.activityImageView.image = newActivityImage
         }
     }
@@ -63,10 +63,10 @@ class RKXMultipleImageSelectionSurveyCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    override var selected: Bool {
+    override var isSelected: Bool {
         didSet {
             self.setBackgroundColor()
-            self.checkImageView.hidden = !selected
+            self.checkImageView.isHidden = !isSelected
         }
     }
     

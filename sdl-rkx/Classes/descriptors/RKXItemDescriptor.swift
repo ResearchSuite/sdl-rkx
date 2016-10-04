@@ -11,7 +11,7 @@ import ResearchKit
 
 
 
-public class RKXItemDescriptor: NSObject {
+open class RKXItemDescriptor: NSObject {
     var identifier: String!
     
     init(itemDictionary: [String: AnyObject]) {
@@ -20,31 +20,31 @@ public class RKXItemDescriptor: NSObject {
     }
 }
 
-public class RKXImageDescriptor: RKXItemDescriptor {
+open class RKXImageDescriptor: RKXItemDescriptor {
     
-    class func imageChoiceForDescriptor(bundle: NSBundle = NSBundle.mainBundle()) -> ((RKXImageDescriptor) -> (ORKImageChoice?)) {
+    class func imageChoiceForDescriptor(_ bundle: Bundle = Bundle.main) -> ((RKXImageDescriptor) -> (ORKImageChoice?)) {
         return { imageDescriptor in
             return imageDescriptor.imageChoice(bundle)
         }
     }
     
-    func imageChoice(bundle: NSBundle = NSBundle.mainBundle()) -> ORKImageChoice? {
+    func imageChoice(_ bundle: Bundle = Bundle.main) -> ORKImageChoice? {
         fatalError("Not Implemented")
     }
 }
 
-public class RKXCopingMechanismDescriptor: RKXImageDescriptor {
+open class RKXCopingMechanismDescriptor: RKXImageDescriptor {
     var generalDescription: String?
     var specificDescription: String?
     var imageTitle: String!
     var category: String!
     
-    override func imageChoice(bundle: NSBundle = NSBundle.mainBundle()) -> ORKImageChoice? {
+    override func imageChoice(_ bundle: Bundle = Bundle.main) -> ORKImageChoice? {
         guard let image = UIImage(named: self.imageTitle)
             else {
                 fatalError("Cannot find image named \(imageTitle) in \(bundle)")
         }
-        return RKXImageChoiceWithAdditionalText(image: image, text: self.specificDescription, additionalText: self.generalDescription, value: self.identifier)
+        return RKXImageChoiceWithAdditionalText(image: image, text: self.specificDescription, additionalText: self.generalDescription, value: self.identifier as NSCoding & NSCopying & NSObjectProtocol)
     }
     
     override init(itemDictionary: [String: AnyObject]) {
@@ -56,16 +56,16 @@ public class RKXCopingMechanismDescriptor: RKXImageDescriptor {
     }
 }
 
-public class RKXActivityDescriptor: RKXImageDescriptor {
+open class RKXActivityDescriptor: RKXImageDescriptor {
     var activityDescription: String?
     var imageTitle: String!
     
-    override func imageChoice(bundle: NSBundle = NSBundle.mainBundle()) -> ORKImageChoice? {
+    override func imageChoice(_ bundle: Bundle = Bundle.main) -> ORKImageChoice? {
         guard let image = UIImage(named: self.imageTitle)
             else {
                 fatalError("Cannot find image named \(imageTitle) in \(bundle)")
         }
-        return ORKImageChoice(normalImage: image, selectedImage: nil, text: self.activityDescription, value: self.identifier)
+        return ORKImageChoice(normalImage: image, selectedImage: nil, text: self.activityDescription, value: self.identifier as NSCoding & NSCopying & NSObjectProtocol)
     }
     
     override init(itemDictionary: [String: AnyObject]) {
@@ -75,20 +75,20 @@ public class RKXActivityDescriptor: RKXImageDescriptor {
     }
 }
 
-public class RKXAffectDescriptor: RKXImageDescriptor {
+open class RKXAffectDescriptor: RKXImageDescriptor {
     var imageTitles: [String]!
     var value: [String: AnyObject]!
     
-    override func imageChoice(bundle: NSBundle = NSBundle.mainBundle()) -> ORKImageChoice? {
+    override func imageChoice(_ bundle: Bundle = Bundle.main) -> ORKImageChoice? {
         let images: [UIImage] = self.imageTitles.map { imageTitle in
-            guard let image = UIImage(named: imageTitle, inBundle: bundle, compatibleWithTraitCollection: nil)
+            guard let image = UIImage(named: imageTitle, in: bundle, compatibleWith: nil)
             else{
                fatalError("Cannot find image named \(imageTitle) in \(bundle)")
             }
             return image
         }
         .flatMap { $0 }
-        return PAMImageChoice(images: images, value: self.value)
+        return PAMImageChoice(images: images, value: self.value as NSCoding & NSCopying & NSObjectProtocol)
     }
     
     override init(itemDictionary: [String: AnyObject]) {
