@@ -33,7 +33,7 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         self.init(nibName: "RKXMultipleImageSelectionSurveyViewController", bundle: framework)
         self.step = step
         self.restorationIdentifier = step!.identifier
-        self.restorationClass = RKXMultipleImageSelectionSurveyViewController.self
+//        self.restorationClass = RKXMultipleImageSelectionSurveyViewController.self
     }
     
     convenience override init(step: ORKStep?, result: ORKResult?) {
@@ -351,7 +351,7 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
     func configureCellForImageChoice(_ missCell: RKXMultipleImageSelectionSurveyCollectionViewCell, imageChoice: ORKImageChoice) -> RKXMultipleImageSelectionSurveyCollectionViewCell {
         
         missCell.activityImage = imageChoice.normalStateImage
-        missCell.selected = self.getSelectedForValue(imageChoice.value)!
+        missCell.isSelected = self.getSelectedForValue(imageChoice.value)!
         missCell.selectedBackgroundColor = self.itemCellSelectedColor
         missCell.selectedOverlayImage = self.itemCellSelectedOverlayImage
         missCell.textStackViewBackgroundColor = self.itemCellTextBackgroundColor

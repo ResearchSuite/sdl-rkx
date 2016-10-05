@@ -55,7 +55,7 @@ open class YADLFullAssessmentTask: RKXSingleImageClassificationSurveyTask {
         }
         else {
             let textChoices = assessment.choices!.map { choice in
-                return RKXTextChoiceWithColor(text: choice.text, value: choice.value, color: choice.color)
+                return RKXTextChoiceWithColor(text: choice.text, value: (choice.value)!, color: choice.color)
             }
             
             let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .singleChoice, textChoices: textChoices)

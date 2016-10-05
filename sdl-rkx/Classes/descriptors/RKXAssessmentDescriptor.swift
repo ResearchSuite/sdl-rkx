@@ -82,7 +82,7 @@ class RKXMultipleImageSelectionSurveyOptions: NSObject {
 
 class RKXChoiceDescriptor: NSObject {
     var text: String!
-    var value: NSCoding & NSCopying & NSObjectProtocol
+    var value: (NSCoding & NSCopying & NSObjectProtocol)?
     var color: UIColor?
     
     init?(choiceDictionary: [String: AnyObject]?) {

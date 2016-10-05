@@ -296,6 +296,7 @@
 				TargetAttributes = {
 					486AACC91D07414D00EE4C7C = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -475,6 +476,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = edu.cornell.tech.foundry.SDLRKX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -492,6 +494,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = edu.cornell.tech.foundry.SDLRKX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

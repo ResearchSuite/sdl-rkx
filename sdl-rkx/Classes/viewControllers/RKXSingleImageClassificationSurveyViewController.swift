@@ -25,7 +25,7 @@ class RKXSingleImageClassificationSurveyViewController: ORKStepViewController {
         self.init(nibName: "RKXSingleImageClassificationSurveyViewController", bundle: framework)
         self.step = step
         self.restorationIdentifier = step!.identifier
-        self.restorationClass = RKXSingleImageClassificationSurveyViewController.self
+//        self.restorationClass = RKXSingleImageClassificationSurveyViewController.self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,7 +42,7 @@ class RKXSingleImageClassificationSurveyViewController: ORKStepViewController {
         }
     }
     
-    var answer: NSCoding & NSCopying & NSObjectProtocol
+    var answer: (NSCoding & NSCopying & NSObjectProtocol)?
     
     override var result: ORKStepResult? {
         guard let parentResult = super.result else {
