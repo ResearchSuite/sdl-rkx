@@ -97,3 +97,23 @@ open class RKXAffectDescriptor: RKXImageDescriptor {
         self.imageTitles = itemDictionary["imageTitles"] as? [String]
     }
 }
+
+open class RKXSingleImageAffectDescriptor: RKXImageDescriptor {
+    var imageTitles: [String]!
+    var value: [String: AnyObject]!
+    
+    override func imageChoice(_ bundle: Bundle = Bundle.main) -> ORKImageChoice? {
+        let imageTitle = self.imageTitles[0]
+            guard let image = UIImage(named: imageTitle, in: bundle, compatibleWith: nil)
+            else {
+                fatalError("Cannot find image named \(imageTitle) in \(bundle)")
+        }
+        return ORKImageChoice(normalImage: image, selectedImage: nil, text: nil, value: self.value as NSCoding & NSCopying & NSObjectProtocol)
+    }
+    
+    override init(itemDictionary: [String: AnyObject]) {
+        super.init(itemDictionary: itemDictionary)
+        self.value = itemDictionary["value"] as? [String: AnyObject]
+        self.imageTitles = itemDictionary["imageTitles"] as? [String]
+    }
+}

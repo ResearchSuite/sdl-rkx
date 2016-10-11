@@ -42,6 +42,9 @@
 		486AAD251D0741E000EE4C7C /* PAM.json in Resources */ = {isa = PBXBuildFile; fileRef = 486AAD231D0741E000EE4C7C /* PAM.json */; };
 		486AAD261D0741E000EE4C7C /* PAM.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 486AAD241D0741E000EE4C7C /* PAM.xcassets */; };
 		486AAD2A1D07425700EE4C7C /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486AAD291D07425700EE4C7C /* ResearchKit.framework */; };
+		E27E292C1DAC54DE0050788A /* PAMMultipleSelectionStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E292B1DAC54DE0050788A /* PAMMultipleSelectionStepViewController.swift */; };
+		E27E292E1DAC55590050788A /* PAMMultipleSelectionStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E292D1DAC55590050788A /* PAMMultipleSelectionStep.swift */; };
+		E27E29301DAC56C30050788A /* PAMMultipleSelectionTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E292F1DAC56C30050788A /* PAMMultipleSelectionTask.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +86,9 @@
 		486AAD241D0741E000EE4C7C /* PAM.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = PAM.xcassets; path = "../../sdl-rkx/Assets/PAM.xcassets"; sourceTree = "<group>"; };
 		486AAD271D07421300EE4C7C /* SDLRKX.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = SDLRKX.modulemap; sourceTree = "<group>"; };
 		486AAD291D07425700EE4C7C /* ResearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ResearchKit.framework; path = "/Users/jk/Developer/Foundry/sdl/RKTutorial/ShareTheJourney/AppCore/APCAppCore/../../researchkit/build/Debug-iphoneos/ResearchKit.framework"; sourceTree = "<absolute>"; };
+		E27E292B1DAC54DE0050788A /* PAMMultipleSelectionStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAMMultipleSelectionStepViewController.swift; sourceTree = "<group>"; };
+		E27E292D1DAC55590050788A /* PAMMultipleSelectionStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAMMultipleSelectionStep.swift; sourceTree = "<group>"; };
+		E27E292F1DAC56C30050788A /* PAMMultipleSelectionTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAMMultipleSelectionTask.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +193,7 @@
 				486AACE81D0741C000EE4C7C /* MEDLFullAssessmentCategoryStep.swift */,
 				486AACE91D0741C000EE4C7C /* MEDLSpotAssessmentStep.swift */,
 				486AACEA1D0741C000EE4C7C /* PAMStep.swift */,
+				E27E292D1DAC55590050788A /* PAMMultipleSelectionStep.swift */,
 				486AACEB1D0741C000EE4C7C /* RKXMultipleImageSelectionSurveyStep.swift */,
 				486AACEC1D0741C000EE4C7C /* RKXSingleImageClassificationSurveyStep.swift */,
 				486AACED1D0741C000EE4C7C /* YADLFullAssessmentStep.swift */,
@@ -202,6 +209,7 @@
 				486AACF01D0741C000EE4C7C /* MEDLFullAssessmentTask.swift */,
 				486AACF11D0741C000EE4C7C /* MEDLSpotAssessmentTask.swift */,
 				486AACF21D0741C000EE4C7C /* PAMTask.swift */,
+				E27E292F1DAC56C30050788A /* PAMMultipleSelectionTask.swift */,
 				486AACF31D0741C000EE4C7C /* RKXMultipleImageSelectionSurveyTask.swift */,
 				486AACF41D0741C000EE4C7C /* RKXSingleImageClassificationSurveyTask.swift */,
 				486AACF51D0741C000EE4C7C /* YADLFullAssessmentTask.swift */,
@@ -226,6 +234,7 @@
 				486AACFA1D0741C000EE4C7C /* MEDLFullAssessmentCategoryStepViewController.swift */,
 				486AACFB1D0741C000EE4C7C /* MEDLSpotAssessmentStepViewController.swift */,
 				486AACFC1D0741C000EE4C7C /* PAMStepViewController.swift */,
+				E27E292B1DAC54DE0050788A /* PAMMultipleSelectionStepViewController.swift */,
 				486AACFD1D0741C000EE4C7C /* RKXMultipleImageSelectionSurveyViewController.swift */,
 				486AACFE1D0741C000EE4C7C /* RKXMultipleImageSelectionSurveyViewController.xib */,
 				486AACFF1D0741C000EE4C7C /* RKXSingleImageClassificationSurveyViewController.swift */,
@@ -342,11 +351,13 @@
 				486AAD121D0741C000EE4C7C /* MEDLFullAssessmentTask.swift in Sources */,
 				486AAD0D1D0741C000EE4C7C /* PAMStep.swift in Sources */,
 				486AAD181D0741C000EE4C7C /* YADLSpotAssessmentTask.swift in Sources */,
+				E27E292C1DAC54DE0050788A /* PAMMultipleSelectionStepViewController.swift in Sources */,
 				486AAD101D0741C000EE4C7C /* YADLFullAssessmentStep.swift in Sources */,
 				486AAD0C1D0741C000EE4C7C /* MEDLSpotAssessmentStep.swift in Sources */,
 				486AAD1C1D0741C000EE4C7C /* PAMStepViewController.swift in Sources */,
 				486AAD211D0741C000EE4C7C /* YADLSpotAssessmentStepViewController.swift in Sources */,
 				486AAD1F1D0741C000EE4C7C /* RKXSingleImageClassificationSurveyViewController.swift in Sources */,
+				E27E292E1DAC55590050788A /* PAMMultipleSelectionStep.swift in Sources */,
 				486AAD0A1D0741C000EE4C7C /* RKXItemDescriptor.swift in Sources */,
 				486AAD0B1D0741C000EE4C7C /* MEDLFullAssessmentCategoryStep.swift in Sources */,
 				486AAD0F1D0741C000EE4C7C /* RKXSingleImageClassificationSurveyStep.swift in Sources */,
@@ -363,6 +374,7 @@
 				486AAD081D0741C000EE4C7C /* RKXTextChoiceWithColor.swift in Sources */,
 				486AAD0E1D0741C000EE4C7C /* RKXMultipleImageSelectionSurveyStep.swift in Sources */,
 				486AAD171D0741C000EE4C7C /* YADLFullAssessmentTask.swift in Sources */,
+				E27E29301DAC56C30050788A /* PAMMultipleSelectionTask.swift in Sources */,
 				486AAD091D0741C000EE4C7C /* RKXAssessmentDescriptor.swift in Sources */,
 				486AAD131D0741C000EE4C7C /* MEDLSpotAssessmentTask.swift in Sources */,
 			);

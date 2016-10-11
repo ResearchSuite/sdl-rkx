@@ -111,7 +111,17 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         }
     }
     
-    
+    func hashedValue(value: NSCoding & NSCopying & NSObjectProtocol) -> Int {
+        if let valueDict = value as? [String: AnyObject] {
+            let values: [AnyObject] = Array(valueDict.values)
+            return values.reduce(0, { (acc, val) -> Int in
+                return acc ^ val.hash
+            })
+        }
+        else {
+            return value.hash
+        }
+    }
     
     var answerDictionary: [Int: RKXMultipleImageSelectionSurveyAnswerStruct]?
     
@@ -124,7 +134,14 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
             
             self.answerDictionary = [Int: RKXMultipleImageSelectionSurveyAnswerStruct]()
             answerFormat.imageChoices.forEach { imageChoice in
-                self.answerDictionary![imageChoice.value.hash] = RKXMultipleImageSelectionSurveyAnswerStruct(identifier: imageChoice.value, selected: false)
+                let hash = self.hashedValue(value: imageChoice.value)
+                if let _ = self.answerDictionary![hash] {
+                    assertionFailure("keys in answer dictionary must be unique!")
+                }
+                else {
+                    self.answerDictionary![hash] = RKXMultipleImageSelectionSurveyAnswerStruct(identifier: imageChoice.value, selected: false)
+                }
+                
             }
             
             self.setupTextViews()
@@ -212,15 +229,17 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
     }
     
     func getSelectedForValue(_ value: NSCoding & NSCopying & NSObjectProtocol) -> Bool? {
+        let hash = self.hashedValue(value: value)
         guard let answerDictionary = self.answerDictionary,
-            let answer = answerDictionary[value.hash]
+            let answer = answerDictionary[hash]
             else { return nil }
         
         return answer.selected
     }
     
     func setSelectedForValue(_ value: NSCoding & NSCopying & NSObjectProtocol, selected: Bool) {
-        self.answerDictionary![value.hash] = RKXMultipleImageSelectionSurveyAnswerStruct(identifier: value, selected: selected)
+        let hash = self.hashedValue(value: value)
+        self.answerDictionary![hash] = RKXMultipleImageSelectionSurveyAnswerStruct(identifier: value, selected: selected)
     }
     
     func selectedAnswers() -> [NSCoding & NSCopying & NSObjectProtocol]? {
