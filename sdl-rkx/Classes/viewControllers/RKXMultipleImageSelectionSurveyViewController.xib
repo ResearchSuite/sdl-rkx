@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -12,6 +15,7 @@
                 <outlet property="imagesCollectionView" destination="f9T-cm-e1F" id="ddB-1l-S6N"/>
                 <outlet property="nothingSelectedButton" destination="Nwo-uo-Yk7" id="jlj-Us-N4q"/>
                 <outlet property="questionTextView" destination="smm-rm-bsK" id="NXs-h1-bYR"/>
+                <outlet property="questionTextViewHeightConstraint" destination="Okh-w2-vxN" id="2cI-6q-I4k"/>
                 <outlet property="somethingSelectedButton" destination="qbv-I2-T8Z" id="FRu-dB-was"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,6 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Which activities did you have trouble with today?" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="smm-rm-bsK">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="Okh-w2-vxN"/>
@@ -30,6 +35,7 @@
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbv-I2-T8Z" userLabel="SomethingSelectedButton" customClass="RKXBorderedButton" customModule="SDLRKX" customModuleProvider="target">
+                    <rect key="frame" x="113.5" y="599" width="148" height="60"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="1xq-8v-vAA"/>
                         <constraint firstAttribute="height" constant="60" id="GfG-te-0OI"/>
@@ -42,6 +48,7 @@
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nwo-uo-Yk7" userLabel="NothingSelectedButton" customClass="RKXBorderedButton" customModule="SDLRKX" customModuleProvider="target">
+                    <rect key="frame" x="113.5" y="599" width="148" height="60"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="6P8-aW-KHU"/>
                     </constraints>
@@ -53,6 +60,7 @@
                     </connections>
                 </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="f9T-cm-e1F">
+                    <rect key="frame" x="0.0" y="100" width="375" height="491"/>
                     <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="v6x-xe-iEo">
                         <size key="itemSize" width="120" height="120"/>
@@ -62,6 +70,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Additional Text" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DgC-hf-nsP" userLabel="Additional Text View">
+                    <rect key="frame" x="0.0" y="60" width="375" height="40"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="6k5-Cc-BBU"/>
@@ -104,11 +113,11 @@
             </constraints>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="Y9Y-UA-833"/>
                     <exclude reference="1Du-mG-pxL"/>
                     <exclude reference="Giu-Ze-Rjg"/>
                     <exclude reference="Plr-Z2-uT6"/>
                     <exclude reference="bhF-E4-8Rx"/>
+                    <exclude reference="Y9Y-UA-833"/>
                     <exclude reference="J1c-c3-uFy"/>
                     <exclude reference="f5a-Uk-sBf"/>
                     <exclude reference="hbp-ys-IYh"/>

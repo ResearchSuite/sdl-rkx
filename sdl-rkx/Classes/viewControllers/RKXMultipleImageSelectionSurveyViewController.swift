@@ -17,6 +17,8 @@ struct RKXMultipleImageSelectionSurveyAnswerStruct {
 class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     @IBOutlet weak var questionTextView: UITextView!
+    @IBOutlet weak var questionTextViewHeightConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var imagesCollectionView: UICollectionView!
     @IBOutlet weak var somethingSelectedButton: UIButton!
     @IBOutlet weak var nothingSelectedButton: UIButton!
@@ -318,6 +320,14 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
 //        }
         
         self.updateUI()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        let sizeThatFits = self.questionTextView.sizeThatFits(CGSize(width: self.questionTextView.frame.size.width, height: CGFloat(MAXFLOAT)))
+        self.questionTextViewHeightConstraint.constant = sizeThatFits.height
+        
     }
     
     
