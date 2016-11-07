@@ -224,6 +224,7 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         questionResult.choiceAnswers = self.selectedAnswers()
         questionResult.startDate = parentResult.startDate
         questionResult.endDate = parentResult.endDate
+        questionResult.questionType = self.supportsMultipleSelection ? .multipleChoice : .singleChoice
         
         parentResult.results = [questionResult]
         
