@@ -58,6 +58,7 @@ open class RKXMultipleImageSelectionSurveyOptions: NSObject {
     public var itemMinSpacing: CGFloat?
     public var maximumSelectedNumberOfItems: Int?
     public var optional: Bool?
+//    public var visibilityFilter: ((NSCoding & NSCopying & NSObjectProtocol) -> Bool)?
     
     public init(optionsDictionary: [String: AnyObject]?) {
         guard let optionsDictionary = optionsDictionary

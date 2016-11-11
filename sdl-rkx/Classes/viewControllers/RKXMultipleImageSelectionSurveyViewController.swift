@@ -132,7 +132,12 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
     var maximumSelectedNumberOfItems: Int?
     var isOptional: Bool! = true
     
-    var visibilityFilter: ((NSCoding & NSCopying & NSObjectProtocol) -> Bool)?
+    var visibilityFilter: ((NSCoding & NSCopying & NSObjectProtocol) -> Bool)? {
+        guard let step = self.step as? RKXMultipleImageSelectionSurveyStep else {
+            return nil
+        }
+        return step.visibilityFilter
+    }
     
     
     var answerDictionary: [Int: RKXMultipleImageSelectionSurveyAnswerStruct]?
