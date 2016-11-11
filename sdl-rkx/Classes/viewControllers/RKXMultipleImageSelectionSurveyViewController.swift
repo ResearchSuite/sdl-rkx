@@ -14,7 +14,7 @@ struct RKXMultipleImageSelectionSurveyAnswerStruct {
     var selected: Bool
 }
 
-class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     @IBOutlet weak var questionTextView: UITextView!
     @IBOutlet weak var questionTextViewHeightConstraint: NSLayoutConstraint!
@@ -40,9 +40,13 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
     
     convenience override init(step: ORKStep?, result: ORKResult?) {
         self.init(step: step)
+        if let stepResult = result {
+            self.initializeAnswersForResult(result: stepResult)
+        }
+        
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -125,10 +129,16 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         }
     }
     
+    var maximumSelectedNumberOfItems: Int?
+    var isOptional: Bool! = true
+    
+    var visibilityFilter: ((NSCoding & NSCopying & NSObjectProtocol) -> Bool)?
+    
+    
     var answerDictionary: [Int: RKXMultipleImageSelectionSurveyAnswerStruct]?
     
     //whenver step is set, initialize the answerArray
-    override var step: ORKStep? {
+    override open var step: ORKStep? {
         didSet {
             guard let step = step as? RKXMultipleImageSelectionSurveyStep,
                 let answerFormat = step.answerFormat as? ORKImageChoiceAnswerFormat
@@ -180,6 +190,14 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         if let itemMinSpacing = options.itemMinSpacing {
             self.itemMinSpacing = itemMinSpacing
         }
+        
+        if let maximumSelectedNumberOfItems = options.maximumSelectedNumberOfItems {
+            self.maximumSelectedNumberOfItems = maximumSelectedNumberOfItems
+        }
+        
+        if let optional = options.optional {
+            self.isOptional = optional
+        }
     }
     
 //    func setupOptionsFromTask(task: RKXMultipleImageSelectionSurveyTask) {
@@ -214,7 +232,7 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
 //        }
 //    }
     
-    override var result: ORKStepResult? {
+    override open var result: ORKStepResult? {
         guard let parentResult = super.result else {
             return nil
         }
@@ -229,6 +247,13 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         parentResult.results = [questionResult]
         
         return parentResult
+    }
+    
+    
+    //TODO: load up results
+    //rethink how to handle things like PAM that don;t support multiple selection
+    func initializeAnswersForResult(result: ORKResult) {
+        print(result)
     }
     
     func getSelectedForValue(_ value: NSCoding & NSCopying & NSObjectProtocol) -> Bool? {
@@ -288,7 +313,7 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         self.additionalTextViewHeightConstraint?.constant = self.additionalTextViewHeight
     }
 
-    override func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         
         let framework = Bundle(for: RKXMultipleImageSelectionSurveyViewController.self)
@@ -323,7 +348,7 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         self.updateUI()
     }
     
-    override func viewWillLayoutSubviews() {
+    override open func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
         let sizeThatFits = self.questionTextView.sizeThatFits(CGSize(width: self.questionTextView.frame.size.width, height: CGFloat(MAXFLOAT)))
@@ -344,6 +369,8 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
             
             self.somethingSelectedButton.isHidden = !(selectedAnswers.count > 0)
             self.nothingSelectedButton.isHidden = (selectedAnswers.count > 0)
+            
+            self.nothingSelectedButton.isEnabled = self.isOptional
         }
         
         //reload collection view
@@ -357,25 +384,40 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         self.goForward()
     }
     
-    // MARK: - UICollectionView Methods
-    func imageChoiceAtIndex(_ index: Int) -> ORKImageChoice? {
+    var visibleImageChoices:[ORKImageChoice]? {
         guard let step = step as? RKXMultipleImageSelectionSurveyStep,
             let answerFormat = step.answerFormat as? ORKImageChoiceAnswerFormat
-            else { return nil }
+            else { return [] }
         
-        return answerFormat.imageChoices[index]
+        if let visibilityFilterFunction = self.visibilityFilter {
+            return answerFormat.imageChoices.filter { imageChoice in
+                return visibilityFilterFunction(imageChoice.value)
+            }
+        }
+        else {
+            return answerFormat.imageChoices
+        }
     }
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    // MARK: - UICollectionView Methods
+    func imageChoiceAtIndex(_ index: Int) -> ORKImageChoice? {
+        guard let imageChoices = self.visibleImageChoices
+            else { return nil }
+        
+        return imageChoices[index]
+    }
+    
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let step = step as? RKXMultipleImageSelectionSurveyStep,
-            let answerFormat = step.answerFormat as? ORKImageChoiceAnswerFormat
+    
+    
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let imageChoices = self.visibleImageChoices
             else { return 0 }
         
-        return answerFormat.imageChoices.count
+        return imageChoices.count
     }
     
     func configureCellForImageChoice(_ missCell: RKXMultipleImageSelectionSurveyCollectionViewCell, imageChoice: ORKImageChoice) -> RKXMultipleImageSelectionSurveyCollectionViewCell {
@@ -389,7 +431,7 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         return missCell
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "rkx_miss_cell", for: indexPath)
         
         guard let missCell = cell as? RKXMultipleImageSelectionSurveyCollectionViewCell,
@@ -401,7 +443,7 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         return self.configureCellForImageChoice(missCell, imageChoice: imageChoice)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let imageChoice = self.imageChoiceAtIndex(indexPath.row)
             else { return }
         
@@ -415,7 +457,23 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
             }
         }
         else {
-            self.setSelectedForValue(imageChoice.value, selected: !self.getSelectedForValue(imageChoice.value)!)
+            
+            //if we will be selecting the item, check to see that we have not reached the max amount
+            if  let isSelected = self.getSelectedForValue(imageChoice.value),
+                isSelected == false,
+                let maxNumberOfSelections = self.maximumSelectedNumberOfItems,
+                let answers = self.selectedAnswers() {
+                if answers.count < maxNumberOfSelections {
+                    self.setSelectedForValue(imageChoice.value, selected: !self.getSelectedForValue(imageChoice.value)!)
+                }
+            }
+            else {
+                self.setSelectedForValue(imageChoice.value, selected: !self.getSelectedForValue(imageChoice.value)!)
+            }
+            
+                
+            
+            
         }
         
         
@@ -432,21 +490,21 @@ class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController, UICo
         return 0.0
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let collectionViewWidth = collectionView.bounds.width
         let cellWidth = (collectionViewWidth - CGFloat(self.itemsPerRow + 1)*self.itemMinSpacing) / CGFloat(self.itemsPerRow)
         return CGSize(width: cellWidth, height: cellWidth + self.cellTextStackViewHeight)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: self.itemMinSpacing, left: self.itemMinSpacing, bottom: self.itemMinSpacing, right: self.itemMinSpacing)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return self.itemMinSpacing
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return self.itemMinSpacing
     }
     

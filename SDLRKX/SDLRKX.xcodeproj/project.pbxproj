@@ -42,6 +42,8 @@
 		486AAD251D0741E000EE4C7C /* PAM.json in Resources */ = {isa = PBXBuildFile; fileRef = 486AAD231D0741E000EE4C7C /* PAM.json */; };
 		486AAD261D0741E000EE4C7C /* PAM.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 486AAD241D0741E000EE4C7C /* PAM.xcassets */; };
 		486AAD2A1D07425700EE4C7C /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486AAD291D07425700EE4C7C /* ResearchKit.framework */; };
+		E22792B61DD523490026F8AB /* CTFBehaviorVSRFullAssessmentStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22792B51DD523490026F8AB /* CTFBehaviorVSRFullAssessmentStep.swift */; };
+		E22792B81DD523A60026F8AB /* CTFBehaviorVSRFullAssessmentStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22792B71DD523A60026F8AB /* CTFBehaviorVSRFullAssessmentStepViewController.swift */; };
 		E27E292C1DAC54DE0050788A /* PAMMultipleSelectionStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E292B1DAC54DE0050788A /* PAMMultipleSelectionStepViewController.swift */; };
 		E27E292E1DAC55590050788A /* PAMMultipleSelectionStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E292D1DAC55590050788A /* PAMMultipleSelectionStep.swift */; };
 		E27E29301DAC56C30050788A /* PAMMultipleSelectionTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E292F1DAC56C30050788A /* PAMMultipleSelectionTask.swift */; };
@@ -86,6 +88,8 @@
 		486AAD241D0741E000EE4C7C /* PAM.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = PAM.xcassets; path = "../../sdl-rkx/Assets/PAM.xcassets"; sourceTree = "<group>"; };
 		486AAD271D07421300EE4C7C /* SDLRKX.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = SDLRKX.modulemap; sourceTree = "<group>"; };
 		486AAD291D07425700EE4C7C /* ResearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ResearchKit.framework; path = "/Users/jk/Developer/Foundry/sdl/RKTutorial/ShareTheJourney/AppCore/APCAppCore/../../researchkit/build/Debug-iphoneos/ResearchKit.framework"; sourceTree = "<absolute>"; };
+		E22792B51DD523490026F8AB /* CTFBehaviorVSRFullAssessmentStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTFBehaviorVSRFullAssessmentStep.swift; sourceTree = "<group>"; };
+		E22792B71DD523A60026F8AB /* CTFBehaviorVSRFullAssessmentStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTFBehaviorVSRFullAssessmentStepViewController.swift; sourceTree = "<group>"; };
 		E27E292B1DAC54DE0050788A /* PAMMultipleSelectionStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAMMultipleSelectionStepViewController.swift; sourceTree = "<group>"; };
 		E27E292D1DAC55590050788A /* PAMMultipleSelectionStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAMMultipleSelectionStep.swift; sourceTree = "<group>"; };
 		E27E292F1DAC56C30050788A /* PAMMultipleSelectionTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAMMultipleSelectionTask.swift; sourceTree = "<group>"; };
@@ -190,6 +194,7 @@
 		486AACE71D0741C000EE4C7C /* steps */ = {
 			isa = PBXGroup;
 			children = (
+				E22792B51DD523490026F8AB /* CTFBehaviorVSRFullAssessmentStep.swift */,
 				486AACE81D0741C000EE4C7C /* MEDLFullAssessmentCategoryStep.swift */,
 				486AACE91D0741C000EE4C7C /* MEDLSpotAssessmentStep.swift */,
 				486AACEA1D0741C000EE4C7C /* PAMStep.swift */,
@@ -231,6 +236,7 @@
 		486AACF91D0741C000EE4C7C /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				E22792B71DD523A60026F8AB /* CTFBehaviorVSRFullAssessmentStepViewController.swift */,
 				486AACFA1D0741C000EE4C7C /* MEDLFullAssessmentCategoryStepViewController.swift */,
 				486AACFB1D0741C000EE4C7C /* MEDLSpotAssessmentStepViewController.swift */,
 				486AACFC1D0741C000EE4C7C /* PAMStepViewController.swift */,
@@ -362,6 +368,7 @@
 				486AAD0B1D0741C000EE4C7C /* MEDLFullAssessmentCategoryStep.swift in Sources */,
 				486AAD0F1D0741C000EE4C7C /* RKXSingleImageClassificationSurveyStep.swift in Sources */,
 				486AAD061D0741C000EE4C7C /* PAMImageChoice.swift in Sources */,
+				E22792B81DD523A60026F8AB /* CTFBehaviorVSRFullAssessmentStepViewController.swift in Sources */,
 				486AAD1B1D0741C000EE4C7C /* MEDLSpotAssessmentStepViewController.swift in Sources */,
 				486AAD191D0741C000EE4C7C /* UIColor+String.swift in Sources */,
 				486AAD161D0741C000EE4C7C /* RKXSingleImageClassificationSurveyTask.swift in Sources */,
@@ -376,6 +383,7 @@
 				486AAD171D0741C000EE4C7C /* YADLFullAssessmentTask.swift in Sources */,
 				E27E29301DAC56C30050788A /* PAMMultipleSelectionTask.swift in Sources */,
 				486AAD091D0741C000EE4C7C /* RKXAssessmentDescriptor.swift in Sources */,
+				E22792B61DD523490026F8AB /* CTFBehaviorVSRFullAssessmentStep.swift in Sources */,
 				486AAD131D0741C000EE4C7C /* MEDLSpotAssessmentTask.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

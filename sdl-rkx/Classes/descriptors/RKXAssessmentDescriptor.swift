@@ -31,6 +31,8 @@ let kOptionsItemCollectionViewBackgroundColorTag = "itemCollectionViewBackground
 let kOptionsItemCellSelectedOverlayImageTitleTag = "itemCellSelectedOverlayImageTitle"
 let kOptionsItemsPerRowTag = "itemsPerRow"
 let kOptionsItemMinSpacingTag = "itemMinSpacing"
+let kOptionsMaximumSelectedNumberOfItems = "maximumSelectedNumberOfItems"
+let kOptionsOptional = "optional"
 
 func getStringForKeyStrings(_ keys: [String], optionsDictionary: [String: AnyObject]) -> String? {
     return keys.map { key in
@@ -45,17 +47,19 @@ func colorForOptionsAndKey(_ options: [String: AnyObject], key: String) -> UICol
     else { return nil }
 }
 
-class RKXMultipleImageSelectionSurveyOptions: NSObject {
-    var somethingSelectedButtonColor: UIColor?
-    var nothingSelectedButtonColor: UIColor?
-    var itemCellSelectedColor:UIColor?
-    var itemCellSelectedOverlayImage: UIImage?
-    var itemCellTextBackgroundColor: UIColor?
-    var itemCollectionViewBackgroundColor: UIColor?
-    var itemsPerRow: Int?
-    var itemMinSpacing: CGFloat?
+open class RKXMultipleImageSelectionSurveyOptions: NSObject {
+    public var somethingSelectedButtonColor: UIColor?
+    public var nothingSelectedButtonColor: UIColor?
+    public var itemCellSelectedColor:UIColor?
+    public var itemCellSelectedOverlayImage: UIImage?
+    public var itemCellTextBackgroundColor: UIColor?
+    public var itemCollectionViewBackgroundColor: UIColor?
+    public var itemsPerRow: Int?
+    public var itemMinSpacing: CGFloat?
+    public var maximumSelectedNumberOfItems: Int?
+    public var optional: Bool?
     
-    init(optionsDictionary: [String: AnyObject]?) {
+    public init(optionsDictionary: [String: AnyObject]?) {
         guard let optionsDictionary = optionsDictionary
             else {
                 return
@@ -73,9 +77,11 @@ class RKXMultipleImageSelectionSurveyOptions: NSObject {
             }()
         self.itemsPerRow = optionsDictionary[kOptionsItemsPerRowTag] as? Int
         self.itemMinSpacing = optionsDictionary[kOptionsItemMinSpacingTag] as? CGFloat
+        self.maximumSelectedNumberOfItems = optionsDictionary[kOptionsMaximumSelectedNumberOfItems] as? Int
+        self.optional = optionsDictionary[kOptionsOptional] as? Bool
     }
     
-    override init() {
+    override public init() {
         super.init()
     }
 }

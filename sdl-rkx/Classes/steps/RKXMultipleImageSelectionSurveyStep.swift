@@ -9,15 +9,15 @@
 import UIKit
 import ResearchKit
 
-class RKXMultipleImageSelectionSurveyStep: ORKQuestionStep {
+open class RKXMultipleImageSelectionSurveyStep: ORKQuestionStep {
 
     var options: RKXMultipleImageSelectionSurveyOptions?
     
-    override func stepViewControllerClass() -> AnyClass {
+    override open func stepViewControllerClass() -> AnyClass {
         return RKXMultipleImageSelectionSurveyViewController.self
     }
     
-    init(identifier: String,
+    public init(identifier: String,
          title: String?,
          answerFormat: ORKImageChoiceAnswerFormat?,
          options: RKXMultipleImageSelectionSurveyOptions?) {
@@ -28,7 +28,7 @@ class RKXMultipleImageSelectionSurveyStep: ORKQuestionStep {
         self.options = options
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required public init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
