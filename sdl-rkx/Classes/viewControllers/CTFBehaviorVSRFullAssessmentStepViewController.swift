@@ -11,7 +11,10 @@ import UIKit
 open class CTFBehaviorVSRFullAssessmentStepViewController: RKXMultipleImageSelectionSurveyViewController {
     // MARK: - Required by superclass
     override var supportsMultipleSelection: Bool {
-        return true
+        guard let maxSelectedItems = self.maximumSelectedNumberOfItems else {
+            return true
+        }
+        return maxSelectedItems != 1
     }
     
     override var transitionOnSelection: Bool {
