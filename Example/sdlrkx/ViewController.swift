@@ -144,7 +144,12 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
     }
     
     @IBAction func launchMEDLFullAssessment(_ sender: AnyObject) {
-        let task = MEDLFullAssessmentTask(identifier: "MEDL Full Assessment Identifier", propertiesFileName: "MEDL")
+        
+        guard let steps = try! MEDLFullAssessmentCategoryStep.create(identifier: "MEDL Full Assessment Identifier", propertiesFileName: "MEDL") else {
+            return
+        }
+        
+        let task = ORKOrderedTask(identifier: "MEDL Full Assessment Identifier", steps: steps)
         
         self.launchAssessmentForTask(task)
     }
