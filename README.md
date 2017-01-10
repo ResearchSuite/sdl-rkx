@@ -25,7 +25,7 @@ To integrate sdlrkx into your Xcode project using CocoaPods, specify it in your 
 platform :ios, '9.0'
 use_frameworks!
 
-pod 'sdlrkx', '~> 0.1'
+pod 'sdlrkx', '~> 0.2'
 ```
 
 Then, run the following command:
