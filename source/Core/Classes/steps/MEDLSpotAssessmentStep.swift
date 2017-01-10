@@ -37,7 +37,7 @@ open class MEDLSpotAssessmentStep: RKXMultipleImageSelectionSurveyStep {
             let assessmentJSON = typeJSON["spot"] as? [String: AnyObject],
             let itemJSONArray = typeJSON["medications"] as? [AnyObject]
             else {
-                fatalError("JSON Parse Error")
+                assertionFailure("JSON Parse Error")
                 return nil
         }
         

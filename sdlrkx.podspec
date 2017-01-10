@@ -4,7 +4,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "sdlrkx"
-  s.version          = "0.2.0"
+  s.version          = "0.3.0"
   s.summary          = "SDL visual self-report for ResearchKit"
 
   s.description      = "The Small Data Lab ResearchKit Extensions package is the easiest way to include SDL visual self-report (YADL, MEDL, PAM) into a ResearchKit application."
@@ -16,9 +16,17 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'source/Classes/**/*'
+  s.subspec 'Core' do |core|
+    core.source_files = 'source/Core/Classes/**/*'
+    core.resources = 'source/Core/Assets/PAM.xcassets', 'source/Core/Assets/PAM.json'
+    core.dependency 'ResearchKit', '~> 1.3.1'
+  end
 
-  s.resources = 'source/Assets/PAM.xcassets', 'source/Assets/PAM.json'
+  s.subspec 'RSTBSupport' do |rstb|
+    rstb.source_files = 'source/RSTBSupport/Classes/**/*'
+    rstb.dependency 'sdlrkx/Core'
+    rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.2.0'
+    rstb.dependency 'Gloss', '~> 1'
+  end
 
-  s.dependency 'ResearchKit', '~> 1.3.1'
 end

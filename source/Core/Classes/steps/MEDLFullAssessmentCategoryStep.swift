@@ -55,7 +55,8 @@ open class MEDLFullAssessmentCategoryStep: RKXMultipleImageSelectionSurveyStep {
             let assessmentJSON = typeJSON["full"] as? [String: AnyObject],
             let itemJSONArray = typeJSON["medications"] as? [AnyObject]
             else {
-                fatalError("JSON Parse Error")
+                assertionFailure("JSON Parse Error")
+                return nil
         }
         
         let items:[RKXCopingMechanismDescriptor] = itemJSONArray.map { (itemJSON: AnyObject) in

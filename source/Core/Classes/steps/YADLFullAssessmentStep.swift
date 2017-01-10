@@ -34,7 +34,8 @@ open class YADLFullAssessmentStep: RKXSingleImageClassificationSurveyStep {
             let assessmentJSON = typeJSON["full"] as? [String: AnyObject],
             let itemJSONArray = typeJSON["activities"] as? [AnyObject]
             else {
-                fatalError("JSON Parse Error")
+                assertionFailure("JSON Parse Error")
+                return nil
         }
         
         let items:[RKXActivityDescriptor] = itemJSONArray.map { (itemJSON: AnyObject) in

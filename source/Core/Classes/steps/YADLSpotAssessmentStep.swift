@@ -37,8 +37,8 @@ open class YADLSpotAssessmentStep: RKXMultipleImageSelectionSurveyStep {
             let assessmentJSON = typeJSON["spot"] as? [String: AnyObject],
             let itemJSONArray = typeJSON["activities"] as? [AnyObject]
             else {
+                assertionFailure("JSON Parse Error")
                 return nil
-                fatalError("JSON Parse Error")
         }
         
         let items:[RKXActivityDescriptor] = itemJSONArray.map { (itemJSON: AnyObject) in

@@ -9,6 +9,7 @@
 import UIKit
 import ResearchKit
 import sdlrkx
+import ResearchSuiteTaskBuilder
 
 let kActivityIdentifiers = "activity_identifiers"
 let kMedicationIdentifiers = "medication_identifiers"
@@ -22,9 +23,34 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
      with the created task.
      */
     var taskResultFinishedCompletionHandler: ((ORKResult) -> Void)?
+    var taskBuilder: RSTBTaskBuilder!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let stepGeneratorServices: [RSTBStepGenerator] = [
+            RSTBInstructionStepGenerator(),
+            PAMStepGenerator(),
+            RSTBSingleChoiceStepGenerator()
+        ]
+        
+        let answerFormatGeneratorServices: [RSTBAnswerFormatGenerator] = [
+            RSTBSingleChoiceStepGenerator()
+        ]
+        
+        let elementGeneratorServices: [RSTBElementGenerator] = [
+            RSTBElementListGenerator(),
+            RSTBElementFileGenerator(),
+            RSTBElementSelectorGenerator()
+        ]
+        
+        // Do any additional setup after loading the view, typically from a nib.
+        self.taskBuilder = RSTBTaskBuilder(
+            stateHelper: nil,
+            elementGeneratorServices: elementGeneratorServices,
+            stepGeneratorServices: stepGeneratorServices,
+            answerFormatGeneratorServices: answerFormatGeneratorServices)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -121,8 +147,9 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
     }
     @IBAction func launchPAM(_ sender: AnyObject) {
         
-        guard let pamStep = PAMStep.create(identifier:  "PAM identifier") else { return }
-        let task = ORKOrderedTask(identifier: "PAM identifier", steps: [pamStep])
+        guard let steps = self.taskBuilder.steps(forElementFilename: "PAMTask") else { return }
+        
+        let task = ORKOrderedTask(identifier: "PAM identifier", steps: steps)
         
         self.launchAssessmentForTask(task)
         

@@ -1,21 +1,20 @@
 //
-//  PAMStep.swift
-//  sdlrkx
+//  PAMMultipleSelectionStep.swift
+//  SDLRKX
 //
-//  Created by James Kizer on 5/3/16.
-//  Copyright © 2016 Cornell Tech Foundry. All rights reserved.
+//  Created by James Kizer on 10/10/16.
+//  Copyright © 2016 Foundry @ Cornell Tech. All rights reserved.
 //
 
 import UIKit
 import ResearchKit
 
-public class PAMStep: RKXMultipleImageSelectionSurveyStep {
-
+public class PAMMultipleSelectionStep: RKXMultipleImageSelectionSurveyStep {
     override public func stepViewControllerClass() -> AnyClass {
-        return PAMStepViewController.self
+        return PAMMultipleSelectionStepViewController.self
     }
     
-    public static func create(identifier: String, propertiesFileName: String = "PAM", bundle: Bundle = Bundle(for: PAMTask.self)) -> PAMStep? {
+    public static func create(identifier: String, propertiesFileName: String, bundle: Bundle = Bundle.main) -> PAMMultipleSelectionStep? {
         
         guard let filePath = bundle.path(forResource: propertiesFileName, ofType: "json")
             else {
@@ -28,30 +27,32 @@ public class PAMStep: RKXMultipleImageSelectionSurveyStep {
         }
         
         if let spotAssessmentParameters = try! JSONSerialization.jsonObject(with: fileContent, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any] {
-            return PAMStep.create(identifier: identifier, parameters: spotAssessmentParameters, bundle: bundle)
+            return PAMMultipleSelectionStep.create(identifier: identifier, parameters: spotAssessmentParameters, bundle: bundle)
         }
         else {
             return nil
         }
     }
     
-    public static func create(identifier: String, parameters: [String: Any], bundle: Bundle = Bundle(for: PAMTask.self)) -> PAMStep? {
+    public static func create(identifier: String, parameters: [String: Any], bundle: Bundle = Bundle.main) -> PAMMultipleSelectionStep? {
         
         let completeJSON = parameters
+        
         guard let typeJSON = completeJSON["PAM"] as? [String: AnyObject],
             let itemJSONArray = typeJSON["affects"] as? [AnyObject]
             else {
-                fatalError("JSON Parse Error")
+                assertionFailure("JSON Parse Error")
+                return nil
         }
         
         let assessmentJSON = typeJSON
-        let items:[RKXAffectDescriptor] = itemJSONArray.map { (itemJSON: AnyObject) in
+        let items:[RKXSingleImageAffectDescriptor] = itemJSONArray.map { (itemJSON: AnyObject) in
             guard let itemDictionary = itemJSON as? [String: AnyObject]
                 else
             {
                 return nil
             }
-            return RKXAffectDescriptor(itemDictionary: itemDictionary)
+            return RKXSingleImageAffectDescriptor(itemDictionary: itemDictionary)
             }.flatMap { $0 }
         
         let imageChoices: [ORKImageChoice] = items
@@ -60,12 +61,11 @@ public class PAMStep: RKXMultipleImageSelectionSurveyStep {
             .flatMap { $0 }
         
         let assessment = RKXMultipleImageSelectionSurveyDescriptor(assessmentDictionary: assessmentJSON)
-
+        
         let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: imageChoices)
         
-        let pamStep = PAMStep(identifier: identifier, title: assessment.prompt, answerFormat: answerFormat, options: PAMTask.defaultOptions())
+        let pamStep = PAMMultipleSelectionStep(identifier: identifier, title: assessment.prompt, answerFormat: answerFormat, options: PAMMultipleSelectionTask.defaultOptions())
         
         return pamStep
     }
-    
 }
