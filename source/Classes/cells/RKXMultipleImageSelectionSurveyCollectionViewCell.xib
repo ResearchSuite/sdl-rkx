@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="rkx_miss_cell" id="6Na-yH-Xf2" customClass="RKXMultipleImageSelectionSurveyCollectionViewCell" customModule="sdlrkx" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="256" height="314"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="256" height="314"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vk5-K8-Z3g" userLabel="yadlImage">
+                        <rect key="frame" x="4" y="4" width="248" height="248"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Vk5-K8-Z3g" secondAttribute="height" multiplier="1:1" id="48H-h8-ilX"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sKe-R7-Sap" userLabel="checkImage">
+                        <rect key="frame" x="66" y="66" width="124" height="124"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="sKe-R7-Sap" secondAttribute="height" multiplier="1:1" id="2Jg-xr-vfg"/>
+                        </constraints>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Obw-ge-jBa" userLabel="TextStackView">
+                        <rect key="frame" x="4" y="252" width="248" height="58"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7e-3o-jPf" userLabel="primaryTextLabel">
+                                <rect key="frame" x="0.0" y="0.0" width="248" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TE1-Jz-hdx" userLabel="secondaryTextLabel">
+                                <rect key="frame" x="0.0" y="29" width="248" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="TE1-Jz-hdx" firstAttribute="height" secondItem="D7e-3o-jPf" secondAttribute="height" id="L2H-9X-EQQ"/>
+                            <constraint firstAttribute="height" constant="36" id="qB6-bn-Ayr"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="qB6-bn-Ayr"/>
+                            </mask>
+                        </variation>
+                    </stackView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Obw-ge-jBa" secondAttribute="trailing" constant="4" id="79c-JJ-urx"/>
+                <constraint firstItem="sKe-R7-Sap" firstAttribute="height" secondItem="6Na-yH-Xf2" secondAttribute="height" multiplier="0.5" id="86X-rw-tz4"/>
+                <constraint firstItem="sKe-R7-Sap" firstAttribute="width" secondItem="Vk5-K8-Z3g" secondAttribute="width" multiplier="0.5" id="9ze-f9-dZ4"/>
+                <constraint firstItem="sKe-R7-Sap" firstAttribute="leading" secondItem="6Na-yH-Xf2" secondAttribute="leading" constant="30" id="BUT-UT-N0n"/>
+                <constraint firstAttribute="trailing" secondItem="Vk5-K8-Z3g" secondAttribute="trailing" constant="4" id="EVY-oN-X90"/>
+                <constraint firstAttribute="bottom" secondItem="Vk5-K8-Z3g" secondAttribute="bottom" constant="4" id="HXQ-AW-Hf0"/>
+                <constraint firstItem="Obw-ge-jBa" firstAttribute="top" secondItem="sKe-R7-Sap" secondAttribute="bottom" constant="43" id="Lti-1A-27U"/>
+                <constraint firstItem="sKe-R7-Sap" firstAttribute="centerX" secondItem="Obw-ge-jBa" secondAttribute="centerX" id="Lue-rh-N07"/>
+                <constraint firstItem="sKe-R7-Sap" firstAttribute="centerY" secondItem="6Na-yH-Xf2" secondAttribute="centerY" id="SgC-te-f0e"/>
+                <constraint firstItem="sKe-R7-Sap" firstAttribute="centerX" secondItem="6Na-yH-Xf2" secondAttribute="centerX" id="ZT9-w2-Btq"/>
+                <constraint firstItem="sKe-R7-Sap" firstAttribute="top" secondItem="6Na-yH-Xf2" secondAttribute="top" constant="30" id="bVW-ea-reE"/>
+                <constraint firstItem="sKe-R7-Sap" firstAttribute="centerY" secondItem="Vk5-K8-Z3g" secondAttribute="centerY" id="gUP-qZ-udd"/>
+                <constraint firstItem="Vk5-K8-Z3g" firstAttribute="leading" secondItem="6Na-yH-Xf2" secondAttribute="leading" constant="4" id="jFo-OK-Be9"/>
+                <constraint firstItem="Vk5-K8-Z3g" firstAttribute="top" secondItem="6Na-yH-Xf2" secondAttribute="top" constant="4" id="n0D-fz-UeZ"/>
+                <constraint firstItem="Obw-ge-jBa" firstAttribute="leading" secondItem="6Na-yH-Xf2" secondAttribute="leading" constant="4" id="n85-5Q-gJJ"/>
+                <constraint firstItem="sKe-R7-Sap" firstAttribute="width" secondItem="6Na-yH-Xf2" secondAttribute="width" multiplier="0.5" id="qGh-58-T6j"/>
+                <constraint firstItem="Obw-ge-jBa" firstAttribute="top" secondItem="Vk5-K8-Z3g" secondAttribute="bottom" id="rig-fX-e7B"/>
+                <constraint firstAttribute="bottom" secondItem="Obw-ge-jBa" secondAttribute="bottom" constant="4" id="wJX-Qv-VIv"/>
+                <constraint firstItem="sKe-R7-Sap" firstAttribute="centerX" secondItem="Vk5-K8-Z3g" secondAttribute="centerX" id="xgd-wf-KEd"/>
+            </constraints>
+            <size key="customSize" width="259" height="360"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="HXQ-AW-Hf0"/>
+                    <exclude reference="86X-rw-tz4"/>
+                    <exclude reference="BUT-UT-N0n"/>
+                    <exclude reference="Lue-rh-N07"/>
+                    <exclude reference="SgC-te-f0e"/>
+                    <exclude reference="ZT9-w2-Btq"/>
+                    <exclude reference="bVW-ea-reE"/>
+                    <exclude reference="qGh-58-T6j"/>
+                    <exclude reference="Lti-1A-27U"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="activityImageView" destination="Vk5-K8-Z3g" id="qfD-zw-IAg"/>
+                <outlet property="checkImageView" destination="sKe-R7-Sap" id="Avp-9x-QWs"/>
+                <outlet property="primaryTextLabel" destination="D7e-3o-jPf" id="nba-jL-YEa"/>
+                <outlet property="secondaryTextLabel" destination="TE1-Jz-hdx" id="EkJ-DZ-m1T"/>
+                <outlet property="textStackView" destination="Obw-ge-jBa" id="AbG-tQ-41f"/>
+            </connections>
+            <point key="canvasLocation" x="252" y="438.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

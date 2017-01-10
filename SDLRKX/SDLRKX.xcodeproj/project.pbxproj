@@ -84,8 +84,8 @@
 		486AAD001D0741C000EE4C7C /* RKXSingleImageClassificationSurveyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RKXSingleImageClassificationSurveyViewController.xib; sourceTree = "<group>"; };
 		486AAD011D0741C000EE4C7C /* YADLSpotAssessmentStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YADLSpotAssessmentStepViewController.swift; sourceTree = "<group>"; };
 		486AAD031D0741C000EE4C7C /* RKXBorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RKXBorderedButton.swift; sourceTree = "<group>"; };
-		486AAD231D0741E000EE4C7C /* PAM.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = PAM.json; path = "../../sdl-rkx/Assets/PAM.json"; sourceTree = "<group>"; };
-		486AAD241D0741E000EE4C7C /* PAM.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = PAM.xcassets; path = "../../sdl-rkx/Assets/PAM.xcassets"; sourceTree = "<group>"; };
+		486AAD231D0741E000EE4C7C /* PAM.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = PAM.json; path = "../../sdlrkx/Assets/PAM.json"; sourceTree = "<group>"; };
+		486AAD241D0741E000EE4C7C /* PAM.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = PAM.xcassets; path = "../../sdlrkx/Assets/PAM.xcassets"; sourceTree = "<group>"; };
 		486AAD271D07421300EE4C7C /* SDLRKX.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = SDLRKX.modulemap; sourceTree = "<group>"; };
 		486AAD291D07425700EE4C7C /* ResearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ResearchKit.framework; path = "/Users/jk/Developer/Foundry/sdl/RKTutorial/ShareTheJourney/AppCore/APCAppCore/../../researchkit/build/Debug-iphoneos/ResearchKit.framework"; sourceTree = "<absolute>"; };
 		E22792B51DD523490026F8AB /* CTFBehaviorVSRFullAssessmentStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTFBehaviorVSRFullAssessmentStep.swift; sourceTree = "<group>"; };
@@ -167,7 +167,7 @@
 				486AACDF1D0741C000EE4C7C /* RKXMultipleImageSelectionSurveyCollectionViewCell.xib */,
 			);
 			name = cells;
-			path = "../../sdl-rkx/Classes/cells";
+			path = "../../sdlrkx/Classes/cells";
 			sourceTree = "<group>";
 		};
 		486AACE01D0741C000EE4C7C /* choices */ = {
@@ -178,7 +178,7 @@
 				486AACE31D0741C000EE4C7C /* RKXTextChoiceWithColor.swift */,
 			);
 			name = choices;
-			path = "../../sdl-rkx/Classes/choices";
+			path = "../../sdlrkx/Classes/choices";
 			sourceTree = "<group>";
 		};
 		486AACE41D0741C000EE4C7C /* descriptors */ = {
@@ -188,7 +188,7 @@
 				486AACE61D0741C000EE4C7C /* RKXItemDescriptor.swift */,
 			);
 			name = descriptors;
-			path = "../../sdl-rkx/Classes/descriptors";
+			path = "../../sdlrkx/Classes/descriptors";
 			sourceTree = "<group>";
 		};
 		486AACE71D0741C000EE4C7C /* steps */ = {
@@ -205,7 +205,7 @@
 				486AACEE1D0741C000EE4C7C /* YADLSpotAssessmentStep.swift */,
 			);
 			name = steps;
-			path = "../../sdl-rkx/Classes/steps";
+			path = "../../sdlrkx/Classes/steps";
 			sourceTree = "<group>";
 		};
 		486AACEF1D0741C000EE4C7C /* tasks */ = {
@@ -221,7 +221,7 @@
 				486AACF61D0741C000EE4C7C /* YADLSpotAssessmentTask.swift */,
 			);
 			name = tasks;
-			path = "../../sdl-rkx/Classes/tasks";
+			path = "../../sdlrkx/Classes/tasks";
 			sourceTree = "<group>";
 		};
 		486AACF71D0741C000EE4C7C /* utils */ = {
@@ -230,7 +230,7 @@
 				486AACF81D0741C000EE4C7C /* UIColor+String.swift */,
 			);
 			name = utils;
-			path = "../../sdl-rkx/Classes/utils";
+			path = "../../sdlrkx/Classes/utils";
 			sourceTree = "<group>";
 		};
 		486AACF91D0741C000EE4C7C /* viewControllers */ = {
@@ -248,7 +248,7 @@
 				486AAD011D0741C000EE4C7C /* YADLSpotAssessmentStepViewController.swift */,
 			);
 			name = viewControllers;
-			path = "../../sdl-rkx/Classes/viewControllers";
+			path = "../../sdlrkx/Classes/viewControllers";
 			sourceTree = "<group>";
 		};
 		486AAD021D0741C000EE4C7C /* views */ = {
@@ -257,7 +257,7 @@
 				486AAD031D0741C000EE4C7C /* RKXBorderedButton.swift */,
 			);
 			name = views;
-			path = "../../sdl-rkx/Classes/views";
+			path = "../../sdlrkx/Classes/views";
 			sourceTree = "<group>";
 		};
 		486AAD281D07423700EE4C7C /* Frameworks */ = {
