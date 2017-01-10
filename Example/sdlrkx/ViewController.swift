@@ -52,48 +52,48 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
     
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
-        if reason == ORKTaskViewControllerFinishReason.completed {
-            //if YADL full task, extract results and store for filtering
-            if let _ = taskViewController.task as? YADLFullAssessmentTask,
-                let results:[ORKChoiceQuestionResult] = YADLFullAssessmentTask.fullAssessmentResults(taskViewController.result)
-            {
-                print(results)
-                let activityIdentifiers:[String] = results.filter { result  in
-                    
-                    guard let choiceAnswers = result.choiceAnswers
-                        else {
-                            return false
-                    }
-                    if choiceAnswers.count == 1,
-                        let answer = choiceAnswers[0] as? String {
-                        return (answer == "hard") || (answer == "moderate")
-                    }
-                    else {
-                        return false
-                    }
-                    }
-                    .map { $0.identifier }
-                self.storeActivitiesForSpotAssessment(activityIdentifiers)
-            }
-            //if YADL full task, extract results and store for filtering
-            if let _ = taskViewController.task as? MEDLFullAssessmentTask,
-                let results:[ORKChoiceQuestionResult] = MEDLFullAssessmentTask.fullAssessmentResults(taskViewController.result)
-            {
-                print(results)
-                let copingIdentifiers: [String] = results.reduce([], { (acc, result) -> [String] in
-                    if let identifiers = result.answer as? [String] {
-                        return acc + identifiers
-                    }
-                    else {
-                        return acc
-                    }
-                })
-                self.storeMedicationsForSpotAssessment(copingIdentifiers)
-            }
-            else if let _ = taskViewController.task as? PAMTask {
-                print(taskViewController.result)
-            }
-        }
+//        if reason == ORKTaskViewControllerFinishReason.completed {
+//            //if YADL full task, extract results and store for filtering
+//            if let _ = taskViewController.task as? YADLFullAssessmentTask,
+//                let results:[ORKChoiceQuestionResult] = YADLFullAssessmentTask.fullAssessmentResults(taskViewController.result)
+//            {
+//                print(results)
+//                let activityIdentifiers:[String] = results.filter { result  in
+//                    
+//                    guard let choiceAnswers = result.choiceAnswers
+//                        else {
+//                            return false
+//                    }
+//                    if choiceAnswers.count == 1,
+//                        let answer = choiceAnswers[0] as? String {
+//                        return (answer == "hard") || (answer == "moderate")
+//                    }
+//                    else {
+//                        return false
+//                    }
+//                    }
+//                    .map { $0.identifier }
+//                self.storeActivitiesForSpotAssessment(activityIdentifiers)
+//            }
+//            //if YADL full task, extract results and store for filtering
+//            if let _ = taskViewController.task as? MEDLFullAssessmentTask,
+//                let results:[ORKChoiceQuestionResult] = MEDLFullAssessmentTask.fullAssessmentResults(taskViewController.result)
+//            {
+//                print(results)
+//                let copingIdentifiers: [String] = results.reduce([], { (acc, result) -> [String] in
+//                    if let identifiers = result.answer as? [String] {
+//                        return acc + identifiers
+//                    }
+//                    else {
+//                        return acc
+//                    }
+//                })
+//                self.storeMedicationsForSpotAssessment(copingIdentifiers)
+//            }
+//            else if let _ = taskViewController.task as? PAMTask {
+//                print(taskViewController.result)
+//            }
+//        }
         
         taskViewController.dismiss(animated: true, completion: nil)
     }
@@ -130,7 +130,12 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
     @IBAction func launchYADLFullAssessment(_ sender: AnyObject) {
         
         //create a YADL full assessment task
-        let task = YADLFullAssessmentTask(identifier: "YADL Full Assessment Identifier", propertiesFileName: "YADL")
+        
+        guard let steps = try! YADLFullAssessmentStep.create(identifier: "YADL Full Assessment Identifier", propertiesFileName: "YADL") else {
+            return
+        }
+        
+        let task = ORKOrderedTask(identifier: "YADL Full Assessment Identifier", steps: steps)
         
         self.launchAssessmentForTask(task)
     }

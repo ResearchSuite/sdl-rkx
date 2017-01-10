@@ -105,7 +105,7 @@ open class MEDLFullAssessmentCategoryStep: RKXMultipleImageSelectionSurveyStep {
             return assessmentStep
         }
         
-        return steps
+        return steps.count > 0 ? steps : nil
         
     }
 }
