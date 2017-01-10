@@ -142,8 +142,12 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
     
     @IBAction func launchYADLSpotAssessment(_ sender: AnyObject) {
         //create a YADL spot assessment task
-//        let task = YADLSpotAssessmentTask(identifier: "YADL Spot Assessment Identifier", propertiesFileName: "YADL")
-        let task = YADLSpotAssessmentTask(identifier: "YADL Spot Assessment Identifier", propertiesFileName: "YADL", activityIdentifiers: self.loadActivitiesForSpotAssessment())
+        
+        guard let step = try! YADLSpotAssessmentStep.create(identifier: "YADL Spot Assessment Identifier", propertiesFileName: "YADL", itemIdentifiers: self.loadActivitiesForSpotAssessment()) else {
+            return
+        }
+        
+        let task = ORKOrderedTask(identifier: "YADL Spot Assessment", steps: [step])
         
         self.launchAssessmentForTask(task)
     }
@@ -160,7 +164,12 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
     }
     
     @IBAction func launchMEDLSpotAssessment(_ sender: AnyObject) {
-        let task = MEDLSpotAssessmentTask(identifier: "MEDL Spot Assessment", propertiesFileName: "MEDL", itemIdentifiers: self.loadMedicationsForSpotAssessment())
+        
+        guard let step = try! MEDLSpotAssessmentStep.create(identifier: "MEDL Spot Assessment Identifier", propertiesFileName: "MEDL", itemIdentifiers: self.loadMedicationsForSpotAssessment()) else {
+            return
+        }
+        
+        let task = ORKOrderedTask(identifier: "MEDL Spot Assessment", steps: [step])
         
         self.launchAssessmentForTask(task)
     }
