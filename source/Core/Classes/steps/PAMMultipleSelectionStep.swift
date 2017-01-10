@@ -41,7 +41,8 @@ public class PAMMultipleSelectionStep: RKXMultipleImageSelectionSurveyStep {
         guard let typeJSON = completeJSON["PAM"] as? [String: AnyObject],
             let itemJSONArray = typeJSON["affects"] as? [AnyObject]
             else {
-                fatalError("JSON Parse Error")
+                assertionFailure("JSON Parse Error")
+                return nil
         }
         
         let assessmentJSON = typeJSON

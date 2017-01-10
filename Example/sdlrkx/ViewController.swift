@@ -41,7 +41,7 @@ class ViewController: UIViewController, ORKTaskViewControllerDelegate {
         let elementGeneratorServices: [RSTBElementGenerator] = [
             RSTBElementListGenerator(),
             RSTBElementFileGenerator(),
-            RTSBElementSelectorGenerator()
+            RSTBElementSelectorGenerator()
         ]
         
         // Do any additional setup after loading the view, typically from a nib.
