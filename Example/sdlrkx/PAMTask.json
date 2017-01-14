@@ -10,7 +10,8 @@
     },
     {
       "identifier"   :   "PAM",
-      "type"            : "PAM"
+      "type"            : "PAM",
+                        "optional": true
     },
     {
       "identifier": "thanks",

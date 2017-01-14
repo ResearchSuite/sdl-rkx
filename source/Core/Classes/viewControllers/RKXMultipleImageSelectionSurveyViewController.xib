@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RKXMultipleImageSelectionSurveyViewController" customModule="SDLRKX" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RKXMultipleImageSelectionSurveyViewController" customModule="sdlrkx" customModuleProvider="target">
             <connections>
                 <outlet property="additionalTextView" destination="DgC-hf-nsP" id="gFU-eY-aGr"/>
                 <outlet property="additionalTextViewHeightConstraint" destination="U3a-p3-Pyx" id="L3W-jo-leM"/>
@@ -16,6 +16,7 @@
                 <outlet property="nothingSelectedButton" destination="Nwo-uo-Yk7" id="jlj-Us-N4q"/>
                 <outlet property="questionTextView" destination="smm-rm-bsK" id="NXs-h1-bYR"/>
                 <outlet property="questionTextViewHeightConstraint" destination="Okh-w2-vxN" id="2cI-6q-I4k"/>
+                <outlet property="skipButton" destination="c4f-kq-SDf" id="fO0-8l-iUO"/>
                 <outlet property="somethingSelectedButton" destination="qbv-I2-T8Z" id="FRu-dB-was"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -34,11 +35,11 @@
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbv-I2-T8Z" userLabel="SomethingSelectedButton" customClass="RKXBorderedButton" customModule="SDLRKX" customModuleProvider="target">
-                    <rect key="frame" x="113.5" y="599" width="148" height="60"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbv-I2-T8Z" userLabel="SomethingSelectedButton" customClass="RKXBorderedButton" customModule="sdlrkx" customModuleProvider="target">
+                    <rect key="frame" x="108" y="579" width="160" height="44"/>
                     <constraints>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="1xq-8v-vAA"/>
-                        <constraint firstAttribute="height" constant="60" id="GfG-te-0OI"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="1xq-8v-vAA"/>
+                        <constraint firstAttribute="height" constant="44" id="GfG-te-0OI"/>
                     </constraints>
                     <state key="normal" title="Submit (0)">
                         <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -47,10 +48,11 @@
                         <action selector="somethingSelectedButtonPressed:" destination="-1" eventType="touchUpInside" id="bhe-b9-RR8"/>
                     </connections>
                 </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nwo-uo-Yk7" userLabel="NothingSelectedButton" customClass="RKXBorderedButton" customModule="SDLRKX" customModuleProvider="target">
-                    <rect key="frame" x="113.5" y="599" width="148" height="60"/>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nwo-uo-Yk7" userLabel="NothingSelectedButton" customClass="RKXBorderedButton" customModule="sdlrkx" customModuleProvider="target">
+                    <rect key="frame" x="108" y="579" width="160" height="44"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="60" id="6P8-aW-KHU"/>
+                        <constraint firstAttribute="height" constant="44" id="6P8-aW-KHU"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="J6s-Fg-YKm"/>
                     </constraints>
                     <state key="normal" title="Nothing To Report">
                         <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -60,7 +62,7 @@
                     </connections>
                 </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="f9T-cm-e1F">
-                    <rect key="frame" x="0.0" y="100" width="375" height="491"/>
+                    <rect key="frame" x="0.0" y="100" width="375" height="471"/>
                     <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="v6x-xe-iEo">
                         <size key="itemSize" width="120" height="120"/>
@@ -84,18 +86,30 @@
                         </mask>
                     </variation>
                 </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c4f-kq-SDf">
+                    <rect key="frame" x="130" y="631" width="115" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="na1-Tc-Qnf"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="Skip this question"/>
+                    <connections>
+                        <action selector="skipButtonPressed:" destination="-1" eventType="touchUpInside" id="hdj-Ac-3qo"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Nwo-uo-Yk7" firstAttribute="top" secondItem="qbv-I2-T8Z" secondAttribute="top" id="1Du-mG-pxL"/>
+                <constraint firstItem="qbv-I2-T8Z" firstAttribute="bottom" secondItem="Nwo-uo-Yk7" secondAttribute="bottom" id="1ej-cg-h2b"/>
                 <constraint firstItem="qbv-I2-T8Z" firstAttribute="top" secondItem="f9T-cm-e1F" secondAttribute="bottom" constant="8" id="3HV-DR-Ra4"/>
-                <constraint firstAttribute="bottom" secondItem="qbv-I2-T8Z" secondAttribute="bottom" constant="8" id="3iq-Uf-yx9"/>
                 <constraint firstItem="Nwo-uo-Yk7" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9d3-b7-BCf"/>
                 <constraint firstAttribute="trailing" secondItem="Nwo-uo-Yk7" secondAttribute="trailing" id="Giu-Ze-Rjg"/>
                 <constraint firstItem="qbv-I2-T8Z" firstAttribute="centerY" secondItem="Nwo-uo-Yk7" secondAttribute="centerY" id="Gza-Wb-qIh"/>
+                <constraint firstItem="c4f-kq-SDf" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="HkP-JX-tIh"/>
                 <constraint firstAttribute="trailing" secondItem="qbv-I2-T8Z" secondAttribute="trailing" id="J1c-c3-uFy"/>
-                <constraint firstItem="qbv-I2-T8Z" firstAttribute="width" secondItem="Nwo-uo-Yk7" secondAttribute="width" id="LgG-RN-aV4"/>
                 <constraint firstItem="DgC-hf-nsP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="MBB-00-XQN"/>
+                <constraint firstItem="c4f-kq-SDf" firstAttribute="top" secondItem="Nwo-uo-Yk7" secondAttribute="bottom" constant="8" id="N3X-wP-jVS"/>
                 <constraint firstItem="Nwo-uo-Yk7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Plr-Z2-uT6"/>
                 <constraint firstItem="f9T-cm-e1F" firstAttribute="top" secondItem="DgC-hf-nsP" secondAttribute="bottom" id="SNi-kv-DAk"/>
                 <constraint firstItem="qbv-I2-T8Z" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="TUn-Gz-tLD"/>
@@ -110,14 +124,15 @@
                 <constraint firstItem="qbv-I2-T8Z" firstAttribute="centerX" secondItem="Nwo-uo-Yk7" secondAttribute="centerX" id="hbp-ys-IYh"/>
                 <constraint firstItem="smm-rm-bsK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wfu-kH-nJp"/>
                 <constraint firstItem="f9T-cm-e1F" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yZz-rO-YZw"/>
+                <constraint firstAttribute="bottom" secondItem="c4f-kq-SDf" secondAttribute="bottom" constant="12" id="zhr-e8-7P8"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="Y9Y-UA-833"/>
                     <exclude reference="1Du-mG-pxL"/>
                     <exclude reference="Giu-Ze-Rjg"/>
                     <exclude reference="Plr-Z2-uT6"/>
                     <exclude reference="bhF-E4-8Rx"/>
-                    <exclude reference="Y9Y-UA-833"/>
                     <exclude reference="J1c-c3-uFy"/>
                     <exclude reference="f5a-Uk-sBf"/>
                     <exclude reference="hbp-ys-IYh"/>

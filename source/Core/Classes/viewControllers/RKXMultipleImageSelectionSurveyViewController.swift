@@ -22,6 +22,7 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
     @IBOutlet weak var imagesCollectionView: UICollectionView!
     @IBOutlet weak var somethingSelectedButton: UIButton!
     @IBOutlet weak var nothingSelectedButton: UIButton!
+    @IBOutlet weak var skipButton: UIButton!
     @IBOutlet weak var additionalTextView: UITextView!
     @IBOutlet weak var additionalTextViewHeightConstraint: NSLayoutConstraint!
     
@@ -55,6 +56,7 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
         didSet {
             if let somethingSelectedButton = self.somethingSelectedButton as? RKXBorderedButton {
                 somethingSelectedButton.configuredColor = self.somethingSelectedButtonColor
+                self.skipButton?.setTitleColor(self.somethingSelectedButtonColor, for: UIControlState.normal)
             }
         }
     }
@@ -334,6 +336,12 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
             somethingSelectedButton.configuredColor = self.somethingSelectedButtonColor
         }
         
+        self.skipButton.setTitleColor(self.somethingSelectedButtonColor, for: UIControlState.normal)
+        if let step = self.step {
+            let optional = step.isOptional
+            self.skipButton.isHidden = !optional
+        }
+        
         if let nothingSelectedButton = self.nothingSelectedButton as? RKXBorderedButton {
             nothingSelectedButton.configuredColor = self.nothingSelectedButtonColor
         }
@@ -539,6 +547,10 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
     
     @IBAction func nothingSelectedButtonPressed(_ sender: AnyObject) {
         fatalError("Unimplemented")
+    }
+
+    @IBAction func skipButtonPressed(_ sender: Any) {
+        self.notifyDelegateAndMoveForward()
     }
     
     

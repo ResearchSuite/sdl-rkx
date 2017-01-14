@@ -27,7 +27,13 @@ open class PAMStepGenerator: RSTBBaseStepGenerator {
             return nil
         }
         
-        return PAMStep.create(identifier: customStepDescriptor.identifier)
+        guard let step = PAMStep.create(identifier: customStepDescriptor.identifier) else {
+            return nil
+        }
+        
+        step.isOptional = customStepDescriptor.optional
+
+        return step
     }
     
     open func processStepResult(type: String,
