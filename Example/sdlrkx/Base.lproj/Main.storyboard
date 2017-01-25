@@ -77,10 +77,22 @@
                                     <action selector="launchBART:" destination="DbQ-Lu-hKH" eventType="touchUpInside" id="8vK-wy-fEY"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dIx-pp-QqA">
+                                <rect key="frame" x="142" y="228" width="92" height="34"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="Go / No Go">
+                                    <color key="titleColor" red="0.094117647060000004" green="0.16862745100000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="launchGoNoGo:" destination="DbQ-Lu-hKH" eventType="touchUpInside" id="CVF-VF-673"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.2156862745" green="0.7725490196" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Prc-vi-hiK" firstAttribute="top" secondItem="l8N-3C-Alm" secondAttribute="bottom" constant="32" id="4w5-86-kPy"/>
+                            <constraint firstItem="dIx-pp-QqA" firstAttribute="top" secondItem="Prc-vi-hiK" secondAttribute="bottom" constant="32" id="JKd-WW-Qbk"/>
+                            <constraint firstItem="dIx-pp-QqA" firstAttribute="centerX" secondItem="evu-ji-wLl" secondAttribute="centerX" id="SxK-Py-2q1"/>
                             <constraint firstItem="l8N-3C-Alm" firstAttribute="top" secondItem="YEy-pi-MMo" secondAttribute="bottom" constant="32" id="XNM-Hm-ERa"/>
                             <constraint firstItem="Prc-vi-hiK" firstAttribute="centerX" secondItem="evu-ji-wLl" secondAttribute="centerX" id="bTr-6b-30e"/>
                             <constraint firstItem="l8N-3C-Alm" firstAttribute="centerX" secondItem="evu-ji-wLl" secondAttribute="centerX" id="fgB-pK-7KO"/>

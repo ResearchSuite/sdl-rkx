@@ -58,6 +58,20 @@ extension Date {
     }
 }
 
+extension Array {
+    
+    func random() -> Element? {
+        if self.count == 0 {
+            return nil
+        }
+        else{
+            let index = Int(arc4random_uniform(UInt32(self.count)))
+            print(index)
+            return self[index]
+        }
+    }
+}
+
 extension MutableCollection where Indices.Iterator.Element == Index {
     /// Shuffles the contents of this collection.
     mutating func shuffle() {

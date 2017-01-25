@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CTFGoNoGoStepViewController" customModule="Impulse" customModuleProvider="target">
+            <connections>
+                <outlet property="feedbackLabel" destination="eNs-Xy-ROB" id="Vvl-6l-l3q"/>
+                <outlet property="goNoGoView" destination="ddD-iK-tVC" id="enJ-lB-7VH"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddD-iK-tVC" customClass="CTFGoNoGoView" customModule="Impulse" customModuleProvider="target">
+                    <subviews>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNs-Xy-ROB">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="fOd-Oi-v4X"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="eNs-Xy-ROB" secondAttribute="bottom" constant="20" id="18I-A5-hwi"/>
+                        <constraint firstItem="eNs-Xy-ROB" firstAttribute="leading" secondItem="ddD-iK-tVC" secondAttribute="leading" id="FQi-m5-ae5"/>
+                        <constraint firstAttribute="trailing" secondItem="eNs-Xy-ROB" secondAttribute="trailing" id="pbV-81-fwm"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="ddD-iK-tVC" secondAttribute="bottom" id="EXD-h5-Au1"/>
+                <constraint firstItem="ddD-iK-tVC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="PRj-vh-xJ9"/>
+                <constraint firstItem="ddD-iK-tVC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Tgi-Se-kMc"/>
+                <constraint firstAttribute="trailing" secondItem="ddD-iK-tVC" secondAttribute="trailing" id="yHq-Zy-VhA"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

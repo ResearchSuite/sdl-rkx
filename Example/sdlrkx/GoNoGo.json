@@ -1,0 +1,40 @@
+{
+  "type"      : "elementList",
+  "identifier": "go_no_go_variable_stimulus_short_intro",
+  "elements"   : [
+    {
+      "identifier"   : "introduction_1",
+      "type"         : "instruction",
+      "title"        : "Welcome to the Square Task",
+      "text"         : "This game measures how quickly you can make a simple decision, and then either react or withhold your response. You will first be presented with a rectangle. If the rectangle turns GREEN, tap the screen as quickly as possible. If the rectangle turns BLUE, do not tap. Between each rectangle you will see a plus (+) sign."
+    },
+    {
+      "type"        : "CTFGoNoGoActiveStep",
+      "identifier"       : "go_no_go_variable_stimulus_active_task",
+      "parameters": {
+        "numberOfTrials": 15,
+        "waitTime": 0.25,
+        "crossTime": 0.25,
+        "blankTime": 0.25,
+        "cueTimes": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.75
+        ],
+        "fillTime": 0.6,
+        "goCueProbability": 0.5,
+        "goCueTargetProbability": 0.7,
+        "noGoCueTargetProbability": 0.7
+      }
+    },
+    {
+      "identifier"   : "results",
+      "type"         : "instruction",
+      "title"        : "Thanks!",
+      "text"         : ""
+    }
+  ]
+}

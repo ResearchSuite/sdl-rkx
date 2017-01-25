@@ -16,8 +16,13 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '9.0'
 
+  s.subspec 'Helpers' do |helpers|
+    helpers.source_files = 'source/Helpers/Classes/**/*'
+  end
+
   s.subspec 'VSR' do |vsr|
     vsr.source_files = 'source/VSR/Core/Classes/**/*'
+    vsr.dependency 'sdlrkx/Helpers'
     vsr.resources = 'source/VSR/Core/Assets/PAM.xcassets', 'source/VSR/Core/Assets/PAM.json'
     vsr.dependency 'ResearchKit', '~> 1.3.1'
   end
@@ -31,6 +36,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'Behavioral' do |behavioral|
     behavioral.source_files = 'source/Behavioral/Core/Classes/**/*'
+    behavioral.dependency 'sdlrkx/Helpers'
     behavioral.resources = 'source/Behavioral/Core/Assets/BART/BART.xcassets'
     behavioral.dependency 'ResearchKit', '~> 1.3.1'
   end

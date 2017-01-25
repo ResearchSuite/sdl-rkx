@@ -18,6 +18,7 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		792E0D7DE91FCB8C003EE24A /* Pods_sdl_rkx_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E0FFD9D5CC712A712E45FA3 /* Pods_sdl_rkx_Tests.framework */; };
 		E2257A901E3926D600B9A2FC /* BART.json in Resources */ = {isa = PBXBuildFile; fileRef = E2257A8F1E3926D600B9A2FC /* BART.json */; };
+		E2257A941E392CE000B9A2FC /* GoNoGo.json in Resources */ = {isa = PBXBuildFile; fileRef = E2257A931E392CE000B9A2FC /* GoNoGo.json */; };
 		E2966AAA1E25897B00457064 /* PAMTask.json in Resources */ = {isa = PBXBuildFile; fileRef = E2966AA91E25897B00457064 /* PAMTask.json */; };
 		E29BA8191E38DEF600C3EE47 /* BehavioralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29BA8181E38DEF600C3EE47 /* BehavioralViewController.swift */; };
 		E29BA81B1E38E09A00C3EE47 /* RKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29BA81A1E38E09A00C3EE47 /* RKViewController.swift */; };
@@ -71,6 +72,7 @@
 		916638093D0D086698D328CC /* Pods-sdl-rkx_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdl-rkx_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-sdl-rkx_Tests/Pods-sdl-rkx_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		CC14AA0B91EE5AAD5BDD0217 /* Pods-sdl-rkx_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdl-rkx_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sdl-rkx_Tests/Pods-sdl-rkx_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		E2257A8F1E3926D600B9A2FC /* BART.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BART.json; sourceTree = "<group>"; };
+		E2257A931E392CE000B9A2FC /* GoNoGo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GoNoGo.json; sourceTree = "<group>"; };
 		E2966AA91E25897B00457064 /* PAMTask.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PAMTask.json; sourceTree = "<group>"; };
 		E29BA8181E38DEF600C3EE47 /* BehavioralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehavioralViewController.swift; sourceTree = "<group>"; };
 		E29BA81A1E38E09A00C3EE47 /* RKViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RKViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 		48E086B71CDAB0CF00099E13 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E2257A931E392CE000B9A2FC /* GoNoGo.json */,
 				E2257A8F1E3926D600B9A2FC /* BART.json */,
 				E29BA81C1E38E1BC00C3EE47 /* DelayedDiscounting.json */,
 				E2966AA91E25897B00457064 /* PAMTask.json */,
@@ -299,6 +302,7 @@
 				E2966AAA1E25897B00457064 /* PAMTask.json in Resources */,
 				48E086B91CDBB6B000099E13 /* MEDL.xcassets in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				E2257A941E392CE000B9A2FC /* GoNoGo.json in Resources */,
 				607FACDD1AFB9204008FA782 /* YADL.xcassets in Resources */,
 				E2257A901E3926D600B9A2FC /* BART.json in Resources */,
 				48CB54171CD80CA100D26F68 /* YADL.json in Resources */,

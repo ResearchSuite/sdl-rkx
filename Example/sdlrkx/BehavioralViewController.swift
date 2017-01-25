@@ -22,6 +22,7 @@ class BehavioralViewController: RKViewController {
             RSTBInstructionStepGenerator(),
             CTFDelayDiscountingStepGenerator(),
             CTFBARTStepGenerator(),
+            CTFGoNoGoStepGenerator(),
             RSTBSingleChoiceStepGenerator()
         ]
         
@@ -60,6 +61,15 @@ class BehavioralViewController: RKViewController {
         guard let steps = self.taskBuilder.steps(forElementFilename: "BART") else { return }
         
         let task = ORKOrderedTask(identifier: "BART", steps: steps)
+        
+        self.launchAssessmentForTask(task)
+        
+    }
+    @IBAction func launchGoNoGo(_ sender: Any) {
+        
+        guard let steps = self.taskBuilder.steps(forElementFilename: "GoNoGo") else { return }
+        
+        let task = ORKOrderedTask(identifier: "GoNoGo", steps: steps)
         
         self.launchAssessmentForTask(task)
         
