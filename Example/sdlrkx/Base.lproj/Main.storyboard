@@ -1,93 +1,182 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Gy3-eY-YJ1">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="TUL-vV-gMY">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--VSR-->
         <scene sceneID="1QH-sk-RO0">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hHQ-v0-MSb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="Gy3-eY-YJ1" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="VSR" id="lq7-4L-tZ8"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="603-Fr-6wl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.0" green="0.54901960780000003" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.0" green="0.54901960780000003" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="STO-Ze-ej4"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hHQ-v0-MSb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-733" y="121"/>
         </scene>
-        <!--SDL-Rx Sample-->
+        <!--Behavioral-->
+        <scene sceneID="D5x-uI-ABO">
+            <objects>
+                <navigationController id="taa-Hz-3uV" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Behavioral" id="AlJ-gC-5t9"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PJY-6Q-BRc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="DbQ-Lu-hKH" kind="relationship" relationship="rootViewController" id="zBu-Bt-k3V"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Iw-AP-CKP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-650" y="806"/>
+        </scene>
+        <!--Behavioral-->
+        <scene sceneID="kvc-Ef-DWf">
+            <objects>
+                <viewController id="DbQ-Lu-hKH" customClass="BehavioralViewController" customModule="sdl_rkx_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YEy-pi-MMo"/>
+                        <viewControllerLayoutGuide type="bottom" id="Q2X-J1-CkD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="evu-ji-wLl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l8N-3C-Alm">
+                                <rect key="frame" x="99" y="96" width="178" height="34"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="Delayed Discounting">
+                                    <color key="titleColor" red="0.094117647060000004" green="0.16862745100000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="launchDelayedDiscounting:" destination="DbQ-Lu-hKH" eventType="touchUpInside" id="Rl1-U0-ly4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Prc-vi-hiK">
+                                <rect key="frame" x="163" y="162" width="49" height="34"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="BART">
+                                    <color key="titleColor" red="0.094117647060000004" green="0.16862745100000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="launchBART:" destination="DbQ-Lu-hKH" eventType="touchUpInside" id="8vK-wy-fEY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.2156862745" green="0.7725490196" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Prc-vi-hiK" firstAttribute="top" secondItem="l8N-3C-Alm" secondAttribute="bottom" constant="32" id="4w5-86-kPy"/>
+                            <constraint firstItem="l8N-3C-Alm" firstAttribute="top" secondItem="YEy-pi-MMo" secondAttribute="bottom" constant="32" id="XNM-Hm-ERa"/>
+                            <constraint firstItem="Prc-vi-hiK" firstAttribute="centerX" secondItem="evu-ji-wLl" secondAttribute="centerX" id="bTr-6b-30e"/>
+                            <constraint firstItem="l8N-3C-Alm" firstAttribute="centerX" secondItem="evu-ji-wLl" secondAttribute="centerX" id="fgB-pK-7KO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Behavioral" id="6JX-tA-2nj"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Iva-Nb-U4k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="291" y="833"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="HhI-Jo-1Ot">
+            <objects>
+                <tabBarController id="TUL-vV-gMY" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="pXX-P8-3rn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Gy3-eY-YJ1" kind="relationship" relationship="viewControllers" id="sPc-Gs-1hu"/>
+                        <segue destination="taa-Hz-3uV" kind="relationship" relationship="viewControllers" id="eDI-CY-h16"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kCY-nB-BD1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1751" y="358"/>
+        </scene>
+        <!--Visual Self Report-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="sdl_rkx_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="VSRViewController" customModule="sdl_rkx_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jss-K2-Rnq">
                                 <rect key="frame" x="279" y="-1" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="fAw-E5-Wy0">
-                                <rect key="frame" x="20" y="104" width="560" height="456"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="fAw-E5-Wy0">
+                                <rect key="frame" x="20" y="104" width="343" height="474"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vzc-a7-6rY">
-                                        <rect key="frame" x="0.0" y="0.0" width="560" height="91"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="95"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <state key="normal" title="PAM">
-                                            <color key="titleColor" red="0.094117647058823528" green="0.16862745098039217" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.094117647058823528" green="0.16862745098039217" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="launchPAM:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="j6W-Jn-6cF"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QGu-Pi-f66">
-                                        <rect key="frame" x="0.0" y="91" width="560" height="91"/>
+                                        <rect key="frame" x="0.0" y="95" width="343" height="94.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <state key="normal" title="YADL Full Assessment">
-                                            <color key="titleColor" red="0.094117647058823528" green="0.16862745098039217" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.094117647058823528" green="0.16862745098039217" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="launchYADLFullAssessment:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="sen-mi-vfZ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpU-Kf-8WQ">
-                                        <rect key="frame" x="0.0" y="182" width="560" height="92"/>
+                                        <rect key="frame" x="0.0" y="189.5" width="343" height="95"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <state key="normal" title="YADL Spot Assessment">
-                                            <color key="titleColor" red="0.094117647058823528" green="0.16862745098039217" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.094117647058823528" green="0.16862745098039217" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="launchYADLSpotAssessment:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="wzC-Nu-Oph"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o6Z-5M-hdr">
-                                        <rect key="frame" x="0.0" y="274" width="560" height="91"/>
+                                        <rect key="frame" x="0.0" y="284.5" width="343" height="94.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <state key="normal" title="MEDL Full Assessment">
-                                            <color key="titleColor" red="0.094117647058823528" green="0.16862745098039217" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.094117647058823528" green="0.16862745098039217" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="launchMEDLFullAssessment:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="NEG-lb-Tzl"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4M-0K-7j3">
-                                        <rect key="frame" x="0.0" y="365" width="560" height="91"/>
+                                        <rect key="frame" x="0.0" y="379" width="343" height="95"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <state key="normal" title="MEDL Spot Assessment">
-                                            <color key="titleColor" red="0.094117647058823528" green="0.16862745098039217" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.094117647058823528" green="0.16862745098039217" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="launchMEDLSpotAssessment:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="2Is-Kk-b7E"/>
@@ -96,7 +185,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.21568627450980393" green="0.77254901960784317" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.21568627450980393" green="0.77254901960784317" blue="0.66274509803921566" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="fAw-E5-Wy0" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="Bfm-e8-xMQ"/>
                             <constraint firstItem="fAw-E5-Wy0" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="K7L-lJ-v87"/>
@@ -109,7 +198,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="SDL-Rx Sample" id="6W7-ns-mmn"/>
+                    <navigationItem key="navigationItem" title="Visual Self Report" id="6W7-ns-mmn"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

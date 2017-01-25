@@ -3,7 +3,7 @@
 //  Impulse
 //
 //  Created by James Kizer on 11/10/16.
-//  Copyright © 2016 James Kizer. All rights reserved.
+//  Copyright © 2016 Cornell Tech. All rights reserved.
 //
 
 import UIKit

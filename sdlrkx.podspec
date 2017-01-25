@@ -16,15 +16,28 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '9.0'
 
-  s.subspec 'Core' do |core|
-    core.source_files = 'source/Core/Classes/**/*'
-    core.resources = 'source/Core/Assets/PAM.xcassets', 'source/Core/Assets/PAM.json'
-    core.dependency 'ResearchKit', '~> 1.3.1'
+  s.subspec 'VSR' do |vsr|
+    vsr.source_files = 'source/VSR/Core/Classes/**/*'
+    vsr.resources = 'source/VSR/Core/Assets/PAM.xcassets', 'source/VSR/Core/Assets/PAM.json'
+    vsr.dependency 'ResearchKit', '~> 1.3.1'
   end
 
-  s.subspec 'RSTBSupport' do |rstb|
-    rstb.source_files = 'source/RSTBSupport/Classes/**/*'
-    rstb.dependency 'sdlrkx/Core'
+  s.subspec 'VSR-RSTBSupport' do |rstb|
+    rstb.source_files = 'source/VSR/RSTBSupport/Classes/**/*'
+    rstb.dependency 'sdlrkx/VSR'
+    rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.2.0'
+    rstb.dependency 'Gloss', '~> 1'
+  end
+
+  s.subspec 'Behavioral' do |behavioral|
+    behavioral.source_files = 'source/Behavioral/Core/Classes/**/*'
+    behavioral.resources = 'source/Behavioral/Core/Assets/BART/BART.xcassets'
+    behavioral.dependency 'ResearchKit', '~> 1.3.1'
+  end
+
+  s.subspec 'Behavioral-RSTBSupport' do |rstb|
+    rstb.source_files = 'source/Behavioral/RSTBSupport/Classes/**/*'
+    rstb.dependency 'sdlrkx/Behavioral'
     rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.2.0'
     rstb.dependency 'Gloss', '~> 1'
   end
