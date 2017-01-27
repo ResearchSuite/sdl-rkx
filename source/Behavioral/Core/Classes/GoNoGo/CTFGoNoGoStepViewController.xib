@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -9,6 +12,7 @@
             <connections>
                 <outlet property="feedbackLabel" destination="eNs-Xy-ROB" id="Vvl-6l-l3q"/>
                 <outlet property="goNoGoView" destination="ddD-iK-tVC" id="enJ-lB-7VH"/>
+                <outlet property="skipButton" destination="kZs-rX-4dg" id="ibb-31-0vZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,8 +22,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddD-iK-tVC" customClass="CTFGoNoGoView" customModule="Impulse" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="622"/>
                     <subviews>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNs-Xy-ROB">
+                            <rect key="frame" x="0.0" y="581" width="375" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="fOd-Oi-v4X"/>
                             </constraints>
@@ -35,12 +41,22 @@
                         <constraint firstAttribute="trailing" secondItem="eNs-Xy-ROB" secondAttribute="trailing" id="pbV-81-fwm"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZs-rX-4dg">
+                    <rect key="frame" x="143.5" y="630" width="88" height="29"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="Skip this step"/>
+                    <connections>
+                        <action selector="skipButtonPressed:" destination="-1" eventType="touchUpInside" id="bTf-B9-aLT"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="ddD-iK-tVC" secondAttribute="bottom" id="EXD-h5-Au1"/>
                 <constraint firstItem="ddD-iK-tVC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="PRj-vh-xJ9"/>
                 <constraint firstItem="ddD-iK-tVC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Tgi-Se-kMc"/>
+                <constraint firstAttribute="bottom" secondItem="kZs-rX-4dg" secondAttribute="bottom" constant="8" id="aNX-cR-Wta"/>
+                <constraint firstItem="kZs-rX-4dg" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="rgZ-ro-rsv"/>
+                <constraint firstItem="kZs-rX-4dg" firstAttribute="top" secondItem="ddD-iK-tVC" secondAttribute="bottom" constant="8" id="wWE-da-bNZ"/>
                 <constraint firstAttribute="trailing" secondItem="ddD-iK-tVC" secondAttribute="trailing" id="yHq-Zy-VhA"/>
             </constraints>
         </view>

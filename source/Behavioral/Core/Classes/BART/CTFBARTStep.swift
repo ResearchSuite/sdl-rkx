@@ -18,7 +18,7 @@ public struct CTFBARTStepParams {
     var maxPayingPumpsPerTrial: Int!
 }
 
-open class CTFBARTStep: ORKActiveStep {
+open class CTFBARTStep: ORKStep {
     
     static let identifier = "BARTStep"
 

@@ -35,6 +35,8 @@ open class CTFDelayDiscountingStepGenerator: RSTBBaseStepGenerator {
         
         let step = CTFDelayDiscountingStep(identifier: customStepDescriptor.identifier)
         step.params = stepParams
+        step.isOptional = customStepDescriptor.optional
+        
         return step
     }
     

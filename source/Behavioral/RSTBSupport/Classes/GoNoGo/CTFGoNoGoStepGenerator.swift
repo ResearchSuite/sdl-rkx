@@ -3,7 +3,7 @@
 //  Impulse
 //
 //  Created by James Kizer on 12/20/16.
-//  Copyright © 2016 James Kizer. All rights reserved.
+//  Copyright © 2016 Cornell Tech. All rights reserved.
 //
 
 import UIKit
@@ -36,6 +36,7 @@ open class CTFGoNoGoStepGenerator: RSTBBaseStepGenerator {
         
         let step = CTFGoNoGoStep(identifier: customStepDescriptor.identifier)
         step.goNoGoParams = stepParams
+        step.isOptional = customStepDescriptor.optional
         return step
     }
     

@@ -18,6 +18,16 @@
         }
       },
       {
+        "type"        : "CTFBARTActiveStep",
+        "identifier"       : "bart_25_cents_active_task-1",
+        "optional": false,
+        "parameters": {
+          "numberOfTrials": 15,
+          "earningsPerPump": 0.25,
+          "maxPayingPumpsPerTrial": 10
+        }
+      },
+      {
         "identifier"   : "results",
         "type"         : "instruction",
         "title"        : "Thank you for completing the task!",

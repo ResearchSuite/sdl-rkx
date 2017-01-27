@@ -10,7 +10,7 @@ import Foundation
 import ResearchKit
 
 
-public class CTFGoNoGoStep: ORKActiveStep {
+public class CTFGoNoGoStep: ORKStep {
     
     var goNoGoParams:CTFGoNoGoStepParameters?
     

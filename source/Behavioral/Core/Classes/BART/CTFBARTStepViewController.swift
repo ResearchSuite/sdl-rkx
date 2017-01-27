@@ -42,7 +42,7 @@ class CTFBARTResult: ORKResult {
 
 
 
-public class CTFBARTStepViewController: ORKStepViewController {
+open class CTFBARTStepViewController: ORKStepViewController {
 
     let initialScalingFactor: CGFloat = 10.0
     
@@ -59,6 +59,7 @@ public class CTFBARTStepViewController: ORKStepViewController {
     @IBOutlet weak var collectButton: CTFBorderedButton!
     var _collectButtonHandler:(() -> ())?
     
+    @IBOutlet weak var skipButton: UIButton!
     
     
     var trials: [CTFBARTTrial]?
@@ -93,7 +94,7 @@ public class CTFBARTStepViewController: ORKStepViewController {
         self.trials = self.generateTrials(params: params)
     }
     
-    convenience public init(step: ORKStep?, result: ORKResult?) {
+    public convenience init(step: ORKStep?, result: ORKResult?) {
         self.init(step: step)
     }
     
@@ -220,6 +221,11 @@ public class CTFBARTStepViewController: ORKStepViewController {
 //        self.pumpButton.configuredColor = self.view.tintColor
 //        self.collectButton.configuredColor = self.view.tintColor
         
+        if let step = self.step,
+            step.isOptional == false {
+            self.skipButton.isHidden = true
+        }
+        
         self.pumpButton.tintColor = self.view.tintColor
         self.collectButton.tintColor = self.view.tintColor
 
@@ -229,11 +235,6 @@ public class CTFBARTStepViewController: ORKStepViewController {
         }
         
         
-    }
-
-    override open func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override open func viewDidAppear(_ animated: Bool) {
@@ -468,5 +469,10 @@ public class CTFBARTStepViewController: ORKStepViewController {
         self.view.isUserInteractionEnabled = false
         
         self._collectButtonHandler?()
+    }
+    @IBAction func skipButtonPressed(_ sender: Any) {
+        
+        self.goForward()
+        
     }
 }

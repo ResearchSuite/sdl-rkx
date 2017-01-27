@@ -3,7 +3,7 @@
 //  Impulse
 //
 //  Created by Francesco Perera on 10/25/16.
-//  Copyright © 2016 Co. All rights reserved.
+//  Copyright © 2016 Cornell Tech. All rights reserved.
 //
 
 import UIKit
@@ -41,6 +41,8 @@ class CTFDelayDiscountingStepViewController: ORKStepViewController {
     @IBOutlet weak var laterButton:CTFBorderedButton!
     @IBOutlet weak var promptLabel: UILabel!
     
+    @IBOutlet weak var skipButton: UIButton!
+    
     var _nowButtonHandler:(()->())?
     var _laterButtonHandler:(()->())?
     
@@ -69,6 +71,11 @@ class CTFDelayDiscountingStepViewController: ORKStepViewController {
         self.laterButton.tintColor = self.view.tintColor
         self.laterButton.titleLabel?.numberOfLines = 0
         self.laterButton.titleLabel?.textAlignment = NSTextAlignment.center
+        
+        if let step = self.step,
+            step.isOptional == false {
+            self.skipButton.isHidden = true
+        }
         
         if let stepParams = self.stepParams {
             
@@ -222,6 +229,24 @@ class CTFDelayDiscountingStepViewController: ORKStepViewController {
         }
     }
     
+    override var result: ORKStepResult? {
+        guard let parentResult = super.result else {
+            return nil
+        }
+        
+        if let trialResults = self.trialResults {
+            
+            let ddResult = CTFDelayDiscountingResult(identifier: step!.identifier)
+            ddResult.startDate = parentResult.startDate
+            ddResult.endDate = parentResult.endDate
+            ddResult.trialResults = trialResults
+            
+            parentResult.results = [ddResult]
+        }
+        
+        return parentResult
+    }
+    
     @IBAction func nowButtonPress(_ sender: AnyObject) {
       self._nowButtonHandler?()
         
@@ -229,6 +254,11 @@ class CTFDelayDiscountingStepViewController: ORKStepViewController {
     
     @IBAction func laterButtonPress(_ sender: AnyObject) {
         self._laterButtonHandler?()
+        
+    }
+    @IBAction func skipButtonPressed(_ sender: Any) {
+        
+        self.goForward()
         
     }
 

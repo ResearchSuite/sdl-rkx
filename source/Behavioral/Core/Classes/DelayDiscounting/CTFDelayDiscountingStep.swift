@@ -18,7 +18,7 @@ struct CTFDelayDiscountingStepParams {
     var prompt: String!
 }
 
-open class CTFDelayDiscountingStep: ORKActiveStep {
+open class CTFDelayDiscountingStep: ORKStep {
     
     static let identifier = "DelayDiscountingStep"
     

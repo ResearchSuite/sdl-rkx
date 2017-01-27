@@ -3,7 +3,7 @@
 //  Impulse
 //
 //  Created by James Kizer on 12/20/16.
-//  Copyright © 2016 James Kizer. All rights reserved.
+//  Copyright © 2016 Cornell Tech. All rights reserved.
 //
 
 import UIKit
@@ -35,6 +35,8 @@ open class CTFBARTStepGenerator: RSTBBaseStepGenerator {
         
         let step = CTFBARTStep(identifier: customStepDescriptor.identifier)
         step.params = stepParams
+        step.isOptional = customStepDescriptor.optional
+        
         return step
     }
     

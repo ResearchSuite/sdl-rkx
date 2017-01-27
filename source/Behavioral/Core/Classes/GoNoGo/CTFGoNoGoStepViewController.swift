@@ -123,6 +123,9 @@ class CTFGoNoGoStepViewController: ORKStepViewController, CTFGoNoGoViewDelegate 
     var backgroundObserver: NSObjectProtocol!
     var foregroundObserver: NSObjectProtocol!
     
+    @IBOutlet weak var skipButton: UIButton!
+    
+    
     var tapTime: Date? = nil
     
     var canceled = false
@@ -218,7 +221,10 @@ class CTFGoNoGoStepViewController: ORKStepViewController, CTFGoNoGoViewDelegate 
 
         // Do any additional setup after loading the view.
         
-        
+        if let step = self.step,
+            step.isOptional == false {
+            self.skipButton.isHidden = true
+        }
         
     }
     
@@ -277,12 +283,12 @@ class CTFGoNoGoStepViewController: ORKStepViewController, CTFGoNoGoViewDelegate 
         
         if let trialResults = self.trialResults {
             
-            let goNoGoResults = CTFGoNoGoResult(identifier: step!.identifier)
-            goNoGoResults.startDate = parentResult.startDate
-            goNoGoResults.endDate = parentResult.endDate
-            goNoGoResults.trialResults = trialResults
+            let goNoGoResult = CTFGoNoGoResult(identifier: step!.identifier)
+            goNoGoResult.startDate = parentResult.startDate
+            goNoGoResult.endDate = parentResult.endDate
+            goNoGoResult.trialResults = trialResults
             
-            parentResult.results = [goNoGoResults]
+            parentResult.results = [goNoGoResult]
         }
         
         return parentResult
@@ -414,6 +420,13 @@ class CTFGoNoGoStepViewController: ORKStepViewController, CTFGoNoGoViewDelegate 
             self.tapTime = Date()
         }
     }
+    
+    @IBAction func skipButtonPressed(_ sender: Any) {
+        
+        self.goForward()
+        
+    }
+    
     
 //    func calculateAllAggregateResults(_ results:[CTFGoNoGoTrialResult])->Dictionary<CTFGoNoGoResult,CTFGoNoGoResults>{
 //        /**
