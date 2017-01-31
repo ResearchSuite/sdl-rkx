@@ -9,99 +9,6 @@
 import UIKit
 import ResearchKit
 
-enum CTFGoNoGoCueType {
-    case go
-    case noGo
-}
-
-enum CTFGoNoGoTargetType {
-    case go
-    case noGo
-}
-
-
-
-enum CTFGoNoGoResponseCode{
-    /**
-     correctBlue = user does not tap when rectangle is blue (NoGo target)
-     incorrectBlue = user taps when rectangle is blue ( NoGo target)
-     correctGreen = user taps when rectangle is green (Go target)
-     incorrectGreen = user does not tap when rectangle is green (Go target)
-    */
-    case correctBlue
-    case incorrectBlue
-    case correctGreen
-    case incorrectGreen
-}
-
-struct CTFGoNoGoTrial {
-    
-    var waitTime: TimeInterval!
-    var crossTime : TimeInterval!
-    var blankTime:TimeInterval!
-    var cueTime: TimeInterval!
-    var fillTime : TimeInterval!
-    
-    var cue: CTFGoNoGoCueType!
-    var target: CTFGoNoGoTargetType!
-    
-    var trialIndex: Int!
-    
-}
-
-struct CTFGoNoGoTrialResult {
-    
-    var trial: CTFGoNoGoTrial?
-    
-    var responseTime: TimeInterval?
-    var tapped: Bool?
-    
-}
-
-class CTFGoNoGoResult: ORKResult {
-    var trialResults: [CTFGoNoGoTrialResult]?
-}
-
-
-//<<<<<<< HEAD
-//=======
-//enum CTFGoNoGoResult{
-//    case full
-//    case firstThird
-//    case secondThird
-//    case lastThird
-//}
-//
-//struct CTFGoNoGoResults {
-//    // variable label?
-//    var numTrials: Int!
-//    var numCorrectResponses: Int!
-//    var numIncorrectResponses: Int!
-//    var numCorrectBlueResponses: Int!
-//    var numCorrectGreenResponses: Int!
-//    var numIncorrectBlueResponses:Int!
-//    var numIncorrectGreenResponses:Int!
-//    var meanAccuracy:Double!
-//    var meanResponseTime:Double!
-//    var rangeResponseTime:(Double,Double)!
-//    var variability:Double!
-//    var avgCorrectResponseTime:Double!
-//    var avgIncorrectResponseTime:Double!
-//}
-//
-//extension Array {
-//    func random() -> Element? {
-//        if self.count == 0 {
-//            return nil
-//        }
-//        else{
-//            let index = Int(arc4random_uniform(UInt32(self.count)))
-//            return self[index]
-//        }
-//    }
-//}
-//
-//>>>>>>> results
 class CTFGoNoGoStepViewController: ORKStepViewController, CTFGoNoGoViewDelegate {
 
     
@@ -113,9 +20,6 @@ class CTFGoNoGoStepViewController: ORKStepViewController, CTFGoNoGoViewDelegate 
     
     var trials: [CTFGoNoGoTrial]?
     var trialResults: [CTFGoNoGoTrialResult]?
-    
-//    var trialTimer: NSTimer?
-//    var trialCompletion: ((NSDate?) -> ())?
     
     var paused = false
     var pendingTrials: [CTFGoNoGoTrial]?

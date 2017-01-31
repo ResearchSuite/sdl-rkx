@@ -8,8 +8,8 @@
 
 import ResearchKit
 
-class CTFDelayDiscountingResult: ORKResult {
+public class CTFDelayDiscountingResult: ORKResult {
     
-    var trialResults: [CTFDelayDiscountingTrialResult]?
+    public var trialResults: [CTFDelayDiscountingTrialResult]?
 
 }
