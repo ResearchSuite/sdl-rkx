@@ -8,9 +8,8 @@
 
 public struct CTFGoNoGoTrialResult {
     
-    public var trial: CTFGoNoGoTrial?
-    
-    public var responseTime: TimeInterval?
-    public var tapped: Bool?
+    public var trial: CTFGoNoGoTrial!
+    public var responseTime: TimeInterval!
+    public var tapped: Bool!
     
 }
