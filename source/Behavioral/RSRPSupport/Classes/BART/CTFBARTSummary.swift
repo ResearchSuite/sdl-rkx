@@ -57,6 +57,7 @@ public final class CTFBARTSummary: RSRPIntermediateResult {
         let explodedIndices: Set<Int> = Set( trialResults.filter {$0.exploded}.map {$0.trial.trialIndex} )
         
         self.numberOfExplosions = explodedIndices.count
+        self.totalGains = trialResults.map{ Double($0.payout) }.reduce(0.0, +)
         
         func afterExplode(trialResult: CTFBARTTrialResult) -> Bool {
             
