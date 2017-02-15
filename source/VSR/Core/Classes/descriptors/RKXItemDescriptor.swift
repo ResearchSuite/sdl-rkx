@@ -80,12 +80,12 @@ open class RKXAffectDescriptor: RKXImageDescriptor {
     var value: [String: AnyObject]!
     
     override func imageChoice(_ bundle: Bundle = Bundle.main) -> ORKImageChoice? {
-        let images: [UIImage] = self.imageTitles.map { imageTitle in
+        let images: [(String, UIImage)] = self.imageTitles.map { imageTitle in
             guard let image = UIImage(named: imageTitle, in: bundle, compatibleWith: nil)
             else{
                fatalError("Cannot find image named \(imageTitle) in \(bundle)")
             }
-            return image
+            return (imageTitle, image)
         }
         .flatMap { $0 }
         return PAMImageChoice(images: images, value: self.value as NSCoding & NSCopying & NSObjectProtocol)

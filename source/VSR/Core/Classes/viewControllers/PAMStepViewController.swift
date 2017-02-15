@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import ResearchKit
+
 class PAMStepViewController: RKXMultipleImageSelectionSurveyViewController {
 
     // MARK: - Required by superclass
@@ -26,6 +28,19 @@ class PAMStepViewController: RKXMultipleImageSelectionSurveyViewController {
         return "Reload Images"
     }
     
+    override open func valueForImageChoice(_ imageChoice: ORKImageChoice) -> NSCoding & NSCopying & NSObjectProtocol {
+        
+        guard let pamImageChoice = imageChoice as? PAMImageChoice,
+            let value = pamImageChoice.value as? NSDictionary else {
+                return imageChoice.value
+        }
+        
+        let valueDictionary = NSMutableDictionary(dictionary: value)
+        valueDictionary["image"] = pamImageChoice.currentImageName
+        return valueDictionary
+        
+    }
+    
     @IBAction override func somethingSelectedButtonPressed(_ sender: AnyObject) {
         fatalError("Unimplemented")
     }
@@ -35,5 +50,7 @@ class PAMStepViewController: RKXMultipleImageSelectionSurveyViewController {
         //which means images will be chosen at random
         self.updateUI()
     }
+    
+    
 
 }

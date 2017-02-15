@@ -11,16 +11,24 @@ import ResearchKit
 
 class PAMImageChoice: ORKImageChoice {
 
-    let images: [UIImage]
-    required init(images: [UIImage], value: NSCoding & NSCopying & NSObjectProtocol) {
+    let images: [(String, UIImage)]
+    var _currentImageName: String?
+    
+    required init(images: [(String, UIImage)], value: NSCoding & NSCopying & NSObjectProtocol) {
         self.images = images
         super.init(normalImage: nil, selectedImage: nil, text: nil, value: value)
+    }
+    
+    var currentImageName: String? {
+        return _currentImageName
     }
     
     override var normalStateImage: UIImage {
         let numberOfImages:UInt32 = UInt32(self.images.count)
         let index = Int(arc4random_uniform(numberOfImages))
-        return self.images[index]
+        let (imageName, image) = self.images[index]
+        self._currentImageName = imageName
+        return image
     }
     
     required init?(coder aDecoder: NSCoder) {

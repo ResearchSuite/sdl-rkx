@@ -158,7 +158,11 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
                     assertionFailure("keys in answer dictionary must be unique!")
                 }
                 else {
-                    self.answerDictionary![hash] = RKXMultipleImageSelectionSurveyAnswerStruct(identifier: imageChoice.value, selected: false)
+//                    guard let identifier = self.identifierForImageChoice(imageChoice: imageChoice) else {
+//                        assertionFailure("could not create identifier for imageChoice!")
+//                        return
+//                    }
+                    self.answerDictionary![hash] = RKXMultipleImageSelectionSurveyAnswerStruct(imageChoice: imageChoice, selected: false)
                 }
                 
             }
@@ -239,6 +243,12 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
 //        }
 //    }
     
+    open func valueForImageChoice(_ imageChoice: ORKImageChoice) -> NSCoding & NSCopying & NSObjectProtocol {
+        
+        return imageChoice.value
+        
+    }
+    
     override open var result: ORKStepResult? {
         guard let parentResult = super.result else {
             return nil
@@ -246,11 +256,12 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
         let step = self.step as? RKXMultipleImageSelectionSurveyStep
         
         let questionResult = ORKChoiceQuestionResult(identifier: step!.identifier)
-        questionResult.choiceAnswers = self.selectedAnswers()
+        questionResult.choiceAnswers = self.selectedAnswers()?.map(self.valueForImageChoice)
         questionResult.startDate = parentResult.startDate
         questionResult.endDate = parentResult.endDate
         questionResult.questionType = self.supportsMultipleSelection ? .multipleChoice : .singleChoice
         
+        print(questionResult)
         parentResult.results = [questionResult]
         
         return parentResult
@@ -263,8 +274,8 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
         print(result)
     }
     
-    func getSelectedForValue(_ value: NSCoding & NSCopying & NSObjectProtocol) -> Bool? {
-        let hash = self.hashedValue(value: value)
+    func getSelectedForImageChoice(imageChoice: ORKImageChoice) -> Bool? {
+        let hash = self.hashedValue(value: imageChoice.value)
         guard let answerDictionary = self.answerDictionary,
             let answer = answerDictionary[hash]
             else { return nil }
@@ -272,12 +283,12 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
         return answer.selected
     }
     
-    func setSelectedForValue(_ value: NSCoding & NSCopying & NSObjectProtocol, selected: Bool) {
-        let hash = self.hashedValue(value: value)
-        self.answerDictionary![hash] = RKXMultipleImageSelectionSurveyAnswerStruct(identifier: value, selected: selected)
+    func setSelectedForImageChoice(imageChoice: ORKImageChoice, selected: Bool) {
+        let hash = self.hashedValue(value: imageChoice.value)
+        self.answerDictionary![hash] = RKXMultipleImageSelectionSurveyAnswerStruct(imageChoice: imageChoice, selected: selected)
     }
     
-    func selectedAnswers() -> [NSCoding & NSCopying & NSObjectProtocol]? {
+    func selectedAnswers() -> [ORKImageChoice]? {
         guard let answerDictionary = self.answerDictionary
             else { return nil }
         
@@ -285,14 +296,14 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
             return answer.selected
             }
             .map { (key, selectedAnswer) in
-                return selectedAnswer.identifier
+                return selectedAnswer.imageChoice
         }
     }
     
     func clearSelectedAnswers() {
         if let selectedAnswers = self.selectedAnswers() {
             selectedAnswers.forEach { selectedAnswer in
-                self.setSelectedForValue(selectedAnswer, selected: false)
+                self.setSelectedForImageChoice(imageChoice: selectedAnswer, selected: false)
             }
         }
     }
@@ -436,7 +447,7 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
     func configureCellForImageChoice(_ missCell: RKXMultipleImageSelectionSurveyCollectionViewCell, imageChoice: ORKImageChoice) -> RKXMultipleImageSelectionSurveyCollectionViewCell {
         
         missCell.activityImage = imageChoice.normalStateImage
-        missCell.isSelected = self.getSelectedForValue(imageChoice.value)!
+        missCell.isSelected = self.getSelectedForImageChoice(imageChoice: imageChoice) ?? false
         missCell.selectedBackgroundColor = self.itemCellSelectedColor
         missCell.selectedOverlayImage = self.itemCellSelectedOverlayImage
         missCell.textStackViewBackgroundColor = self.itemCellTextBackgroundColor
@@ -461,9 +472,9 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
             else { return }
         
         if !self.supportsMultipleSelection {
-            if let currentlySelected = self.getSelectedForValue(imageChoice.value) {
+            if let currentlySelected = self.getSelectedForImageChoice(imageChoice: imageChoice) {
                 self.clearSelectedAnswers()
-                self.setSelectedForValue(imageChoice.value, selected: !currentlySelected)
+                self.setSelectedForImageChoice(imageChoice: imageChoice, selected: !currentlySelected)
             }
             else {
                 self.clearSelectedAnswers()
@@ -472,24 +483,19 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
         else {
             
             //if we will be selecting the item, check to see that we have not reached the max amount
-            if  let isSelected = self.getSelectedForValue(imageChoice.value),
+            if  let isSelected = self.getSelectedForImageChoice(imageChoice: imageChoice),
                 isSelected == false,
                 let maxNumberOfSelections = self.maximumSelectedNumberOfItems,
                 let answers = self.selectedAnswers() {
                 if answers.count < maxNumberOfSelections {
-                    self.setSelectedForValue(imageChoice.value, selected: !self.getSelectedForValue(imageChoice.value)!)
+                    self.setSelectedForImageChoice(imageChoice: imageChoice, selected: !self.getSelectedForImageChoice(imageChoice: imageChoice)!)
                 }
             }
             else {
-                self.setSelectedForValue(imageChoice.value, selected: !self.getSelectedForValue(imageChoice.value)!)
+                self.setSelectedForImageChoice(imageChoice: imageChoice, selected: !self.getSelectedForImageChoice(imageChoice: imageChoice)!)
             }
-            
-                
-            
-            
         }
-        
-        
+    
         if self.transitionOnSelection {
             self.notifyDelegateAndMoveForward()
         }
