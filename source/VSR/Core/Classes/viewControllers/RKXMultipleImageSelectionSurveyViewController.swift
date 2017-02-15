@@ -10,7 +10,7 @@ import UIKit
 import ResearchKit
 
 struct RKXMultipleImageSelectionSurveyAnswerStruct {
-    var identifier: NSCoding & NSCopying & NSObjectProtocol
+    var imageChoice: ORKImageChoice
     var selected: Bool
 }
 
