@@ -74,7 +74,7 @@ open class CTFBARTStepViewController: ORKStepViewController {
         self.trials = self.generateTrials(params: params)
     }
     
-    public convenience init(step: ORKStep?, result: ORKResult?) {
+    public convenience override init(step: ORKStep?, result: ORKResult?) {
         self.init(step: step)
     }
     

@@ -14,7 +14,7 @@ public class CTFGoNoGoStep: ORKStep {
     
     var goNoGoParams:CTFGoNoGoStepParameters?
     
-    public func stepViewControllerClass() -> AnyClass {
+    public override func stepViewControllerClass() -> AnyClass {
         return CTFGoNoGoStepViewController.self
     }
 }
