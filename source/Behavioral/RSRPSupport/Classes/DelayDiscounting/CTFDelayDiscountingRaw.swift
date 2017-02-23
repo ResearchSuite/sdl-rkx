@@ -18,9 +18,19 @@ final public class CTFDelayDiscountingRaw: RSRPIntermediateResult {
     public var choiceArray: [Double]!
     public var times: [TimeInterval]!
     
-    public init?(result: CTFDelayDiscountingResult) {
+    public init?(
+        uuid: UUID,
+        taskIdentifier: String,
+        taskRunUUID: UUID,
+        result: CTFDelayDiscountingResult
+        ) {
         
-        super.init(type: "DelayDiscountingRaw")
+        super.init(
+            type: "DelayDiscountingRaw",
+            uuid: uuid,
+            taskIdentifier: taskIdentifier,
+            taskRunUUID: taskRunUUID
+        )
         
         self.variableLabel = result.identifier
         

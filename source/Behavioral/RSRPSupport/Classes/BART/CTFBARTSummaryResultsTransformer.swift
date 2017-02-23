@@ -13,13 +13,17 @@ import ResearchSuiteResultsProcessor
 
 public class CTFBARTSummaryResultsTransformer: RSRPFrontEndTransformer {
     
-    public static func transform(parameters: [String: ORKStepResult]) -> RSRPIntermediateResult? {
+    public static func transform(
+        taskIdentifier: String,
+        taskRunUUID: UUID,
+        parameters: [String: ORKStepResult]
+        ) -> RSRPIntermediateResult? {
         
         guard let bartResult = parameters["BARTResult"]?.firstResult as? CTFBARTResult else {
             return nil
         }
         
-        guard let summary = CTFBARTSummary(result: bartResult) else {
+        guard let summary = CTFBARTSummary(uuid: UUID(), taskIdentifier: taskIdentifier, taskRunUUID: taskRunUUID, result: bartResult) else {
             return nil
         }
         

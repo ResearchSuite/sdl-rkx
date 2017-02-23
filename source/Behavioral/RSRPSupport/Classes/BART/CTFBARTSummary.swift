@@ -40,9 +40,19 @@ public final class CTFBARTSummary: RSRPIntermediateResult {
     
     var totalGains: Double!
 
-    public init?(result: CTFBARTResult) {
+    public init?(
+        uuid: UUID,
+        taskIdentifier: String,
+        taskRunUUID: UUID,
+        result: CTFBARTResult
+        ) {
         
-        super.init(type: "BARTSummary")
+        super.init(
+            type: "BARTSummary",
+            uuid: uuid,
+            taskIdentifier: taskIdentifier,
+            taskRunUUID: taskRunUUID
+        )
         
         guard let trialResults = result.trialResults,
             let firstResult = trialResults.first else {

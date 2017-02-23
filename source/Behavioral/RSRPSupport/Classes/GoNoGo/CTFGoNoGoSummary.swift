@@ -50,9 +50,19 @@ public final class CTFGoNoGoSummary: RSRPIntermediateResult {
     public var middleThirdSummary: CTFGoNoGoSummaryStruct!
     public var lastThirdSummary: CTFGoNoGoSummaryStruct!
     
-    public init?(result: CTFGoNoGoResult) {
+    public init?(
+        uuid: UUID,
+        taskIdentifier: String,
+        taskRunUUID: UUID,
+        result: CTFGoNoGoResult
+        ) {
         
-        super.init(type: "GoNoGoSummary")
+        super.init(
+            type: "GoNoGoSummary",
+            uuid: uuid,
+            taskIdentifier: taskIdentifier,
+            taskRunUUID: taskRunUUID
+        )
         
         guard let totalTrials = result.trialResults else {
             return nil

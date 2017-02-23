@@ -12,13 +12,17 @@ import ResearchSuiteResultsProcessor
 
 public class CTFDelayDiscountingRawResultsTransformer: RSRPFrontEndTransformer {
     
-    public static func transform(parameters: [String: ORKStepResult]) -> RSRPIntermediateResult? {
+    public static func transform(
+        taskIdentifier: String,
+        taskRunUUID: UUID,
+        parameters: [String: ORKStepResult]
+        ) -> RSRPIntermediateResult? {
         
         guard let ddResult = parameters["DelayDiscountingResult"]?.firstResult as? CTFDelayDiscountingResult else {
             return nil
         }
         
-        guard let summary = CTFDelayDiscountingRaw(result: ddResult) else {
+        guard let summary = CTFDelayDiscountingRaw(uuid: UUID(), taskIdentifier: taskIdentifier, taskRunUUID: taskRunUUID, result: ddResult) else {
             return nil
         }
         

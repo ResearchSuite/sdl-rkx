@@ -4,7 +4,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "sdlrkx"
-  s.version          = "0.6.0"
+  s.version          = "0.6.1"
   s.summary          = "SDL visual self-report for ResearchKit"
 
   s.description      = "The Small Data Lab ResearchKit Extensions package is the easiest way to include SDL visual self-report (YADL, MEDL, PAM) and Behavioral extensions (Go / No Go, Delayed Discounting, BART)into a ResearchKit application."
@@ -24,13 +24,13 @@ Pod::Spec.new do |s|
     vsr.source_files = 'source/VSR/Core/Classes/**/*'
     vsr.dependency 'sdlrkx/Helpers'
     vsr.resources = 'source/VSR/Core/Assets/PAM.xcassets', 'source/VSR/Core/Assets/PAM.json'
-    vsr.dependency 'ResearchKit', '~> 1.3.1'
+    vsr.dependency 'ResearchKit', '~> 1.3'
   end
 
   s.subspec 'VSR-RSTBSupport' do |rstb|
     rstb.source_files = 'source/VSR/RSTBSupport/Classes/**/*'
     rstb.dependency 'sdlrkx/VSR'
-    rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.2.0'
+    rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.2'
     rstb.dependency 'Gloss', '~> 1'
   end
 
@@ -38,21 +38,21 @@ Pod::Spec.new do |s|
     behavioral.source_files = 'source/Behavioral/Core/Classes/**/*'
     behavioral.dependency 'sdlrkx/Helpers'
     behavioral.resources = 'source/Behavioral/Core/Assets/BART/BART.xcassets'
-    behavioral.dependency 'ResearchKit', '~> 1.3.1'
+    behavioral.dependency 'ResearchKit', '~> 1.3'
   end
 
   s.subspec 'Behavioral-RSTBSupport' do |rstb|
     rstb.source_files = 'source/Behavioral/RSTBSupport/Classes/**/*'
     rstb.dependency 'sdlrkx/Behavioral'
-    rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.2.0'
+    rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.2'
     rstb.dependency 'Gloss', '~> 1'
   end
 
   s.subspec 'Behavioral-RSRPSupport' do |rsrp|
     rsrp.source_files = 'source/Behavioral/RSRPSupport/Classes/**/*'
     rsrp.dependency 'sdlrkx/Behavioral'
-    rsrp.dependency 'ResearchSuiteResultsProcessor'
-    rsrp.dependency 'ResearchKit', '~> 1.3.1'
+    rsrp.dependency 'ResearchSuiteResultsProcessor', '~> 0.1'
+    rsrp.dependency 'ResearchKit', '~> 1.3'
   end
 
   s.subspec 'Behavioral-RSRPOhmageBackend' do |obes|

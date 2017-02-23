@@ -13,13 +13,17 @@ import ResearchSuiteResultsProcessor
 
 public class CTFGoNoGoSummaryResultsTransformer: RSRPFrontEndTransformer {
 
-    public static func transform(parameters: [String : ORKStepResult]) -> RSRPIntermediateResult? {
+    public static func transform(
+        taskIdentifier: String,
+        taskRunUUID: UUID,
+        parameters: [String: ORKStepResult]
+        ) -> RSRPIntermediateResult? {
         
         guard let goNoGoResult = parameters["GoNoGoResult"]?.firstResult as? CTFGoNoGoResult else {
             return nil
         }
         
-        guard let summary = CTFGoNoGoSummary(result: goNoGoResult) else {
+        guard let summary = CTFGoNoGoSummary(uuid: UUID(), taskIdentifier: taskIdentifier, taskRunUUID: taskRunUUID, result: goNoGoResult) else {
             return nil
         }
         
