@@ -104,7 +104,7 @@ class CTFGoNoGoStepViewController: ORKStepViewController, CTFGoNoGoViewDelegate 
         }
     }
     
-    public convenience init(step: ORKStep?, result: ORKResult?) {
+    public convenience override init(step: ORKStep?, result: ORKResult?) {
         self.init(step: step)
     }
     

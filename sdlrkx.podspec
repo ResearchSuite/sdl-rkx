@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
     vsr.source_files = 'source/VSR/Core/Classes/**/*'
     vsr.dependency 'sdlrkx/Helpers'
     vsr.resources = 'source/VSR/Core/Assets/PAM.xcassets', 'source/VSR/Core/Assets/PAM.json'
-    vsr.dependency 'ResearchKit', '~> 1.3'
+    vsr.dependency 'ResearchKit', '~> 1.4'
   end
 
   s.subspec 'VSR-RSTBSupport' do |rstb|
@@ -38,7 +38,7 @@ Pod::Spec.new do |s|
     behavioral.source_files = 'source/Behavioral/Core/Classes/**/*'
     behavioral.dependency 'sdlrkx/Helpers'
     behavioral.resources = 'source/Behavioral/Core/Assets/BART/BART.xcassets'
-    behavioral.dependency 'ResearchKit', '~> 1.3'
+    behavioral.dependency 'ResearchKit', '~> 1.4'
   end
 
   s.subspec 'Behavioral-RSTBSupport' do |rstb|
@@ -52,7 +52,7 @@ Pod::Spec.new do |s|
     rsrp.source_files = 'source/Behavioral/RSRPSupport/Classes/**/*'
     rsrp.dependency 'sdlrkx/Behavioral'
     rsrp.dependency 'ResearchSuiteResultsProcessor', '~> 0.1'
-    rsrp.dependency 'ResearchKit', '~> 1.3'
+    rsrp.dependency 'ResearchKit', '~> 1.4'
   end
 
   s.subspec 'Behavioral-RSRPOhmageBackend' do |obes|

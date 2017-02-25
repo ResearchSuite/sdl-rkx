@@ -24,7 +24,7 @@ open class CTFDelayDiscountingStep: ORKStep {
     
     var params:CTFDelayDiscountingStepParams?
     
-    func stepViewControllerClass() -> AnyClass {
+    open override func stepViewControllerClass() -> AnyClass {
         return CTFDelayDiscountingStepViewController.self
     }
     

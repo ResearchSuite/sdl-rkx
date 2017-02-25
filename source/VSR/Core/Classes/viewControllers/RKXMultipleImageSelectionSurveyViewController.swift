@@ -39,7 +39,7 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
 //        self.restorationClass = RKXMultipleImageSelectionSurveyViewController.self
     }
     
-    convenience init(step: ORKStep?, result: ORKResult?) {
+    convenience override init(step: ORKStep?, result: ORKResult?) {
         self.init(step: step)
         if let stepResult = result {
             self.initializeAnswersForResult(result: stepResult)
@@ -253,6 +253,9 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
         guard let parentResult = super.result else {
             return nil
         }
+        
+        debugPrint(parentResult)
+        
         let step = self.step as? RKXMultipleImageSelectionSurveyStep
         
         let questionResult = ORKChoiceQuestionResult(identifier: step!.identifier)
