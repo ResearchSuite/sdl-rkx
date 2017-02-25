@@ -14,7 +14,7 @@ open class RKXMultipleImageSelectionSurveyStep: ORKQuestionStep {
     var options: RKXMultipleImageSelectionSurveyOptions?
     var visibilityFilter:((NSCoding & NSCopying & NSObjectProtocol) -> Bool)?
     
-    open func stepViewControllerClass() -> AnyClass {
+    open override func stepViewControllerClass() -> AnyClass {
         return RKXMultipleImageSelectionSurveyViewController.self
     }
     

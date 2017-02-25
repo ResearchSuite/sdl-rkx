@@ -26,8 +26,16 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
     @IBOutlet weak var additionalTextView: UITextView!
     @IBOutlet weak var additionalTextViewHeightConstraint: NSLayoutConstraint!
     
+    var _appeared: Bool = false
+    
     override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    override open func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self._appeared = true
     }
     
     override convenience init(step: ORKStep?) {
@@ -39,7 +47,7 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
 //        self.restorationClass = RKXMultipleImageSelectionSurveyViewController.self
     }
     
-    convenience init(step: ORKStep?, result: ORKResult?) {
+    convenience override init(step: ORKStep?, result: ORKResult?) {
         self.init(step: step)
         if let stepResult = result {
             self.initializeAnswersForResult(result: stepResult)
@@ -248,21 +256,26 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
         return imageChoice.value
         
     }
+
+    
     
     override open var result: ORKStepResult? {
         guard let parentResult = super.result else {
             return nil
         }
-        let step = self.step as? RKXMultipleImageSelectionSurveyStep
+        if self._appeared {
+            let step = self.step as? RKXMultipleImageSelectionSurveyStep
+            
+            let questionResult = ORKChoiceQuestionResult(identifier: step!.identifier)
+            questionResult.choiceAnswers = self.selectedAnswers()?.map(self.valueForImageChoice)
+            questionResult.startDate = parentResult.startDate
+            questionResult.endDate = parentResult.endDate
+            questionResult.questionType = self.supportsMultipleSelection ? .multipleChoice : .singleChoice
+            
+            print(questionResult)
+            parentResult.results = [questionResult]
+        }
         
-        let questionResult = ORKChoiceQuestionResult(identifier: step!.identifier)
-        questionResult.choiceAnswers = self.selectedAnswers()?.map(self.valueForImageChoice)
-        questionResult.startDate = parentResult.startDate
-        questionResult.endDate = parentResult.endDate
-        questionResult.questionType = self.supportsMultipleSelection ? .multipleChoice : .singleChoice
-        
-        print(questionResult)
-        parentResult.results = [questionResult]
         
         return parentResult
     }

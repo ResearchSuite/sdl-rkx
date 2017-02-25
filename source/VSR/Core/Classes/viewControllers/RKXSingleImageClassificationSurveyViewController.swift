@@ -28,6 +28,11 @@ class RKXSingleImageClassificationSurveyViewController: ORKStepViewController {
 //        self.restorationClass = RKXSingleImageClassificationSurveyViewController.self
     }
     
+    convenience override init(step: ORKStep?, result: ORKResult?) {
+        self.init(step: step)
+        
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -48,6 +53,8 @@ class RKXSingleImageClassificationSurveyViewController: ORKStepViewController {
         guard let parentResult = super.result else {
             return nil
         }
+        
+        debugPrint(parentResult)
         
         if let answer = self.answer {
             let step = self.step as? RKXSingleImageClassificationSurveyStep

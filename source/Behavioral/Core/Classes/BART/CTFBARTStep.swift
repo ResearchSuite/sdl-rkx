@@ -24,7 +24,7 @@ open class CTFBARTStep: ORKStep {
 
     public var params:CTFBARTStepParams?
     
-    open func stepViewControllerClass() -> AnyClass {
+    open override func stepViewControllerClass() -> AnyClass {
         return CTFBARTStepViewController.self
     }
     
