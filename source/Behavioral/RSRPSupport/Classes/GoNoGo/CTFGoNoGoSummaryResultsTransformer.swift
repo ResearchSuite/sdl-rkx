@@ -16,7 +16,7 @@ public class CTFGoNoGoSummaryResultsTransformer: RSRPFrontEndTransformer {
     public static func transform(
         taskIdentifier: String,
         taskRunUUID: UUID,
-        parameters: [String: ORKStepResult]
+        parameters: [String: AnyObject]
         ) -> RSRPIntermediateResult? {
         
         guard let goNoGoResult = parameters["GoNoGoResult"]?.firstResult as? CTFGoNoGoResult else {

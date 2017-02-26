@@ -4,7 +4,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "sdlrkx"
-  s.version          = "0.7.0"
+  s.version          = "0.8.0"
   s.summary          = "SDL visual self-report for ResearchKit"
 
   s.description      = "The Small Data Lab ResearchKit Extensions package is the easiest way to include SDL visual self-report (YADL, MEDL, PAM) and Behavioral extensions (Go / No Go, Delayed Discounting, BART)into a ResearchKit application."
@@ -51,7 +51,7 @@ Pod::Spec.new do |s|
   s.subspec 'Behavioral-RSRPSupport' do |rsrp|
     rsrp.source_files = 'source/Behavioral/RSRPSupport/Classes/**/*'
     rsrp.dependency 'sdlrkx/Behavioral'
-    rsrp.dependency 'ResearchSuiteResultsProcessor', '~> 0.1'
+    rsrp.dependency 'ResearchSuiteResultsProcessor', '~> 0.2'
     rsrp.dependency 'ResearchKit', '~> 1.4'
   end
 

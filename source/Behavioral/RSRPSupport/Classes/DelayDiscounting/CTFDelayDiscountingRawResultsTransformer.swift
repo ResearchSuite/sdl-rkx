@@ -15,7 +15,7 @@ public class CTFDelayDiscountingRawResultsTransformer: RSRPFrontEndTransformer {
     public static func transform(
         taskIdentifier: String,
         taskRunUUID: UUID,
-        parameters: [String: ORKStepResult]
+        parameters: [String: AnyObject]
         ) -> RSRPIntermediateResult? {
         
         guard let ddResult = parameters["DelayDiscountingResult"]?.firstResult as? CTFDelayDiscountingResult else {
