@@ -1,5 +1,5 @@
 //
-//  PAMMultipleRaw+OHMDataPoint.swift
+//  CTFPAMMultipleRaw+OHMDataPoint.swift
 //  Pods
 //
 //  Created by James Kizer on 2/26/17.
