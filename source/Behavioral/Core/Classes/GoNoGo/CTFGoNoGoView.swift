@@ -122,7 +122,9 @@ class CTFGoNoGoView: UIView {
         self.verticalRectangle.layer.borderWidth = 4.0
         self.addSubview(self.verticalRectangle)
         
-        let tapRec = UITapGestureRecognizer(target: self, action: #selector(CTFGoNoGoView.screenTapped))
+        let tapRec = CTFGoNoGoGestureRecognizer { [weak self] in
+            self?.screenTapped()
+        }
         self.addGestureRecognizer(tapRec)
         self.isUserInteractionEnabled = false
         
