@@ -17,6 +17,8 @@ open class CTFBARTStepParamsDescriptor: Decodable {
     let earningsPerPump: Float
     let maxPayingPumpsPerTrial: Int
     
+    let canExplodeOnFirstPump: Bool
+    
     required public init?(json: JSON) {
         
         guard let numTrials: Int = "numberOfTrials" <~~ json,
@@ -28,6 +30,7 @@ open class CTFBARTStepParamsDescriptor: Decodable {
         self.earningsPerPump = earningsPerPump
         self.maxPayingPumpsPerTrial = maxPayingPumpsPerTrial
         self.numTrials = numTrials
+        self.canExplodeOnFirstPump = "canExplodeOnFirstPump" <~~ json ?? true
         
         
     }

@@ -32,7 +32,7 @@ extension CTFBARTSummary: OMHDataPointBuilder {
     }
     
     open var schema: OMHSchema {
-        return OMHSchema(name: "BARTSummary", version: "1.0", namespace: "Cornell")
+        return OMHSchema(name: "BARTSummary", version: "1.1", namespace: "Cornell")
     }
     
     open var body: [String: Any] {

@@ -16,6 +16,8 @@ public struct CTFBARTStepParams {
     
     var earningsPerPump: Float!
     var maxPayingPumpsPerTrial: Int!
+    
+    var canExplodeOnFirstPump: Bool
 }
 
 open class CTFBARTStep: ORKStep {

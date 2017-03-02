@@ -31,7 +31,11 @@ open class CTFBARTStepGenerator: RSTBBaseStepGenerator {
                 return nil
         }
         
-        let stepParams = CTFBARTStepParams(numTrials: stepParamDescriptor.numTrials, earningsPerPump: stepParamDescriptor.earningsPerPump, maxPayingPumpsPerTrial: stepParamDescriptor.maxPayingPumpsPerTrial)
+        let stepParams = CTFBARTStepParams(
+            numTrials: stepParamDescriptor.numTrials,
+            earningsPerPump: stepParamDescriptor.earningsPerPump,
+            maxPayingPumpsPerTrial: stepParamDescriptor.maxPayingPumpsPerTrial,
+            canExplodeOnFirstPump: stepParamDescriptor.canExplodeOnFirstPump)
         
         let step = CTFBARTStep(identifier: customStepDescriptor.identifier)
         step.params = stepParams

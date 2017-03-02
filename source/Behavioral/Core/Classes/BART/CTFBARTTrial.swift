@@ -12,4 +12,5 @@ public struct CTFBARTTrial {
     public var earningsPerPump: Float!
     public var maxPayingPumps: Int!
     public var trialIndex: Int!
+    public var canExplodeOnFirstPump: Bool
 }

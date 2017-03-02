@@ -14,6 +14,8 @@ public final class CTFBARTSummary: RSRPIntermediateResult {
     var variableLabel: String!
     var maxPumpsPerBalloon: Int!
     
+    var pumpsPerBalloon: [Int]!
+    
     var numberOfBalloons: Int!
     var numberOfExplosions: Int!
     
@@ -61,6 +63,10 @@ public final class CTFBARTSummary: RSRPIntermediateResult {
         
         self.variableLabel = String(format: "BART%.02f", firstResult.trial.earningsPerPump)
         self.maxPumpsPerBalloon = firstResult.trial.maxPayingPumps
+        
+        self.pumpsPerBalloon = trialResults.map({ (trialResult) -> Int in
+            return trialResult.numPumps
+        })
         
         self.numberOfBalloons = trialResults.count
         
@@ -156,12 +162,13 @@ public final class CTFBARTSummary: RSRPIntermediateResult {
     
     
     //note that this a work around for the swift dictionary literal compiler bug
-    func dataDictionary() -> [String:Any] {
+    public func dataDictionary() -> [String:Any] {
         
         var bodyDictionary: [String: Any] = [:]
         
         bodyDictionary["variable_label"] = self.variableLabel
         bodyDictionary["max_pumps_per_balloon"] = self.maxPumpsPerBalloon
+        bodyDictionary["pumps_per_balloon"] = self.pumpsPerBalloon
         
         bodyDictionary["mean_pumps_after_explode"] = self.meanPumpsAfterExplode
         bodyDictionary["mean_pumps_after_no_explode"] = self.meanPumpsAfterNoExplode
