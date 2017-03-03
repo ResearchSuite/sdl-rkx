@@ -187,7 +187,7 @@ class CTFDelayDiscountingStepViewController: ORKStepViewController {
             let result = CTFDelayDiscountingTrialResult(trial: trial,
                                                        choiceType: pressAction,
                                                        choiceValue: amount,
-                                                       choiceTime: trialEndTime.timeIntervalSince(trialStartTime))
+                                                       choiceTime: trialEndTime.timeIntervalSince(trialStartTime) * 1000)
             
             //fade out
             UIView.animate(withDuration: CTFDelayDiscountingStepViewController.totalAnimationDuration / 2.0, animations: {
