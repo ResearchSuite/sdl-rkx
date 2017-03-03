@@ -10,21 +10,26 @@ import UIKit
 import sdlrkx
 import ResearchSuiteResultsProcessor
 
+public struct CTFGoNoGoStreakStruct {
+    let count: Int
+    let correct: Bool
+}
+
 public struct CTFGoNoGoSummaryStruct {
-    var numberOfTrials: Int
-    var numberOfCorrectResponses: Int
-    var numberOfCorrectNonresponses: Int
-    var numberOfIncorrectResponses: Int
-    var numberOfIncorrectNonresponses: Int
-    var meanAccuracy: Double
-    var responseTimeMean: TimeInterval
-    var responseTimeMin: TimeInterval
-    var responseTimeMax: TimeInterval
+    public var numberOfTrials: Int
+    public var numberOfCorrectResponses: Int
+    public var numberOfCorrectNonresponses: Int
+    public var numberOfIncorrectResponses: Int
+    public var numberOfIncorrectNonresponses: Int
+    public var meanAccuracy: Double
+    public var responseTimeMean: TimeInterval
+    public var responseTimeRange: TimeInterval
+    public var responseTimeStdDev: TimeInterval
     //punt on these for now
-    //var meanResponseTimeAfterOneError: TimeInterval
-    //var meanResponseTimeAfterTenStreak: TimeInterval
-    var meanResponseTimeCorrect: TimeInterval
-    var meanResponseTimeIncorrect: TimeInterval
+    public var meanResponseTimeAfterOneIncorrect: TimeInterval
+    public var meanResponseTimeAfterTenCorrect: TimeInterval
+    public var meanResponseTimeCorrect: TimeInterval
+    public var meanResponseTimeIncorrect: TimeInterval
     
     public func toDict() -> [String: Any] {
         return [
@@ -35,8 +40,10 @@ public struct CTFGoNoGoSummaryStruct {
             "numberOfIncorrectNonresponses": self.numberOfIncorrectNonresponses,
             "meanAccuracy": self.meanAccuracy,
             "responseTimeMean": self.responseTimeMean,
-            "responseTimeMin": self.responseTimeMin,
-            "responseTimeMax": self.responseTimeMax,
+            "responseTimeRange": self.responseTimeRange,
+            "responseTimeStdDev": self.responseTimeStdDev,
+            "meanResponseTimeAfterOneIncorrect": self.meanResponseTimeAfterOneIncorrect,
+            "meanResponseTimeAfterTenCorrect": self.meanResponseTimeAfterTenCorrect,
             "meanResponseTimeCorrect": self.meanResponseTimeCorrect,
             "meanResponseTimeIncorrect": self.meanResponseTimeIncorrect
         ]
@@ -45,6 +52,8 @@ public struct CTFGoNoGoSummaryStruct {
 
 public final class CTFGoNoGoSummary: RSRPIntermediateResult {
     
+    public var variableLabel: String!
+    public var numberOfTrials: Int!
     public var totalSummary: CTFGoNoGoSummaryStruct!
     public var firstThirdSummary: CTFGoNoGoSummaryStruct!
     public var middleThirdSummary: CTFGoNoGoSummaryStruct!
@@ -68,21 +77,56 @@ public final class CTFGoNoGoSummary: RSRPIntermediateResult {
             return nil
         }
         
-        self.totalSummary = CTFGoNoGoSummary.generateSummary(trialResults: totalTrials)
+        
+        self.variableLabel = result.identifier
+        self.numberOfTrials = totalTrials.count
+        
+        //this should evaluate to correctness
+        func correct(trialResult: CTFGoNoGoTrialResult) -> Bool {
+            return trialResult.tapped == (trialResult.trial.target == .go)
+        }
+        
+        let streaks: [CTFGoNoGoStreakStruct] = totalTrials.reduce([]) { (acc, trialResult) -> [CTFGoNoGoStreakStruct] in
+            
+            if let last = acc.last {
+                let newStreak: CTFGoNoGoStreakStruct = {
+                    if correct(trialResult: trialResult) == last.correct {
+                        return CTFGoNoGoStreakStruct(count: last.count + 1, correct: last.correct)
+                    }
+                    else {
+                        return CTFGoNoGoStreakStruct(count: 1, correct: !last.correct)
+                    }
+                }()
+                
+                return acc + [newStreak]
+                
+            }
+            else {
+                return [CTFGoNoGoStreakStruct(count: 1, correct: correct(trialResult: trialResult))]
+            }
+            
+        }
+        
+        assert(streaks.count == totalTrials.count, "Streaks and Trials not the same length")
+    
+        self.totalSummary = CTFGoNoGoSummary.generateSummary(trialResults: totalTrials, streaks: streaks)
         
         let firstTrials = Array(totalTrials[(0..<(totalTrials.count/3))])
-        self.firstThirdSummary = CTFGoNoGoSummary.generateSummary(trialResults: firstTrials)
+        let firstStreaks = Array(streaks[(0..<(totalTrials.count/3))])
+        self.firstThirdSummary = CTFGoNoGoSummary.generateSummary(trialResults: firstTrials, streaks: firstStreaks)
 
         let middleTrials = Array(totalTrials[((totalTrials.count/3)..<2*(totalTrials.count/3))])
-        self.middleThirdSummary = CTFGoNoGoSummary.generateSummary(trialResults: middleTrials)
+        let middleStreaks = Array(streaks[((totalTrials.count/3)..<2*(totalTrials.count/3))])
+        self.middleThirdSummary = CTFGoNoGoSummary.generateSummary(trialResults: middleTrials, streaks: middleStreaks)
         
         let lastTrials = Array(totalTrials[(2*(totalTrials.count/3)..<totalTrials.count)])
-        self.lastThirdSummary = CTFGoNoGoSummary.generateSummary(trialResults: lastTrials)
+        let lastStreaks = Array(streaks[(2*(totalTrials.count/3)..<totalTrials.count)])
+        self.lastThirdSummary = CTFGoNoGoSummary.generateSummary(trialResults: lastTrials, streaks: lastStreaks)
         
         
     }
     
-    static func generateSummary(trialResults: [CTFGoNoGoTrialResult]) -> CTFGoNoGoSummaryStruct? {
+    static func generateSummary(trialResults: [CTFGoNoGoTrialResult], streaks: [CTFGoNoGoStreakStruct]) -> CTFGoNoGoSummaryStruct? {
         
         guard trialResults.count > 0 else {
             return nil
@@ -120,10 +164,45 @@ public final class CTFGoNoGoSummary: RSRPIntermediateResult {
         let responseTimeMin: TimeInterval = responseTimes.min() ?? 0.0
         let responseTimeMax: TimeInterval = responseTimes.max() ?? 0.0
         
+        let responseTimeRange = responseTimeMax - responseTimeMin
+        
+        let responseTimeStdDev: TimeInterval = {
+            
+            if responseTimes.count > 0 {
+                let expressionValues = NSExpression(forConstantValue: responseTimes)
+                let stdDevExpression = NSExpression(forFunction: "stddev:", arguments: [expressionValues])
+                guard let stdDev = stdDevExpression.expressionValue(with: nil, context: nil) as? Double else {
+                    return 0.0
+                }
+                return stdDev
+            }
+            else {
+                return 0.0
+            }
+            
+        }()
+        
         let meanResponseTimeCorrect: TimeInterval = correctResponses.count > 0 ? correctResponses.map({$0.responseTime}).reduce(0.0, +) / Double(correctResponses.count) : 0.0
         
-        let meanResponseTimeIncorrect: TimeInterval = correctResponses.count > 0 ? incorrectResponses.map({$0.responseTime}).reduce(0.0, +) / Double(incorrectResponses.count) : 0.0
+        let meanResponseTimeIncorrect: TimeInterval = incorrectResponses.count > 0 ? incorrectResponses.map({$0.responseTime}).reduce(0.0, +) / Double(incorrectResponses.count) : 0.0
         
+        //avg response time after one error
+        //zip, filter, map
+        let resultsAfterOneIncorrect = zip(trialResults, streaks).filter { (result, streak) -> Bool in
+            return streak.count == 1 && !streak.correct
+        }.map { (result, streak) -> CTFGoNoGoTrialResult in
+            return result
+        }
+        
+        let meanResponseTimeAfterOneIncorrect: TimeInterval = resultsAfterOneIncorrect.count > 0 ? resultsAfterOneIncorrect.map({$0.responseTime}).reduce(0.0, +) / Double(resultsAfterOneIncorrect.count) : 0.0
+        
+        let resultsAfter10Correct = zip(trialResults, streaks).filter { (result, streak) -> Bool in
+            return streak.count == 10 && streak.correct
+            }.map { (result, streak) -> CTFGoNoGoTrialResult in
+                return result
+        }
+        
+        let meanResponseTimeAfterTenCorrect: TimeInterval = resultsAfter10Correct.count > 0 ? resultsAfter10Correct.map({$0.responseTime}).reduce(0.0, +) / Double(resultsAfter10Correct.count) : 0.0
         
         return CTFGoNoGoSummaryStruct(
             numberOfTrials: numberOfTrials,
@@ -133,8 +212,10 @@ public final class CTFGoNoGoSummary: RSRPIntermediateResult {
             numberOfIncorrectNonresponses: numberOfIncorrectNonresponses,
             meanAccuracy: meanAccuracy,
             responseTimeMean: meanResponseTime,
-            responseTimeMin: responseTimeMin,
-            responseTimeMax: responseTimeMax,
+            responseTimeRange: responseTimeRange,
+            responseTimeStdDev: responseTimeStdDev,
+            meanResponseTimeAfterOneIncorrect: meanResponseTimeAfterOneIncorrect,
+            meanResponseTimeAfterTenCorrect: meanResponseTimeAfterTenCorrect,
             meanResponseTimeCorrect: meanResponseTimeCorrect,
             meanResponseTimeIncorrect: meanResponseTimeIncorrect)
         
