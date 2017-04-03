@@ -17,7 +17,7 @@ class RKViewController: UIViewController, ORKTaskViewControllerDelegate {
      */
     var taskResultFinishedCompletionHandler: ((ORKTaskResult) -> Void)?
     
-    func launchAssessmentForTask(_ task: ORKOrderedTask) {
+    func launchAssessmentForTask(_ task: ORKOrderedTask, completion: ((ORKTaskResult) -> Void)? = nil) {
         /*
          Passing `nil` for the `taskRunUUID` lets the task view controller
          generate an identifier for this run of the task.
@@ -29,6 +29,8 @@ class RKViewController: UIViewController, ORKTaskViewControllerDelegate {
         
         // Assign a directory to store `taskViewController` output.
         taskViewController.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        
+        self.taskResultFinishedCompletionHandler = completion
         
         /*
          We present the task directly, but it is also possible to use segues.

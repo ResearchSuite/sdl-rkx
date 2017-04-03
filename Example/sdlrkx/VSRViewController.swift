@@ -20,12 +20,16 @@ class VSRViewController: RKViewController {
     
     var taskBuilder: RSTBTaskBuilder!
 
+    var stateHelper: UserDefaultsStateHelper!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let stepGeneratorServices: [RSTBStepGenerator] = [
             RSTBInstructionStepGenerator(),
             PAMStepGenerator(),
+            YADLFullStepGenerator(),
+            YADLSpotStepGenerator(),
             RSTBSingleChoiceStepGenerator()
         ]
         
@@ -39,9 +43,11 @@ class VSRViewController: RKViewController {
             RSTBElementSelectorGenerator()
         ]
         
+        self.stateHelper = UserDefaultsStateHelper()
+        
         // Do any additional setup after loading the view, typically from a nib.
         self.taskBuilder = RSTBTaskBuilder(
-            stateHelper: nil,
+            stateHelper: self.stateHelper,
             elementGeneratorServices: elementGeneratorServices,
             stepGeneratorServices: stepGeneratorServices,
             answerFormatGeneratorServices: answerFormatGeneratorServices)
@@ -53,14 +59,13 @@ class VSRViewController: RKViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func storeActivitiesForSpotAssessment(_ activities: [String]) {
-        UserDefaults().set(activities, forKey: kActivityIdentifiers)
-    }
-    
+//    func storeActivitiesForSpotAssessment(_ activities: [String]) {
+//        UserDefaults().set(activities, forKey: kActivityIdentifiers)
+//    }
+//    
     func loadActivitiesForSpotAssessment() -> [String]? {
-        return UserDefaults().array(forKey: kActivityIdentifiers) as? [String]
+        return self.stateHelper.valueInState(forKey: kActivityIdentifiers) as? [String]
     }
-    
     func storeMedicationsForSpotAssessment(_ medications: [String]) {
         UserDefaults().set(medications, forKey: kMedicationIdentifiers)
     }
@@ -83,23 +88,37 @@ class VSRViewController: RKViewController {
         
         //create a YADL full assessment task
         
-        guard let steps = try! YADLFullAssessmentStep.create(identifier: "YADL Full Assessment Identifier", propertiesFileName: "YADL") else {
-            return
-        }
+        guard let steps = self.taskBuilder.steps(forElementFilename: "yadl_full_rstb") else { return }
         
         let task = ORKOrderedTask(identifier: "YADL Full Assessment Identifier", steps: steps)
         
-        self.launchAssessmentForTask(task)
+        self.launchAssessmentForTask(task) { (taskResult) in
+            
+            if let difficultActivities: [String]? = taskResult.results?.flatMap({ (stepResult) in
+                if let stepResult = stepResult as? ORKStepResult,
+                    stepResult.identifier.hasPrefix("yadl_full."),
+                    let choiceResult = stepResult.firstResult as? ORKChoiceQuestionResult,
+                    let answer = choiceResult.choiceAnswers?.first as? String,
+                    answer == "hard" || answer == "moderate"
+                {
+                    return stepResult.identifier.replacingOccurrences(of: "yadl_full.", with: "")
+                }
+                return nil
+            }) {
+                if let answers = difficultActivities {
+                    self.stateHelper.setValueInState(value: answers as NSSecureCoding, forKey: kActivityIdentifiers)
+                }
+            }
+            
+        }
     }
     
     @IBAction func launchYADLSpotAssessment(_ sender: AnyObject) {
         //create a YADL spot assessment task
         
-        guard let step = try! YADLSpotAssessmentStep.create(identifier: "YADL Spot Assessment Identifier", propertiesFileName: "YADL", itemIdentifiers: self.loadActivitiesForSpotAssessment()) else {
-            return
-        }
+        guard let steps = self.taskBuilder.steps(forElementFilename: "yadl_spot_rstb") else { return }
         
-        let task = ORKOrderedTask(identifier: "YADL Spot Assessment", steps: [step])
+        let task = ORKOrderedTask(identifier: "YADL Spot Assessment", steps: steps)
         
         self.launchAssessmentForTask(task)
     }

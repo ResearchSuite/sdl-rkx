@@ -140,7 +140,7 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
     }
     
     var maximumSelectedNumberOfItems: Int?
-    var isOptional: Bool! = true
+//    var isOptional: Bool! = true
     
     var visibilityFilter: ((NSCoding & NSCopying & NSObjectProtocol) -> Bool)? {
         guard let step = self.step as? RKXMultipleImageSelectionSurveyStep else {
@@ -214,9 +214,9 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
             self.maximumSelectedNumberOfItems = maximumSelectedNumberOfItems
         }
         
-        if let optional = options.optional {
-            self.isOptional = optional
-        }
+//        if let optional = options.optional {
+//            self.isOptional = optional
+//        }
     }
     
 //    func setupOptionsFromTask(task: RKXMultipleImageSelectionSurveyTask) {
@@ -266,11 +266,28 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
         if self._appeared {
             let step = self.step as? RKXMultipleImageSelectionSurveyStep
             
-            let questionResult = ORKChoiceQuestionResult(identifier: step!.identifier)
+            let questionResult = RKXMultipleImageSelectionSurveyResult(identifier: step!.identifier)
             questionResult.choiceAnswers = self.selectedAnswers()?.map(self.valueForImageChoice)
             questionResult.startDate = parentResult.startDate
             questionResult.endDate = parentResult.endDate
             questionResult.questionType = self.supportsMultipleSelection ? .multipleChoice : .singleChoice
+            questionResult.selectedIdentifiers = self.selectedAnswers()?.map(self.valueForImageChoice) as? [String]
+            questionResult.excludedIdentifiers = (self.step as? RKXMultipleImageSelectionSurveyStep)?.excludedIdentifiers
+            questionResult.notSelectedIdentifiers = {
+                guard let selectedIdentifiers = questionResult.selectedIdentifiers,
+                    let excludedIdentifiers = questionResult.excludedIdentifiers,
+                    let step = step as? RKXMultipleImageSelectionSurveyStep,
+                    let answerFormat = step.answerFormat as? ORKImageChoiceAnswerFormat else {
+                        return nil
+                }
+                
+                let selectedSet: Set<String> = Set(selectedIdentifiers)
+                let excludedSet: Set<String> = Set(excludedIdentifiers)
+                let totalSet: Set<String> = Set(answerFormat.imageChoices.flatMap({$0.value as? String}))
+                let notSelectedSet = totalSet.subtracting(excludedSet).subtracting(selectedSet)
+                
+                return Array(notSelectedSet)
+            }()
             
             print(questionResult)
             parentResult.results = [questionResult]
@@ -407,7 +424,7 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
             self.somethingSelectedButton.isHidden = !(selectedAnswers.count > 0)
             self.nothingSelectedButton.isHidden = (selectedAnswers.count > 0)
             
-            self.nothingSelectedButton.isEnabled = self.isOptional
+            self.nothingSelectedButton.isEnabled = self.step?.isOptional ?? false
         }
         
         //reload collection view

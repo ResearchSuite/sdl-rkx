@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Gloss
 
 let kPromptTag = "prompt"
 let kIdentifierTag = "identifier"
@@ -47,7 +48,7 @@ func colorForOptionsAndKey(_ options: [String: AnyObject], key: String) -> UICol
     else { return nil }
 }
 
-open class RKXMultipleImageSelectionSurveyOptions: NSObject {
+open class RKXMultipleImageSelectionSurveyOptions: NSObject, Decodable {
     public var somethingSelectedButtonColor: UIColor?
     public var nothingSelectedButtonColor: UIColor?
     public var itemCellSelectedColor:UIColor?
@@ -57,8 +58,6 @@ open class RKXMultipleImageSelectionSurveyOptions: NSObject {
     public var itemsPerRow: Int?
     public var itemMinSpacing: CGFloat?
     public var maximumSelectedNumberOfItems: Int?
-    public var optional: Bool?
-//    public var visibilityFilter: ((NSCoding & NSCopying & NSObjectProtocol) -> Bool)?
     
     public init(optionsDictionary: [String: AnyObject]?) {
         guard let optionsDictionary = optionsDictionary
@@ -79,12 +78,43 @@ open class RKXMultipleImageSelectionSurveyOptions: NSObject {
         self.itemsPerRow = optionsDictionary[kOptionsItemsPerRowTag] as? Int
         self.itemMinSpacing = optionsDictionary[kOptionsItemMinSpacingTag] as? CGFloat
         self.maximumSelectedNumberOfItems = optionsDictionary[kOptionsMaximumSelectedNumberOfItems] as? Int
-        self.optional = optionsDictionary[kOptionsOptional] as? Bool
     }
     
     override public init() {
         super.init()
     }
+    
+    required public init?(json: JSON) {
+        
+        let hexColorConverter: (String?) -> UIColor? = { hexString in
+            
+            if let hexString = hexString {
+                return UIColor(hexString: hexString)
+            }
+            else {
+                return nil
+            }
+            
+        }
+        
+        self.somethingSelectedButtonColor = hexColorConverter(kOptionsSomethingSelectedButtonColorTag <~~ json)
+        self.nothingSelectedButtonColor = hexColorConverter(kOptionsNothingSelectedButtonColorTag <~~ json)
+        self.itemCellSelectedColor = hexColorConverter(kOptionsItemCellSelectedColorTag <~~ json)
+        self.itemCollectionViewBackgroundColor = hexColorConverter(kOptionsItemCollectionViewBackgroundColorTag <~~ json)
+        self.itemCellTextBackgroundColor = hexColorConverter(kOptionsItemCellTextBackgroundColorTag <~~ json)
+        self.itemCellSelectedOverlayImage = {
+            if let imageString: String = kOptionsItemCellSelectedOverlayImageTitleTag <~~ json {
+                return UIImage(named: imageString)
+            }
+            else { return nil }
+        }()
+        self.itemsPerRow = kOptionsItemsPerRowTag <~~ json
+        self.itemMinSpacing = kOptionsItemMinSpacingTag <~~ json
+        self.maximumSelectedNumberOfItems = kOptionsMaximumSelectedNumberOfItems <~~ json
+        
+    }
+    
+    
 }
 
 class RKXChoiceDescriptor: NSObject {

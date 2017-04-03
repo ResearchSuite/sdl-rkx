@@ -25,12 +25,13 @@ Pod::Spec.new do |s|
     vsr.dependency 'sdlrkx/Helpers'
     vsr.resources = 'source/VSR/Core/Assets/PAM.xcassets', 'source/VSR/Core/Assets/PAM.json'
     vsr.dependency 'ResearchKit', '~> 1.4'
+    rstb.dependency 'Gloss', '~> 1'
   end
 
   s.subspec 'VSR-RSTBSupport' do |rstb|
     rstb.source_files = 'source/VSR/RSTBSupport/Classes/**/*'
     rstb.dependency 'sdlrkx/VSR'
-    rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.2'
+    rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.4'
     rstb.dependency 'Gloss', '~> 1'
   end
 
@@ -57,7 +58,7 @@ Pod::Spec.new do |s|
   s.subspec 'Behavioral-RSTBSupport' do |rstb|
     rstb.source_files = 'source/Behavioral/RSTBSupport/Classes/**/*'
     rstb.dependency 'sdlrkx/Behavioral'
-    rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.2'
+    rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.4'
     rstb.dependency 'Gloss', '~> 1'
   end
 

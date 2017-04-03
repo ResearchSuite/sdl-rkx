@@ -14,6 +14,7 @@ import ResearchSuiteTaskBuilder
 class BehavioralViewController: RKViewController {
 
     var taskBuilder: RSTBTaskBuilder!
+    var stateHelper: UserDefaultsStateHelper!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +37,11 @@ class BehavioralViewController: RKViewController {
             RSTBElementSelectorGenerator()
         ]
         
+        self.stateHelper = UserDefaultsStateHelper()
+        
         // Do any additional setup after loading the view, typically from a nib.
         self.taskBuilder = RSTBTaskBuilder(
-            stateHelper: nil,
+            stateHelper: self.stateHelper,
             elementGeneratorServices: elementGeneratorServices,
             stepGeneratorServices: stepGeneratorServices,
             answerFormatGeneratorServices: answerFormatGeneratorServices)

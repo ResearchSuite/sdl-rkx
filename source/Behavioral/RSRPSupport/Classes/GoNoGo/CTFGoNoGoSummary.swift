@@ -86,6 +86,7 @@ public final class CTFGoNoGoSummary: RSRPIntermediateResult {
             return trialResult.tapped == (trialResult.trial.target == .go)
         }
         
+        //TODO: Streaks seem to be off by one
         let streaks: [CTFGoNoGoStreakStruct] = totalTrials.reduce([]) { (acc, trialResult) -> [CTFGoNoGoStreakStruct] in
             
             if let last = acc.last {
@@ -102,7 +103,7 @@ public final class CTFGoNoGoSummary: RSRPIntermediateResult {
                 
             }
             else {
-                return [CTFGoNoGoStreakStruct(count: 1, correct: correct(trialResult: trialResult))]
+                return [CTFGoNoGoStreakStruct(count: 0, correct: correct(trialResult: trialResult))]
             }
             
         }

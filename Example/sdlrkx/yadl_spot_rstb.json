@@ -1,0 +1,68 @@
+{
+  "type"      : "elementList",
+  "identifier": "yadl_spot_assessment",
+  "elements"   : [
+
+    {
+      "identifier"   : "introduction",
+      "type"         : "instruction",
+      "title"        : "Welcome to the YADL Spot Assessment",
+      "text"         : "Please select the activities that you have trouble with."
+    },
+    {
+      "identifier": "yadl_spot",
+      "type": "YADLSpotAssessment",
+      "title": "Which activities did you have trouble with today?",
+      "somethingSelectedButtonColor":"#0080ff",
+      "nothingSelectedButtonColor":"#FCC103",
+      "itemCellSelectedColor":"#7FEE7D",
+      "itemCellSelectedOverlayImageTitle":"first_tab",
+      "itemsPerRow":3,
+      "itemMinSpacing":10.0,
+      "filterKey": "activity_identifiers",
+      "items": [
+         {
+            "imageTitle":"BedToChair",
+            "description":"Bed To Chair",
+            "identifier":"BedToChair"
+         },
+         {
+            "imageTitle":"Dressing",
+            "description":"Dressing",
+            "identifier":"Dressing"
+         },
+         {
+            "imageTitle":"Housework",
+            "description":"Housework",
+            "identifier":"Housework"
+         },
+         {
+            "imageTitle":"Lifting",
+            "description":"Lift 10-pounds",
+            "identifier":"Lifting"
+         },
+         {
+            "imageTitle":"Shopping",
+            "description":"Shopping",
+            "identifier":"Shopping"
+         },
+         {
+            "imageTitle":"ShortWalk",
+            "description":"Talking a short walk",
+            "identifier":"ShortWalk"
+         },
+         {
+            "imageTitle":"WalkingUpStairs",
+            "description":"Climbing Stairs",
+            "identifier":"WalkingUpStairs"
+         }
+      ]
+    },
+    {
+      "identifier"   : "results",
+      "type"         : "instruction",
+      "title"        : "Thank you for completing the task!",
+      "text"         : ""
+    }
+  ]
+}

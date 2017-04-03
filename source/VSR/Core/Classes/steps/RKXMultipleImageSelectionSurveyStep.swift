@@ -13,6 +13,7 @@ open class RKXMultipleImageSelectionSurveyStep: ORKQuestionStep {
 
     var options: RKXMultipleImageSelectionSurveyOptions?
     var visibilityFilter:((NSCoding & NSCopying & NSObjectProtocol) -> Bool)?
+    var excludedIdentifiers: [String]?
     
     open override func stepViewControllerClass() -> AnyClass {
         return RKXMultipleImageSelectionSurveyViewController.self
@@ -42,6 +43,30 @@ open class RKXMultipleImageSelectionSurveyStep: ORKQuestionStep {
                   options: options)
         
         self.visibilityFilter = visibilityFilter
+    }
+    
+    public convenience init(identifier: String,
+                            title: String?,
+                            answerFormat: ORKImageChoiceAnswerFormat?,
+                            options: RKXMultipleImageSelectionSurveyOptions?,
+                            excludedIdentifiers: [String]) {
+        
+        
+        self.init(identifier: identifier,
+                  title: title,
+                  answerFormat: answerFormat,
+                  options: options)
+        
+        self.excludedIdentifiers = excludedIdentifiers
+        self.visibilityFilter = { identifier in
+            guard let identifier = identifier as? String else {
+                return false
+            }
+            
+            return !excludedIdentifiers.contains(where: { (excludedIdentifier) -> Bool in
+                return identifier == excludedIdentifier
+            })
+        }
     }
     
     

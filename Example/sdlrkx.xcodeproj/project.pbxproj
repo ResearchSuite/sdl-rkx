@@ -19,6 +19,9 @@
 		792E0D7DE91FCB8C003EE24A /* Pods_sdl_rkx_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E0FFD9D5CC712A712E45FA3 /* Pods_sdl_rkx_Tests.framework */; };
 		E2257A901E3926D600B9A2FC /* BART.json in Resources */ = {isa = PBXBuildFile; fileRef = E2257A8F1E3926D600B9A2FC /* BART.json */; };
 		E2257A941E392CE000B9A2FC /* GoNoGo.json in Resources */ = {isa = PBXBuildFile; fileRef = E2257A931E392CE000B9A2FC /* GoNoGo.json */; };
+		E229E9671E91C72400ABB6F0 /* yadl_full_rstb.json in Resources */ = {isa = PBXBuildFile; fileRef = E229E9661E91C72400ABB6F0 /* yadl_full_rstb.json */; };
+		E229E96D1E91D45C00ABB6F0 /* UserDefaultsStateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229E96C1E91D45C00ABB6F0 /* UserDefaultsStateHelper.swift */; };
+		E229E97B1E91EF8700ABB6F0 /* yadl_spot_rstb.json in Resources */ = {isa = PBXBuildFile; fileRef = E229E97A1E91EF8700ABB6F0 /* yadl_spot_rstb.json */; };
 		E2966AAA1E25897B00457064 /* PAMTask.json in Resources */ = {isa = PBXBuildFile; fileRef = E2966AA91E25897B00457064 /* PAMTask.json */; };
 		E29BA8191E38DEF600C3EE47 /* BehavioralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29BA8181E38DEF600C3EE47 /* BehavioralViewController.swift */; };
 		E29BA81B1E38E09A00C3EE47 /* RKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29BA81A1E38E09A00C3EE47 /* RKViewController.swift */; };
@@ -73,6 +76,9 @@
 		CC14AA0B91EE5AAD5BDD0217 /* Pods-sdl-rkx_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdl-rkx_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sdl-rkx_Tests/Pods-sdl-rkx_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		E2257A8F1E3926D600B9A2FC /* BART.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BART.json; sourceTree = "<group>"; };
 		E2257A931E392CE000B9A2FC /* GoNoGo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GoNoGo.json; sourceTree = "<group>"; };
+		E229E9661E91C72400ABB6F0 /* yadl_full_rstb.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = yadl_full_rstb.json; sourceTree = "<group>"; };
+		E229E96C1E91D45C00ABB6F0 /* UserDefaultsStateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsStateHelper.swift; sourceTree = "<group>"; };
+		E229E97A1E91EF8700ABB6F0 /* yadl_spot_rstb.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = yadl_spot_rstb.json; sourceTree = "<group>"; };
 		E2966AA91E25897B00457064 /* PAMTask.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PAMTask.json; sourceTree = "<group>"; };
 		E29BA8181E38DEF600C3EE47 /* BehavioralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehavioralViewController.swift; sourceTree = "<group>"; };
 		E29BA81A1E38E09A00C3EE47 /* RKViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RKViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +129,8 @@
 		48E086B71CDAB0CF00099E13 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E229E9661E91C72400ABB6F0 /* yadl_full_rstb.json */,
+				E229E97A1E91EF8700ABB6F0 /* yadl_spot_rstb.json */,
 				E2257A931E392CE000B9A2FC /* GoNoGo.json */,
 				E2257A8F1E3926D600B9A2FC /* BART.json */,
 				E29BA81C1E38E1BC00C3EE47 /* DelayedDiscounting.json */,
@@ -161,6 +169,7 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* VSRViewController.swift */,
+				E229E96C1E91D45C00ABB6F0 /* UserDefaultsStateHelper.swift */,
 				E29BA8181E38DEF600C3EE47 /* BehavioralViewController.swift */,
 				E29BA81A1E38E09A00C3EE47 /* RKViewController.swift */,
 				48E086B71CDAB0CF00099E13 /* Resources */,
@@ -302,6 +311,8 @@
 				E2966AAA1E25897B00457064 /* PAMTask.json in Resources */,
 				48E086B91CDBB6B000099E13 /* MEDL.xcassets in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				E229E97B1E91EF8700ABB6F0 /* yadl_spot_rstb.json in Resources */,
+				E229E9671E91C72400ABB6F0 /* yadl_full_rstb.json in Resources */,
 				E2257A941E392CE000B9A2FC /* GoNoGo.json in Resources */,
 				607FACDD1AFB9204008FA782 /* YADL.xcassets in Resources */,
 				E2257A901E3926D600B9A2FC /* BART.json in Resources */,
@@ -418,6 +429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E229E96D1E91D45C00ABB6F0 /* UserDefaultsStateHelper.swift in Sources */,
 				E29BA8191E38DEF600C3EE47 /* BehavioralViewController.swift in Sources */,
 				E29BA81B1E38E09A00C3EE47 /* RKViewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* VSRViewController.swift in Sources */,
