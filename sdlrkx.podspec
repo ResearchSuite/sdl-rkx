@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
     vsr.dependency 'sdlrkx/Helpers'
     vsr.resources = 'source/VSR/Core/Assets/PAM.xcassets', 'source/VSR/Core/Assets/PAM.json'
     vsr.dependency 'ResearchKit', '~> 1.4'
-    rstb.dependency 'Gloss', '~> 1'
+    vsr.dependency 'Gloss', '~> 1'
   end
 
   s.subspec 'VSR-RSTBSupport' do |rstb|
