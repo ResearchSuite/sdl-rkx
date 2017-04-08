@@ -149,10 +149,7 @@ class CTFGoNoGoStepViewController: ORKStepViewController, CTFGoNoGoViewDelegate 
                 }
             })
         }
-        
-        
-        //clear results
-        if let trials = self.trials {
+        else if let trials = self.trials {
             self.performTrials(trials, results: [], completion: { (results) in
                 //                print(results)
                 
@@ -168,6 +165,9 @@ class CTFGoNoGoStepViewController: ORKStepViewController, CTFGoNoGoViewDelegate 
                 }
             })
         }
+        
+        
+        
     }
     
 //    override func viewWillDisappear(_ animated: Bool) {

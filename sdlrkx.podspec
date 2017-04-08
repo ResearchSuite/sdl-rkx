@@ -4,7 +4,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "sdlrkx"
-  s.version          = "0.11.0"
+  s.version          = "0.12.0"
   s.summary          = "SDL visual self-report for ResearchKit"
 
   s.description      = "The Small Data Lab ResearchKit Extensions package is the easiest way to include SDL visual self-report (YADL, MEDL, PAM) and Behavioral extensions (Go / No Go, Delayed Discounting, BART)into a ResearchKit application."
@@ -46,6 +46,7 @@ Pod::Spec.new do |s|
     obes.source_files = 'source/VSR/RSRPOhmageBackendSupport/Classes/**/*'
     obes.dependency 'sdlrkx/VSR-RSRPSupport'
     obes.dependency 'OMHClient'
+    obes.dependency 'ResearchSuiteResultsProcessor/OMHHelper'
   end
 
   s.subspec 'Behavioral' do |behavioral|
@@ -73,6 +74,34 @@ Pod::Spec.new do |s|
     obes.source_files = 'source/Behavioral/RSRPOhmageBackendSupport/Classes/**/*'
     obes.dependency 'sdlrkx/Behavioral-RSRPSupport'
     obes.dependency 'OMHClient'
+    obes.dependency 'ResearchSuiteResultsProcessor/OMHHelper'
+  end
+
+  s.subspec 'Survey' do |q|
+    q.source_files = 'source/Survey/Core/Classes/**/*'
+    q.dependency 'sdlrkx/Helpers'
+    q.dependency 'ResearchKit', '~> 1.4'
+  end
+
+  s.subspec 'Survey-RSTBSupport' do |rstb|
+    rstb.source_files = 'source/Survey/RSTBSupport/Classes/**/*'
+    rstb.dependency 'sdlrkx/Survey'
+    rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.4'
+    rstb.dependency 'Gloss', '~> 1'
+  end
+
+  s.subspec 'Survey-RSRPSupport' do |rsrp|
+    rsrp.source_files = 'source/Survey/RSRPSupport/Classes/**/*'
+    rsrp.dependency 'sdlrkx/Survey'
+    rsrp.dependency 'ResearchSuiteResultsProcessor', '~> 0.2'
+    rsrp.dependency 'ResearchKit', '~> 1.4'
+  end
+
+  s.subspec 'Survey-RSRPOhmageBackend' do |obes|
+    obes.source_files = 'source/Survey/RSRPOhmageBackendSupport/Classes/**/*'
+    obes.dependency 'sdlrkx/Survey-RSRPSupport'
+    obes.dependency 'OMHClient'
+    obes.dependency 'ResearchSuiteResultsProcessor/OMHHelper'
   end
 
 end
