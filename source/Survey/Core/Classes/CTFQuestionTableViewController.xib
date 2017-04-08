@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CTFQuestionTableViewController" customModule="sdlrkx" customModuleProvider="target">
+            <connections>
+                <outlet property="continueButton" destination="Y00-dY-GC8" id="2mQ-XZ-zxa"/>
+                <outlet property="footerContainer" destination="N6A-eb-LJF" id="Pjv-6Y-8ld"/>
+                <outlet property="headerView" destination="pix-Ec-f5U" id="R9b-Wf-U0z"/>
+                <outlet property="skipButton" destination="ubo-01-RCY" id="h40-RO-l1x"/>
+                <outlet property="tableView" destination="fMT-3i-A65" id="g30-du-ZNF"/>
+                <outlet property="textLabel" destination="Va8-k4-B89" id="eej-Jr-E2X"/>
+                <outlet property="titleLabel" destination="fue-NP-bKy" id="Kgj-HL-Ofd"/>
+                <outlet property="view" destination="iN0-l3-epB" id="fiu-L7-wFg"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fMT-3i-A65">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <stackView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" axis="vertical" id="pix-Ec-f5U">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Lorem ipsum" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fue-NP-bKy" userLabel="Title">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="37"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Va8-k4-B89" userLabel="Text">
+                                <rect key="frame" x="0.0" y="37" width="375" height="98"/>
+                                <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </string>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <view key="tableFooterView" contentMode="scaleToFill" id="Bl9-fT-vJk">
+                        <rect key="frame" x="0.0" y="537" width="375" height="130"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N6A-eb-LJF" userLabel="Footer Content Container">
+                                <rect key="frame" x="-0.5" y="0.0" width="375" height="130"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ubo-01-RCY">
+                                        <rect key="frame" x="130" y="95" width="115" height="19"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="19" id="R5i-WQ-JKi"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="Skip this question"/>
+                                        <connections>
+                                            <action selector="skipTapped:" destination="-1" eventType="touchUpInside" id="flK-jx-5fR"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y00-dY-GC8" customClass="CTFBorderedButton" customModule="sdlrkx" customModuleProvider="target">
+                                        <rect key="frame" x="112.5" y="35" width="150" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="YYw-91-6aH"/>
+                                            <constraint firstAttribute="height" constant="44" id="YtY-M6-fqS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Continue"/>
+                                        <connections>
+                                            <action selector="continueTapped:" destination="-1" eventType="touchUpInside" id="oAn-ic-Kxj"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="ubo-01-RCY" firstAttribute="top" secondItem="Y00-dY-GC8" secondAttribute="bottom" constant="16" id="0r9-C8-9BR"/>
+                                    <constraint firstAttribute="bottom" secondItem="ubo-01-RCY" secondAttribute="bottom" constant="16" id="8UO-aW-H2R"/>
+                                    <constraint firstAttribute="height" constant="130" id="97N-vK-XaO"/>
+                                    <constraint firstItem="Y00-dY-GC8" firstAttribute="centerX" secondItem="N6A-eb-LJF" secondAttribute="centerX" id="DRC-Lg-9lB"/>
+                                    <constraint firstItem="ubo-01-RCY" firstAttribute="centerX" secondItem="N6A-eb-LJF" secondAttribute="centerX" id="OG4-1D-9gN"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="N6A-eb-LJF" secondAttribute="bottom" id="1al-nn-Mhh"/>
+                            <constraint firstItem="N6A-eb-LJF" firstAttribute="centerX" secondItem="Bl9-fT-vJk" secondAttribute="centerX" id="4nG-Rq-QrW"/>
+                            <constraint firstItem="N6A-eb-LJF" firstAttribute="width" secondItem="Bl9-fT-vJk" secondAttribute="width" id="WHL-c3-eep"/>
+                        </constraints>
+                    </view>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fMT-3i-A65" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="5n5-zt-HDi"/>
+                <constraint firstAttribute="trailing" secondItem="fMT-3i-A65" secondAttribute="trailing" id="aW7-52-7sn"/>
+                <constraint firstItem="fMT-3i-A65" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="goF-FO-SdP"/>
+                <constraint firstAttribute="bottom" secondItem="fMT-3i-A65" secondAttribute="bottom" id="qah-p9-6ef"/>
+            </constraints>
+            <point key="canvasLocation" x="29.5" y="97.5"/>
+        </view>
+    </objects>
+</document>
