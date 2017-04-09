@@ -1,5 +1,5 @@
 //
-//  CTFQuestionTableViewController.swift
+//  RSQuestionTableViewController.swift
 //  Pods
 //
 //  Created by James Kizer on 4/6/17.
@@ -11,12 +11,12 @@ import ResearchKit
 import ResearchSuiteTaskBuilder
 import Gloss
 
-open class CTFQuestionTableViewStepGenerator: RSTBBaseStepGenerator {
+open class RSQuestionTableViewStepGenerator: RSTBBaseStepGenerator {
     
     public init(){}
     
     let _supportedTypes = [
-        "CTFQuestionTableViewController"
+        "RSQuestionTableViewController"
     ]
     
     public var supportedTypes: [String]! {
@@ -46,7 +46,7 @@ open class CTFQuestionTableViewStepGenerator: RSTBBaseStepGenerator {
 //        formStep.formItems = formItems
 //        return formStep
         
-        let step = CTFQuestionTableViewStep(identifier: stepDescriptor.identifier)
+        let step = RSQuestionTableViewStep(identifier: stepDescriptor.identifier)
         step.title = stepDescriptor.title
         step.text = stepDescriptor.text
         step.isOptional = stepDescriptor.optional

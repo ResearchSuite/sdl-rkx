@@ -1,5 +1,5 @@
 //
-//  CTFQuestionTableViewStep.swift
+//  RSQuestionTableViewStep.swift
 //  Pods
 //
 //  Created by James Kizer on 4/6/17.
@@ -9,10 +9,10 @@
 import UIKit
 import ResearchKit
 
-open class CTFQuestionTableViewStep: ORKStep {
+open class RSQuestionTableViewStep: ORKStep {
    
     override open func stepViewControllerClass() -> AnyClass {
-        return CTFQuestionTableViewController.self
+        return RSQuestionTableViewController.self
     }
 
 }
