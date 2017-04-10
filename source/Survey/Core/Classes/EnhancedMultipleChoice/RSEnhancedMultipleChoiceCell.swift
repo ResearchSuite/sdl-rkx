@@ -33,7 +33,6 @@ open class RSEnhancedMultipleChoiceCell: UITableViewCell, RSEnhancedMultipleChoi
     
     var auxFormAnswer: Any? = nil
     
-    
     @IBOutlet weak var choiceContainer: UIView!
     
     override open func awakeFromNib() {
@@ -65,7 +64,6 @@ open class RSEnhancedMultipleChoiceCell: UITableViewCell, RSEnhancedMultipleChoi
         }
         
         self.auxFormItem = auxItem
-        
     }
     
     open func updateAuxView(selected: Bool, animated: Bool) {

@@ -15,7 +15,7 @@ open class RSEnhancedMultipleChoiceStepViewController: RSQuestionTableViewContro
     override open func viewDidLoad() {
         super.viewDidLoad()
 
-        let nib = UINib(nibName: "RSEnhancedMultipleChoiceCell", bundle: Bundle(for: RSEnhancedMultipleChoiceStepViewController.self))
+        let nib = UINib(nibName: "RSEnhancedMultipleChoiceCellWithTextFieldAccessory", bundle: Bundle(for: RSEnhancedMultipleChoiceStepViewController.self))
         self.tableView.register(nib, forCellReuseIdentifier: "enhanced_multi_choice")
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 60

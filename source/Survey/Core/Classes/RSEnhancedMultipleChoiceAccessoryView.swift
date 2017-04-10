@@ -38,7 +38,9 @@ open class RSEnhancedMultipleChoiceAccessoryView: UIView {
         let size = self.textLabel.sizeThatFits(CGSize(width: maxLabelWidth, height: CGFloat(MAXFLOAT)))
         self.textLabel.frame = CGRect(x: 8, y: 16, width: size.width, height: size.height)
         
-        super.init(frame: CGRect(x: 0, y: 0, width: size.width, height: size.height + 32) )
+        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: size.height + 32) )
+        
+//        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0) )
         
         self.addSubview(self.textLabel)
         print(self.textLabel)
@@ -51,9 +53,13 @@ open class RSEnhancedMultipleChoiceAccessoryView: UIView {
         
         let widthConstraint = NSLayoutConstraint(item: self.textLabel, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: maxLabelWidth-8)
         
+//        let heightConstraint 
+        
         self.addConstraints([topConstraint, bottomConstraint, leadingContraint])
         
         self.textLabel.addConstraint(widthConstraint)
+        
+        self.setNeedsLayout()
         
         //set delegate
         self.delegate = delegate
