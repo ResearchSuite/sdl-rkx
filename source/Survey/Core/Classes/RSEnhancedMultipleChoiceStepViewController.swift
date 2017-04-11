@@ -298,7 +298,7 @@ open class RSEnhancedMultipleChoiceStepViewController: RSQuestionTableViewContro
         //if the item is optional, it must have no text or there must be a valid result
         //if the item is not optional, there must be a valid result
         
-        let invaidIds = self.selected.filter { selectedId in
+        let invalidIds = self.selected.filter { selectedId in
             
             //return true if invalid
             //if there is no auxItem, it's always valid
@@ -320,11 +320,19 @@ open class RSEnhancedMultipleChoiceStepViewController: RSQuestionTableViewContro
             return !valid
         }
         
-        if invaidIds.count == 0 {
+        if invalidIds.count == 0 {
             super.continueTapped(sender)
         }
         else {
-            self.showValidityAlertMessage(message:"One or more fields is invalid \(invaidIds)")
+            let textForInvalidIds: [String] = invalidIds.flatMap { id in
+                
+                guard let textChoice = self.textChoice(id: id) else {
+                    return nil
+                }
+                return textChoice.text
+            }
+            
+            self.showValidityAlertMessage(message:"One or more fields is invalid: \(textForInvalidIds.joined(separator: ", "))")
         }
         
     }
