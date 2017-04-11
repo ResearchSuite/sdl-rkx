@@ -15,6 +15,7 @@
                 <outlet property="headerView" destination="pix-Ec-f5U" id="R9b-Wf-U0z"/>
                 <outlet property="skipButton" destination="ubo-01-RCY" id="h40-RO-l1x"/>
                 <outlet property="tableView" destination="fMT-3i-A65" id="g30-du-ZNF"/>
+                <outlet property="tableViewBottomConstraint" destination="fGh-mh-0zW" id="YZj-v4-IVA"/>
                 <outlet property="textLabel" destination="Va8-k4-B89" id="eej-Jr-E2X"/>
                 <outlet property="titleLabel" destination="fue-NP-bKy" id="Kgj-HL-Ofd"/>
                 <outlet property="view" destination="iN0-l3-epB" id="fiu-L7-wFg"/>
@@ -101,8 +102,8 @@
             <constraints>
                 <constraint firstItem="fMT-3i-A65" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="5n5-zt-HDi"/>
                 <constraint firstAttribute="trailing" secondItem="fMT-3i-A65" secondAttribute="trailing" id="aW7-52-7sn"/>
+                <constraint firstAttribute="bottom" secondItem="fMT-3i-A65" secondAttribute="bottom" id="fGh-mh-0zW"/>
                 <constraint firstItem="fMT-3i-A65" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="goF-FO-SdP"/>
-                <constraint firstAttribute="bottom" secondItem="fMT-3i-A65" secondAttribute="bottom" id="qah-p9-6ef"/>
             </constraints>
             <point key="canvasLocation" x="29.5" y="97.5"/>
         </view>

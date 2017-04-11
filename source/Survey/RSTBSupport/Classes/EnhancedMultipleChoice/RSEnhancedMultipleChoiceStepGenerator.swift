@@ -62,6 +62,8 @@ open class RSEnhancedChoiceStepGenerator: RSTBBaseStepGenerator {
                     optional: stepDescriptor.optional
                 )
                 
+                formItem.placeholder = "placeholder" <~~ auxiliaryItem
+                
                 return formItem
                 
             }()

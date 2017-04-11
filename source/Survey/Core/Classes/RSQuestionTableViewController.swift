@@ -20,10 +20,13 @@ open class RSQuestionTableViewController: ORKStepViewController, UITableViewData
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerView: UIStackView!
     @IBOutlet weak var footerContainer: UIView!
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     
     var rawFooterHeight: CGFloat?
     
     var tableViewStep: RSQuestionTableViewStep?
+    
+    open var skipped = false
     
     override convenience init(step: ORKStep?) {
         self.init(step: step, result: nil)
@@ -35,6 +38,7 @@ open class RSQuestionTableViewController: ORKStepViewController, UITableViewData
         self.init(nibName: "RSQuestionTableViewController", bundle: framework)
         self.step = step
         self.restorationIdentifier = step!.identifier
+        
     }
     
     override open func viewDidLoad() {
@@ -69,7 +73,18 @@ open class RSQuestionTableViewController: ORKStepViewController, UITableViewData
             header.frame.size.height = titleSize.height + textSize.height
             self.tableView.tableHeaderView = header
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
+        
     }
+    
+    override open func viewDidDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    }
+    
     
     //Note that we want the table view to be as large as the screen,
     //should return one more than actual data source
@@ -77,80 +92,75 @@ open class RSQuestionTableViewController: ORKStepViewController, UITableViewData
         return 0
     }
     
+    open func keyboardWillShow(notification: NSNotification) {
+        
+        if let userInfo = notification.userInfo,
+            let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
+            let curve = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.intValue,
+            let keyboardFrameEnd = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect {
+
+            let internalKeyboardFrameEnd = self.view.convert(keyboardFrameEnd, from: nil)
+            let curveOption = UIViewAnimationOptions.init(rawValue: UInt(curve))
+
+            UIView.animate(withDuration: duration, delay: 0, options: [UIViewAnimationOptions.beginFromCurrentState, curveOption], animations: {
+                
+                self.tableViewBottomConstraint.constant = internalKeyboardFrameEnd.size.height
+                self.view.layoutIfNeeded()
+                
+            }, completion: nil)
+            
+        }
+        
+        
+    }
     
-//    //this method adjusts the sizing of the footer
-//    //in order to
-//    override open func viewDidLayoutSubviews() {
-//        
-//        guard let tableView = self.tableView else  {
-//            return
-//        }
-//        
-////        if self.rawFooterHeight == nil {self.rawFooterHeight = tableView.tableFooterView?.bounds.size.height}
-//        
-//       let rawFooterHeight = self.footerContainer.bounds.size.height
-//        
-//        
-//        if let footerView = tableView.tableFooterView {
-//            
-//            //calculate current footer padding
-//            let currentFooterPadding = footerView.bounds.height - rawFooterHeight
-//            
-//            let contentHeightDifference = tableView.frame.size.height - tableView.contentSize.height
-//            
-//            //grow (or shrink) padding by contentHeightDifference
-//            if currentFooterPadding + contentHeightDifference > 0 {
-//                tableView.isScrollEnabled = false
-//                footerView.bounds.size.height = footerView.bounds.height + contentHeightDifference
-//                tableView.tableFooterView = footerView
-//            }
-//            else {
-//                tableView.isScrollEnabled = true
-//                footerView.bounds.size.height = rawFooterHeight
-//                tableView.tableFooterView = footerView
-//            }
-//            
-//        }
-//        
-////        let currentFooterPadding
-////        
-////        let contentHeightDifference = tableView.frame.size.height - tableView.contentSize.height
-////        
-////        if contentHeightDifference > 0 {
-////            tableView.isScrollEnabled = false
-////            
-////            if let footerView = tableView.tableFooterView {
-////                let additionalPadding = tableView.frame.size.height - tableView.contentSize.height
-////                let currentFooterSize = footerView.bounds.size
-////                footerView.bounds.size.height = currentFooterSize.height + additionalPadding
-////                tableView.tableFooterView = footerView
-////            }
-////            
-////        }
-////        else {
-////            tableView.isScrollEnabled = true
-////            
-////            if let footerView = tableView.tableFooterView {
-////                let rawFooterSize = self.footerContainer.bounds.size
-////                footerView.bounds.size.height = rawFooterSize.height
-////                tableView.tableFooterView = footerView
-////            }
-////        }
-//    }
-    
+    open func keyboardWillHide(notification: NSNotification) {
+        if let userInfo = notification.userInfo,
+            let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
+            let curve = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.intValue {
+            let curveOption = UIViewAnimationOptions.init(rawValue: UInt(curve))
+            
+            UIView.animate(withDuration: duration, delay: 0, options: [UIViewAnimationOptions.beginFromCurrentState, curveOption], animations: {
+                
+                self.tableViewBottomConstraint.constant = 0
+                self.view.layoutIfNeeded()
+                
+            }, completion: nil)
+            
+        }
+    }
+
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "default")
         cell.textLabel?.text = "Default Cell"
         cell.detailTextLabel?.text = "You should override cellForRowAt"
+        
+        printResponderChain(self)
+        
         return cell
     }
     
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        
+        printResponderChain(self)
     }
 
-    open func clearAnswer() {
+    open func printResponderChain(_ responder: UIResponder?) {
         
+        guard let responder = responder else {
+            return
+        }
+        
+        print("responder is \(responder)")
+        printResponderChain(responder.next)
+    }
+    
+    open func clearAnswer() {
+        self.skipped = true
+        self.tableView.indexPathsForSelectedRows?.forEach( { indexPath in
+            self.tableView.deselectRow(at: indexPath, animated: false)
+        })
     }
     
     open func notifyDelegateAndMoveForward() {
@@ -160,14 +170,27 @@ open class RSQuestionTableViewController: ORKStepViewController, UITableViewData
         self.goForward()
     }
 
+    open func validate() -> Bool {
+        return true
+    }
+    
     @IBAction func continueTapped(_ sender: Any) {
-        self.notifyDelegateAndMoveForward()
+        if self.validate() {
+            self.notifyDelegateAndMoveForward()
+        }
     }
     
     @IBAction func skipTapped(_ sender: Any) {
         self.clearAnswer()
         self.notifyDelegateAndMoveForward()
     }
+    
+    override open var result: ORKStepResult? {
+        
+        return super.result
+        
+    }
+    
     
     
     

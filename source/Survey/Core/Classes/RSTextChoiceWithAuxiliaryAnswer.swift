@@ -11,7 +11,7 @@ import ResearchKit
 
 open class RSTextChoiceWithAuxiliaryAnswer: ORKTextChoice {
     
-    let auxiliaryItem: ORKFormItem?
+    public let auxiliaryItem: ORKFormItem?
     
     public init(text: String,
         detailText: String?,
