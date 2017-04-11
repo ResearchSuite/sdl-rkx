@@ -11,12 +11,16 @@ import ResearchKit
 
 open class RSEnhancedMultipleChoiceStepViewController: RSQuestionTableViewController, RSEnhancedMultipleChoiceCellWithTextFieldAccessoryCellDelegate {
     
+    static let EmailValidationRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
+    
     var enhancedMultiChoiceStep: RSEnhancedMultipleChoiceStep!
     
     var selected: Set<Int>!
     var auxiliaryResultOptional: Set<Int>!
-    var auxiliaryResultForIndex: [Int: ORKResult]!
-    var resultIsValidForIndex: [Int: Bool]!
+//    var auxiliaryResultForIndex: [Int: ORKResult]!
+    var validatedAuxiliaryResultForIndex: [Int: ORKResult]!
+    
+    var currentText: [Int: String]!
     
     convenience init(step: ORKStep?) {
         self.init(step: step, result: nil)
@@ -59,28 +63,42 @@ open class RSEnhancedMultipleChoiceStepViewController: RSQuestionTableViewContro
             
             var selected: Set<Int> = Set()
             var auxiliaryResultForIndex: [Int: ORKResult] = [:]
-            var resultIsValidForIndex: [Int: Bool] = [:]
+            var initialText: [Int: String] = [:]
             choiceAnswers.forEach({ (choiceSelection) in
                 
                 if let index = self.index(value: choiceSelection.value) {
                     selected = selected.union(Set([index]))
                     if let auxiliaryResult = choiceSelection.auxiliaryResult {
-                        auxiliaryResultForIndex[index] = auxiliaryResult
-                        resultIsValidForIndex[index] = true
+                        
+                        switch(auxiliaryResult) {
+                        case let textResult as ORKTextQuestionResult:
+                            initialText[index] = textResult.textAnswer
+                            auxiliaryResultForIndex[index] = auxiliaryResult
+                            
+                        case let numericResult as ORKNumericQuestionResult:
+                            if let numericAnswer = numericResult.numericAnswer {
+                                initialText[index] = String(describing: numericAnswer)
+                                auxiliaryResultForIndex[index] = auxiliaryResult
+                            }
+    
+                        default:
+                            break
+                        }
                     }
                 }
                 
             })
             
             self.selected = selected
-            self.auxiliaryResultForIndex = auxiliaryResultForIndex
-            self.resultIsValidForIndex = resultIsValidForIndex
+            self.validatedAuxiliaryResultForIndex = auxiliaryResultForIndex
+            self.currentText = initialText
         }
         else {
             self.selected = Set()
-            self.auxiliaryResultForIndex = [:]
-            self.resultIsValidForIndex = [:]
+            self.validatedAuxiliaryResultForIndex = [:]
+            self.currentText = [:]
         }
+        
         
         
         
@@ -104,6 +122,9 @@ open class RSEnhancedMultipleChoiceStepViewController: RSQuestionTableViewContro
         self.tableView.allowsSelection = true
         self.tableView.allowsMultipleSelection = answerFormat.style == .multipleChoice
         
+        print("my state selected: \(self.selected)")
+        print("tableView selected: \(self.tableView.indexPathsForSelectedRows)")
+        
         self.selected.forEach( { index in
             self.tableView.selectRow(at: IndexPath(row: index, section: 0), animated: false, scrollPosition: UITableViewScrollPosition.top )
         })
@@ -121,9 +142,13 @@ open class RSEnhancedMultipleChoiceStepViewController: RSQuestionTableViewContro
             
             //we can do this via set math
             //iff selected set - optional set - results set = 0, we should be good
-            let indicesWithResults = self.auxiliaryResultForIndex.map { index, value in return index}
+            let indicesWithText = self.currentText.filter{ index, value in
+                
+                return value.characters.count > 0
+                
+                }.map { index, value in return index}
             
-            let remainingSet = self.selected.subtracting(self.auxiliaryResultOptional).subtracting(indicesWithResults)
+            let remainingSet = self.selected.subtracting(self.auxiliaryResultOptional).subtracting(indicesWithText)
             
             self.continueButton.isEnabled = remainingSet.count == 0
         }
@@ -226,8 +251,8 @@ open class RSEnhancedMultipleChoiceStepViewController: RSQuestionTableViewContro
             return cell
         }
         
-        let auxResult = self.auxiliaryResultForIndex[indexPath.row]
-        cell.configure(forTextChoice: textChoice, withId: indexPath.row, result: auxResult)
+//        let auxResult = self.validatedAuxiliaryResultForIndex[indexPath.row]
+        cell.configure(forTextChoice: textChoice, withId: indexPath.row, initialText: self.currentText[indexPath.row])
         cell.delegate = self
         
         cell.updateUI(selected: self.tableView.indexPathsForSelectedRows?.contains(indexPath) ?? false, animated: false, updateResponder: false)
@@ -239,7 +264,7 @@ open class RSEnhancedMultipleChoiceStepViewController: RSQuestionTableViewContro
     
     override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        self.selected = self.selected.union(Set([indexPath.row]))
+//        self.selected = self.selected.union(Set([indexPath.row]))
         
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -249,124 +274,15 @@ open class RSEnhancedMultipleChoiceStepViewController: RSQuestionTableViewContro
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        self.selected = self.selected.subtracting(Set([indexPath.row]))
+//        self.selected = self.selected.subtracting(Set([indexPath.row]))
         
         tableView.beginUpdates()
         tableView.endUpdates()
         
-        
-        
         self.view.setNeedsLayout()
         self.updateUI()
     }
-    
-    func showValidityAlertMessage(_ id: Int, message: String) {
-        
-        let title = "Invalid value"
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alert.addAction(cancelAction)
-        
-        //        weak var nav: UINavigationController? = self.navigationController
-        
-//        let endSessionAction = UIAlertAction(title: "End Session", style: .destructive, handler: { _ in
-//            assert(self.sessionId.get() != nil)
-//            if let delegate = UIApplication.shared.delegate as? RSLApplicationDelegate,
-//                let item = delegate.endSessionItem(),
-//                let store = delegate.reduxStore,
-//                let taskBuilder = self.sessionTaskBuilder
-//            {
-//                let action = RSAFActionCreators.queueActivity(fromScheduleItem: item, taskBuilder: taskBuilder)
-//                store.dispatch(action)
-//                
-//            }
-//            
-//            //            if let store = self.store {
-//            //                let asyncActionCreator: RSAFActionCreators.AsyncActionCreator = { (state, store, actionCreatorCallback) in
-//            //                    let endSessionAction = RSLLabActionCreators.endCurrentSession()
-//            //                    actionCreatorCallback( { (store, state) in
-//            //                        return endSessionAction
-//            //                    })
-//            //
-//            //                }
-//            //
-//            //                store.dispatch(asyncActionCreator, callback: { (state) in
-//            //                    nav?.popViewController(animated: true)
-//            //                })
-//            //            }
-//        })
-//        alert.addAction(endSessionAction)
-        
-        self.present(alert, animated: true, completion: nil)
-        
-    }
-    
-    func cellAuxiliaryAnswerChanged(_ id: Int, answer: Any?, valid: Bool) {
-        
-        print("answer changed for \(id), \(answer)")
-        
-        guard let auxFormItem = self.auxFormItem(id: id),
-            let answerFormat = auxFormItem.answerFormat else {
-            self.auxiliaryResultForIndex[id] = nil
-            self.resultIsValidForIndex[id] = false
-            return
-        }
-        
-        //convert into a result
-        let result: ORKResult? = {
-            
-            switch(answerFormat) {
-            case _ as ORKTextAnswerFormat:
-                
-                if let answer = answer as? String {
-                    let result = ORKTextQuestionResult(identifier: auxFormItem.identifier)
-                    result.textAnswer = answer
-                    return result
-                }
-                
-                return nil
-            case _ as ORKEmailAnswerFormat:
-                
-                if let answer = answer as? String {
-                    let result = ORKTextQuestionResult(identifier: auxFormItem.identifier)
-                    result.textAnswer = answer
-                    return result
-                }
-                
-                return nil
-            case let answerFormat as ORKNumericAnswerFormat:
-                
-                if answerFormat.style == .decimal {
-                    if let answer = answer as? Double {
-                        let result = ORKNumericQuestionResult(identifier: auxFormItem.identifier)
-                        result.numericAnswer = NSNumber(floatLiteral: answer)
-                        result.unit = answerFormat.unit
-                        return result
-                    }
-                }
-                else {
-                    if let answer = answer as? Int {
-                        let result = ORKNumericQuestionResult(identifier: auxFormItem.identifier)
-                        result.numericAnswer = NSNumber(integerLiteral: answer)
-                        result.unit = answerFormat.unit
-                        return result
-                    }
-                }
-                return nil
-            default:
-                return nil
-            }
-            
-            
-        }()
-        
-        self.auxiliaryResultForIndex[id] = result
-        self.resultIsValidForIndex[id] = valid
-        self.updateUI()
-        
-    }
-    
+
     override open func clearAnswer() {
         self.selected = []
     }
@@ -375,25 +291,40 @@ open class RSEnhancedMultipleChoiceStepViewController: RSQuestionTableViewContro
 //        self.resignFirstResponder()
         self.view.endEditing(true)
         
-        //check to see that all selected results are valid
-        //if any are invalid, dont go forward
-        let selectedValid: [Bool] = self.resultIsValidForIndex.flatMap { (pair) -> Bool? in
+        
+        
+        //rules for moving forward
+        //For all selected items
+        //if the item is optional, it must have no text or there must be a valid result
+        //if the item is not optional, there must be a valid result
+        
+        let invaidIds = self.selected.filter { selectedId in
             
-            //ignore if pair index is not in selected set
-            if !self.selected.contains(pair.0) {
-                return nil
+            //return true if invalid
+            //if there is no auxItem, it's always valid
+            guard let auxItem = self.auxFormItem(id: selectedId) else {
+                return false
             }
             
-            return pair.1
+            let valid: Bool = {
+                if auxItem.isOptional {
+                    return self.currentText[selectedId] == nil ||
+                        self.currentText[selectedId] == "" ||
+                        self.validatedAuxiliaryResultForIndex[selectedId] != nil
+                }
+                else {
+                    return self.validatedAuxiliaryResultForIndex[selectedId] != nil
+                }
+            }()
             
-        }
-            
-        let allValid = selectedValid.reduce(true) { (acc, isValid) -> Bool in
-            return acc && isValid
+            return !valid
         }
         
-        if allValid {
+        if invaidIds.count == 0 {
             super.continueTapped(sender)
+        }
+        else {
+            self.showValidityAlertMessage(message:"One or more fields is invalid \(invaidIds)")
         }
         
     }
@@ -409,7 +340,7 @@ open class RSEnhancedMultipleChoiceStepViewController: RSQuestionTableViewContro
                 return nil
             }
             
-            return RSEnahncedMultipleChoiceSelection(value: textChoice.value, auxiliaryResult: self.auxiliaryResultForIndex[index])
+            return RSEnahncedMultipleChoiceSelection(value: textChoice.value, auxiliaryResult: self.validatedAuxiliaryResultForIndex[index])
         }
         
         multipleChoiceResult.choiceAnswers = selections
@@ -418,5 +349,262 @@ open class RSEnhancedMultipleChoiceStepViewController: RSQuestionTableViewContro
         
         return result
     }
+    
+    func setSelected(selected: Bool, forCellId id: Int) {
+        if selected {
+            self.selected = self.selected.union([id])
+        }
+        else {
+            self.selected = self.selected.subtracting([id])
+        }
+    }
+    
+    //MARK: RSEnhancedMultipleChoiceCellWithTextFieldAccessoryCellDelegate
+    func auxiliaryTextField(_ textField: UITextField, forCellId id: Int, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        //if changes, clear result associated with this id
+        
+        if let startingText = textField.text {
+            
+            let start = startingText.index(startingText.startIndex, offsetBy: range.location)
+            let end = startingText.index(startingText.startIndex, offsetBy: range.location + range.length)
+            let stringRange = start..<end
+            let text = startingText.replacingCharacters(in: stringRange, with: string)
+            let textWithoutNewlines = text.components(separatedBy: CharacterSet.newlines).joined(separator: "")
+            
+            if self.validateTextForLength(text: textWithoutNewlines, id: id) == false {
+                self.updateUI()
+                return false
+            }
+            
+            //set the state of text
+            self.currentText[id] = textWithoutNewlines
+        }
+        self.updateUI()
+        return true
+        
+    }
+    
+    func auxiliaryTextFieldShouldClear(_ textField: UITextField, forCellId id: Int) -> Bool {
+        self.currentText[id] = nil
+        self.updateUI()
+        return true
+    }
+    
+    func auxiliaryTextFieldDidEndEditing(_ textField: UITextField, forCellId id: Int) {
+        //we need to make sure that we cannot dismiss this if its selected and invalid
+        if !self.selected.contains(id) {
+            self.updateUI()
+            return
+        }
+        
+        guard let auxItem = self.auxFormItem(id: id) else  {
+            self.updateUI()
+            return
+        }
+        
+        //emtpy should be considered valid in all cases
+        if let text = textField.text,
+            text.characters.count > 0 {
+            
+            self.currentText[id] = textField.text
+            
+            //validate
+            //if passes, convert into result and add to map
+            //otherwise, throw message
+            
+            if self.validate(text: text, id: id) {
+                self.validatedAuxiliaryResultForIndex[id] = self.convertToResult(text: text, id: id)
+            }
+            else {
+                self.validatedAuxiliaryResultForIndex[id] = nil
+            }
+            
+        }
+        else {
+            
+            //clear the
+            //is this empty?
+            self.currentText[id] = textField.text
+            if !auxItem.isOptional {
+                self.showValidityAlertMessage(message: "This field is required.")
+            }
+        }
+        
+        self.updateUI()
+    }
+    
+    func showValidityAlertMessage(message: String) {
+        
+        let title = "Invalid value"
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
+    func convertToResult(text: String, id: Int) -> ORKResult? {
+        
+        guard let auxItem = self.auxFormItem(id: id),
+            let answerFormat = auxItem.answerFormat else {
+                return nil
+        }
+        
+        switch(answerFormat) {
+        case _ as ORKTextAnswerFormat:
+            
+            let result = ORKTextQuestionResult(identifier: auxItem.identifier)
+            result.textAnswer = text
+            return result
+            
+            return nil
+        case _ as ORKEmailAnswerFormat:
+            
+            let result = ORKTextQuestionResult(identifier: auxItem.identifier)
+            result.textAnswer = text
+            return result
+            
+            return nil
+        case let answerFormat as ORKNumericAnswerFormat:
+            
+            if answerFormat.style == .decimal {
+                if let answer = Double(text) {
+                    let result = ORKNumericQuestionResult(identifier: auxItem.identifier)
+                    result.numericAnswer = NSNumber(floatLiteral: answer)
+                    result.unit = answerFormat.unit
+                    return result
+                }
+            }
+            else {
+                if let answer = Int(text) {
+                    let result = ORKNumericQuestionResult(identifier: auxItem.identifier)
+                    result.numericAnswer = NSNumber(integerLiteral: answer)
+                    result.unit = answerFormat.unit
+                    return result
+                }
+            }
+            return nil
+        default:
+            return nil
+        }
+    }
+    
+    func validate(text: String, id: Int) -> Bool {
+        
+        guard let auxItem = self.auxFormItem(id: id) else {
+            self.showValidityAlertMessage(message: "An eror occurred")
+            return false
+        }
+        
+        switch auxItem.answerFormat {
+
+        case _ as ORKTextAnswerFormat:
+            return self.validateTextForLength(text: text, id: id) && self.validateTextForRegEx(text: text, id: id)
+            
+        case _ as ORKEmailAnswerFormat:
+            return self.validateTextForLength(text: text, id: id) && self.validateTextForRegEx(text: text, id: id)
+            
+        case _ as ORKNumericAnswerFormat:
+            return self.validateNumericTextForRange(text: text, id: id)
+
+        default:
+            self.showValidityAlertMessage(message: "An eror occurred")
+            return false
+            
+        }
+    }
+
+    //MARK: Validation Functions
+    //returns true for empty text
+    open func validateTextForRegEx(text: String, id: Int) -> Bool {
+        
+        guard let auxItem = self.auxFormItem(id: id),
+            let answerFormat = auxItem.answerFormat as? ORKTextAnswerFormat,
+            let regex = answerFormat.validationRegex,
+            let invalidMessage = answerFormat.invalidMessage else {
+                return true
+        }
+        
+        do {
+            let regex = try NSRegularExpression(pattern: regex)
+            let matchCount = regex.numberOfMatches(in: text, options: [], range: NSMakeRange(0, text.characters.count))
+            
+            if matchCount != 1 {
+                self.showValidityAlertMessage(message: invalidMessage)
+                return false
+            }
+            return true
+        } catch {
+            self.showValidityAlertMessage(message: "Invalid Regular Expression")
+            return false
+        }
+    }
+    
+    open func validateTextForLength(text: String, id: Int) -> Bool {
+        
+        guard let auxItem = self.auxFormItem(id: id),
+            let answerFormat = auxItem.answerFormat as? ORKTextAnswerFormat,
+            answerFormat.maximumLength > 0 else {
+                return true
+        }
+        
+        if text.characters.count > answerFormat.maximumLength {
+            self.showValidityAlertMessage(message: "Text content exceeding maximum length: \(answerFormat.maximumLength)")
+            return false
+        }
+        else {
+            return true
+        }
+        
+    }
+    
+    open func validateNumericTextForRange(text: String, id: Int) -> Bool {
+        guard let auxItem = self.auxFormItem(id: id),
+            let answerFormat = auxItem.answerFormat as? ORKNumericAnswerFormat else {
+                return true
+        }
+        
+        if answerFormat.style == ORKNumericAnswerStyle.decimal,
+            let decimalAnswer = Double(text) {
+            
+            if let minValue = answerFormat.minimum?.doubleValue,
+                decimalAnswer < minValue {
+                self.showValidityAlertMessage(message: "\(decimalAnswer) is less than the minimum allowed value \(minValue).")
+                return false
+            }
+            
+            if let maxValue = answerFormat.maximum?.doubleValue,
+                decimalAnswer > maxValue {
+                self.showValidityAlertMessage(message: "\(decimalAnswer) is more than the maximum allowed value \(maxValue).")
+                return false
+            }
+            
+            return true
+        }
+        else if answerFormat.style == ORKNumericAnswerStyle.integer,
+            let integerAnswer = Int(text)  {
+            
+            if let minValue = answerFormat.minimum?.intValue,
+                integerAnswer < minValue {
+                self.showValidityAlertMessage(message: "\(integerAnswer) is less than the minimum allowed value \(minValue).")
+                return false
+            }
+            
+            if let maxValue = answerFormat.maximum?.intValue,
+                integerAnswer > maxValue {
+                self.showValidityAlertMessage(message: "\(integerAnswer) is more than the maximum allowed value \(maxValue).")
+                return false
+            }
+            
+            return true
+        }
+        else {
+            return true
+        }
+    }
+    
 
 }
