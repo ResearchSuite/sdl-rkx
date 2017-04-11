@@ -31,7 +31,6 @@ open class RSEnhancedMultipleChoiceStepViewController: RSQuestionTableViewContro
         
         self.enhancedMultiChoiceStep = step as! RSEnhancedMultipleChoiceStep
         
-        
         //compute the set of optional selections
         if let textChoices = self.enhancedMultiChoiceStep.answerFormat?.textChoices {
             //if regular text choice, optional is true

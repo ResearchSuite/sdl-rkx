@@ -18,31 +18,27 @@ open class RSEnhancedMultipleChoiceCellWithTextFieldAccessoryCell: UITableViewCe
 
     static let EmailValidationRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
     
-    var identifier: Int!
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var checkImageView: UIImageView!
     @IBOutlet weak var auxContainer: UIView!
     @IBOutlet weak var choiceContainer: UIView!
-    weak var delegate: RSEnhancedMultipleChoiceCellWithTextFieldAccessoryCellDelegate?
+    @IBOutlet weak var auxTextLabel: UILabel!
+    @IBOutlet weak var auxTextField: UITextField!
     
+    var identifier: Int!
+    weak var delegate: RSEnhancedMultipleChoiceCellWithTextFieldAccessoryCellDelegate?
     var titleHeight: NSLayoutConstraint?
     var choiceContainerHeight: NSLayoutConstraint?
-    
     var auxFormItem: ORKFormItem?
     var auxFormAnswer: Any? = nil
     var auxHeight: NSLayoutConstraint?
-    
-    @IBOutlet weak var auxTextLabel: UILabel!
-    @IBOutlet weak var auxTextField: UITextField!
     
     override open func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
-        let auxContainerHeight = NSLayoutConstraint(item: self.auxContainer, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 0)
-        auxContainerHeight.priority = 750
-        self.auxHeight = auxContainerHeight
-        self.auxContainer.addConstraint(auxContainerHeight)
+        self.clearForReuse()
     }
     
     override open func setSelected(_ selected: Bool, animated: Bool) {
@@ -52,7 +48,30 @@ open class RSEnhancedMultipleChoiceCellWithTextFieldAccessoryCell: UITableViewCe
         self.updateUI(selected: selected, animated: animated, updateResponder: true)
     }
     
+    open func clearForReuse() {
+        
+        if let auxContainerHeight = self.auxHeight {
+            self.auxContainer.removeConstraint(auxContainerHeight)
+        }
+        
+        self.identifier = nil
+        self.delegate = nil
+        self.titleHeight = nil
+        self.choiceContainerHeight = nil
+        self.auxFormItem = nil
+        self.auxFormAnswer = nil
+        self.auxHeight = nil
+        
+        let auxContainerHeight = NSLayoutConstraint(item: self.auxContainer, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 0)
+        auxContainerHeight.priority = 750
+        self.auxHeight = auxContainerHeight
+        self.auxContainer.addConstraint(auxContainerHeight)
+    }
+    
     open func configure(forTextChoice textChoice: RSTextChoiceWithAuxiliaryAnswer, withId: Int, result: ORKResult?) {
+        
+        self.clearForReuse()
+        
         self.identifier = withId
         self.separatorInset = UIEdgeInsets.zero
         self.preservesSuperviewLayoutMargins = false
@@ -63,7 +82,6 @@ open class RSEnhancedMultipleChoiceCellWithTextFieldAccessoryCell: UITableViewCe
         self.selectionStyle = .none
         
         self.checkImageView.image = UIImage(named: "checkmark", in: Bundle(for: ORKStep.self), compatibleWith: nil)
-        
         
         guard let auxItem = textChoice.auxiliaryItem else {
             return
