@@ -406,7 +406,8 @@ open class RSEnhancedMultipleChoiceStepViewController: RSQuestionTableViewContro
             return
         }
         
-        guard let auxItem = self.auxFormItem(id: id) else  {
+        guard let textChoice = self.textChoice(id: id),
+            let auxItem = textChoice.auxiliaryItem else  {
             self.updateUI()
             return
         }
@@ -435,7 +436,7 @@ open class RSEnhancedMultipleChoiceStepViewController: RSQuestionTableViewContro
             //is this empty?
             self.currentText[id] = textField.text
             if !auxItem.isOptional {
-                self.showValidityAlertMessage(message: "This field is required.")
+                self.showValidityAlertMessage(message: "The field associated with choice \"\(textChoice.text)\" is required.")
             }
         }
         
