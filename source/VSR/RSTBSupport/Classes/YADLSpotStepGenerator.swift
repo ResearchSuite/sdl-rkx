@@ -23,29 +23,29 @@ open class YADLSpotStepGenerator: RSTBBaseStepGenerator {
         return self._supportedTypes
     }
     
-    public typealias YADLItemFilter = ((NSCoding & NSCopying & NSObjectProtocol) -> Bool)
-    
-    open func generateFilter(type: String, jsonObject: JSON, helper: RSTBTaskBuilderHelper) -> YADLItemFilter? {
-        
-        guard let yadlSpotDescriptor = YADLSpotDescriptor(json: jsonObject),
-            let filterKey = yadlSpotDescriptor.filterKey,
-            let stateHelper = helper.stateHelper,
-            let includedValues = stateHelper.valueInState(forKey: filterKey) as? [String],
-            includedValues.count > 0 else {
-            return nil
-        }
-        
-        return { item in
-            if let value = item as? String {
-                return includedValues.contains(where: { (includedValue) -> Bool in
-                    return includedValue == value
-                })
-            }
-            else {
-                return false
-            }
-        }
-    }
+//    public typealias YADLItemFilter = ((NSCoding & NSCopying & NSObjectProtocol) -> Bool)
+//    
+//    open func generateFilter(type: String, jsonObject: JSON, helper: RSTBTaskBuilderHelper) -> YADLItemFilter? {
+//        
+//        guard let yadlSpotDescriptor = YADLSpotDescriptor(json: jsonObject),
+//            let filterKey = yadlSpotDescriptor.filterKey,
+//            let stateHelper = helper.stateHelper,
+//            let includedValues = stateHelper.valueInState(forKey: filterKey) as? [String],
+//            includedValues.count > 0 else {
+//            return nil
+//        }
+//        
+//        return { item in
+//            if let value = item as? String {
+//                return includedValues.contains(where: { (includedValue) -> Bool in
+//                    return includedValue == value
+//                })
+//            }
+//            else {
+//                return false
+//            }
+//        }
+//    }
 
     open func excludedIdentifiers(items: [YADLItem], jsonObject: JSON, helper: RSTBTaskBuilderHelper) -> [String] {
         
@@ -91,28 +91,9 @@ open class YADLSpotStepGenerator: RSTBBaseStepGenerator {
             return nil
         }
         
-        
-//        let textChoices: [ORKTextChoice] = yadlFullDescriptor.choices.flatMap { (choice) -> ORKTextChoice? in
-//            RKXTextChoiceWithColor(text: choice.text, value: choice.value as NSCoding & NSCopying & NSObjectProtocol, color: choice.color)
-//        }
-//        
-//        let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .singleChoice, textChoices: textChoices)
-//        
-//        return yadlFullDescriptor.items.flatMap({ (item) -> YADLFullAssessmentStep? in
-//            guard let image = UIImage(named: item.imageTitle)
-//                else {
-//                    assertionFailure("Cannot find image named \(item.imageTitle)")
-//                    return nil
-//            }
-//            
-//            return YADLFullAssessmentStep(identifier: yadlFullDescriptor.identifier.appending(".\(item.identifier)"), title: item.description, text: yadlFullDescriptor.text, image: image, answerFormat: answerFormat)
-//        })
-        
         let imageChoices = self.generateChoices(items: yadlSpotDescriptor.items)
-        
         let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: imageChoices)
-        
-//        let itemFilter = self.generateFilter(type: type, jsonObject: jsonObject, helper: helper)
+
         let excludedIdentifiers = self.excludedIdentifiers(items: yadlSpotDescriptor.items, jsonObject: jsonObject, helper: helper)
         let options = RKXMultipleImageSelectionSurveyOptions(json: jsonObject)
         
