@@ -25,7 +25,7 @@ To integrate sdlrkx into your Xcode project using CocoaPods, specify it in your 
 platform :ios, '9.0'
 use_frameworks!
 
-pod 'sdlrkx', '~> 0.2'
+pod 'sdlrkx', '~> 0.11'
 ```
 
 Then, run the following command:
@@ -33,8 +33,6 @@ Then, run the following command:
 ```bash
 $ pod install
 ```
-
-> NOTE: When building ResearchKit, you may need to set 'No Common Blocks' to 'No' under the Apple LLVM Code Generation heading in the ResearchKit framework Build Settings
 
 ## Example
 
