@@ -21,6 +21,10 @@ open class RSQuestionViewController: ORKStepViewController {
     @IBOutlet weak var footerHeight: NSLayoutConstraint!
     
     open var skipped: Bool = false
+    private var _initializedResult: ORKResult?
+    public var initializedResult: ORKResult? {
+        return _initializedResult
+    }
     
     open class var showsContinueButton: Bool {
         return true
@@ -35,26 +39,37 @@ open class RSQuestionViewController: ORKStepViewController {
         let framework = Bundle(for: RSQuestionViewController.self)
         self.init(nibName: "RSQuestionViewController", bundle: framework)
         self.step = step
+        self._initializedResult = result
         self.restorationIdentifier = step!.identifier
         
     }
     
     override open func viewDidLoad() {
         
+        super.viewDidLoad()
+        
         self.titleLabel.text = self.step?.title
         self.textLabel.text = self.step?.text
         
         if self.hasNextStep() {
-            self.continueButton.setTitle("Next", for: .normal)
+            self.setContinueButtonTitle(title: "Next")
         }
         else {
-            self.continueButton.setTitle("Done", for: .normal)
+            self.setContinueButtonTitle(title: "Done")
         }
         
         if !type(of: self).showsContinueButton {
             self.footerHeight.constant = RSQuestionViewController.footerHeightWithoutContinueButton
         }
         
+    }
+    
+    open func setSkipButtonTitle(title: String) {
+        self.skipButton.setTitle(title, for: .normal)
+    }
+    
+    open func setContinueButtonTitle(title: String) {
+        self.continueButton.setTitle(title, for: .normal)
     }
     
     open func notifyDelegateAndMoveForward() {
