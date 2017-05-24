@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RSEnhancedMultipleChoiceCellWithTextFieldAccessoryCell" customModule="sdlrkx" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="enhanced_multi_choice" rowHeight="92" id="KGk-i7-Jjw" customClass="RSEnhancedMultipleChoiceCellWithTextFieldAccessoryCell" customModule="sdlrkx" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RnO-aF-pe3" userLabel="Aux Container">
+                        <rect key="frame" x="0.0" y="59" width="320" height="60"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aux Text Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BqO-sP-kup">
+                                <rect key="frame" x="8" y="16" width="106" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Placeholder" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="S7h-bO-SFy">
+                                <rect key="frame" x="122" y="16" width="190" height="20"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="S7h-bO-SFy" secondAttribute="trailing" constant="8" id="CO8-O2-i4w"/>
+                            <constraint firstItem="BqO-sP-kup" firstAttribute="width" relation="lessThanOrEqual" secondItem="RnO-aF-pe3" secondAttribute="width" multiplier="0.5" constant="8" id="Ed4-5u-zpU"/>
+                            <constraint firstAttribute="bottom" secondItem="BqO-sP-kup" secondAttribute="bottom" priority="500" constant="16" id="Git-p6-yCE"/>
+                            <constraint firstItem="S7h-bO-SFy" firstAttribute="top" secondItem="BqO-sP-kup" secondAttribute="top" id="Kdx-yA-kRA"/>
+                            <constraint firstItem="S7h-bO-SFy" firstAttribute="leading" secondItem="BqO-sP-kup" secondAttribute="trailing" constant="8" id="WDL-w0-A2m"/>
+                            <constraint firstItem="BqO-sP-kup" firstAttribute="top" secondItem="RnO-aF-pe3" secondAttribute="top" priority="500" constant="16" id="axF-sr-3lC"/>
+                            <constraint firstItem="BqO-sP-kup" firstAttribute="leading" secondItem="RnO-aF-pe3" secondAttribute="leading" constant="8" id="fet-0i-5IH"/>
+                        </constraints>
+                    </view>
+                    <view autoresizesSubviews="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="xBb-Z7-S1E" userLabel="Choice Container">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
+                        <subviews>
+                            <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Text Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GaG-JF-7dp">
+                                <rect key="frame" x="8" y="16" width="85.5" height="27.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="24" placeholderIntrinsicHeight="24" translatesAutoresizingMaskIntoConstraints="NO" id="t2A-l0-U2f">
+                                <rect key="frame" x="288" y="18" width="24" height="24"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GaG-JF-7dp" firstAttribute="leading" secondItem="xBb-Z7-S1E" secondAttribute="leading" constant="8" id="1Jy-HB-gmH"/>
+                            <constraint firstAttribute="height" constant="60" id="642-lB-hHf"/>
+                            <constraint firstItem="t2A-l0-U2f" firstAttribute="centerY" secondItem="GaG-JF-7dp" secondAttribute="centerY" id="eZQ-F4-Lna"/>
+                            <constraint firstAttribute="bottom" secondItem="GaG-JF-7dp" secondAttribute="bottom" constant="16" id="ko1-gK-qtN"/>
+                            <constraint firstItem="GaG-JF-7dp" firstAttribute="top" secondItem="xBb-Z7-S1E" secondAttribute="top" constant="16" id="owS-yq-fO1"/>
+                            <constraint firstAttribute="trailing" secondItem="t2A-l0-U2f" secondAttribute="trailing" constant="8" id="tQX-br-sbK"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="RnO-aF-pe3" firstAttribute="top" secondItem="xBb-Z7-S1E" secondAttribute="bottom" id="6ER-4J-Vti"/>
+                    <constraint firstItem="RnO-aF-pe3" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="8cw-Ic-Y2F"/>
+                    <constraint firstItem="xBb-Z7-S1E" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Jut-vO-stU"/>
+                    <constraint firstItem="xBb-Z7-S1E" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="bZO-vI-HII"/>
+                    <constraint firstItem="RnO-aF-pe3" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="hus-vu-cQ5"/>
+                    <constraint firstAttribute="bottom" secondItem="RnO-aF-pe3" secondAttribute="bottom" id="idE-xb-6cu"/>
+                </constraints>
+            </tableViewCellContentView>
+            <constraints>
+                <constraint firstItem="xBb-Z7-S1E" firstAttribute="width" secondItem="KGk-i7-Jjw" secondAttribute="width" id="OYX-2y-5dN"/>
+            </constraints>
+            <connections>
+                <outlet property="auxContainer" destination="RnO-aF-pe3" id="yuU-zP-r4T"/>
+                <outlet property="auxTextField" destination="S7h-bO-SFy" id="sld-iP-KvE"/>
+                <outlet property="auxTextLabel" destination="BqO-sP-kup" id="v15-qk-BOn"/>
+                <outlet property="checkImageView" destination="t2A-l0-U2f" id="dc2-5q-3Nz"/>
+                <outlet property="choiceContainer" destination="xBb-Z7-S1E" id="4Mg-vf-1mq"/>
+                <outlet property="titleLabel" destination="GaG-JF-7dp" id="cdU-DI-KxC"/>
+            </connections>
+            <point key="canvasLocation" x="82" y="-38"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CTFBorderedButton: UIButton {
+public class CTFBorderedButton: UIButton {
 
     /*
      // Only override drawRect: if you perform custom drawing.
@@ -24,7 +24,7 @@ class CTFBorderedButton: UIButton {
         self.layer.cornerRadius = 5.0
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.layer.borderWidth = 1.0
         self.layer.cornerRadius = 5.0
@@ -48,7 +48,7 @@ class CTFBorderedButton: UIButton {
         }
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         if let color = self.titleColor(for: self.state) {
             self.layer.borderColor = color.cgColor
@@ -57,7 +57,7 @@ class CTFBorderedButton: UIButton {
         
     }
     
-    override func tintColorDidChange() {
+    override public func tintColorDidChange() {
         //if we have not configured the color, set
         super.tintColorDidChange()
         if let _ = self.configuredColor {
@@ -68,7 +68,7 @@ class CTFBorderedButton: UIButton {
         }
     }
     
-    override var intrinsicContentSize : CGSize {
+    override public var intrinsicContentSize : CGSize {
         let superSize = super.intrinsicContentSize
         return CGSize(width: superSize.width + 20.0, height: superSize.height)
     }

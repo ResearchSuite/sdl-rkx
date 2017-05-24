@@ -9,10 +9,10 @@ Pod::Spec.new do |s|
 
   s.description      = "The Small Data Lab ResearchKit Extensions package is the easiest way to include SDL visual self-report (YADL, MEDL, PAM) and Behavioral extensions (Go / No Go, Delayed Discounting, BART)into a ResearchKit application."
 
-  s.homepage         = "https://github.com/cornelltech/sdl-rkx"
+  s.homepage         = "https://github.com/ResearchSuite/sdl-rkx"
   s.license          = { :type => "Apache 2", :file => "LICENSE" }
   s.author           = { "James Kizer, Cornell Tech Foundry" => "jdk288 at cornell dot edu" }
-  s.source           = { :git => "https://github.com/cornelltech/sdl-rkx.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/ResearchSuite/sdl-rkx.git", :tag => s.version.to_s }
 
   s.ios.deployment_target = '9.0'
 
@@ -77,31 +77,31 @@ Pod::Spec.new do |s|
     obes.dependency 'ResearchSuiteResultsProcessor/OMHHelper'
   end
 
-  s.subspec 'Survey' do |q|
-    q.source_files = 'source/Survey/Core/Classes/**/*'
-    q.dependency 'sdlrkx/Helpers'
-    q.dependency 'ResearchKit', '~> 1.4'
-  end
-
-  s.subspec 'Survey-RSTBSupport' do |rstb|
-    rstb.source_files = 'source/Survey/RSTBSupport/Classes/**/*'
-    rstb.dependency 'sdlrkx/Survey'
-    rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.4'
-    rstb.dependency 'Gloss', '~> 1'
-  end
-
-  s.subspec 'Survey-RSRPSupport' do |rsrp|
-    rsrp.source_files = 'source/Survey/RSRPSupport/Classes/**/*'
-    rsrp.dependency 'sdlrkx/Survey'
-    rsrp.dependency 'ResearchSuiteResultsProcessor', '~> 0.2'
-    rsrp.dependency 'ResearchKit', '~> 1.4'
-  end
-
-  s.subspec 'Survey-RSRPOhmageBackend' do |obes|
-    obes.source_files = 'source/Survey/RSRPOhmageBackendSupport/Classes/**/*'
-    obes.dependency 'sdlrkx/Survey-RSRPSupport'
-    obes.dependency 'OMHClient'
-    obes.dependency 'ResearchSuiteResultsProcessor/OMHHelper'
-  end
+  # s.subspec 'Survey' do |q|
+  #   q.source_files = 'source/Survey/Core/Classes/**/*'
+  #   q.dependency 'sdlrkx/Helpers'
+  #   q.dependency 'ResearchKit', '~> 1.4'
+  # end
+  #
+  # s.subspec 'Survey-RSTBSupport' do |rstb|
+  #   rstb.source_files = 'source/Survey/RSTBSupport/Classes/**/*'
+  #   rstb.dependency 'sdlrkx/Survey'
+  #   rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.4'
+  #   rstb.dependency 'Gloss', '~> 1'
+  # end
+  #
+  # s.subspec 'Survey-RSRPSupport' do |rsrp|
+  #   rsrp.source_files = 'source/Survey/RSRPSupport/Classes/**/*'
+  #   rsrp.dependency 'sdlrkx/Survey'
+  #   rsrp.dependency 'ResearchSuiteResultsProcessor', '~> 0.2'
+  #   rsrp.dependency 'ResearchKit', '~> 1.4'
+  # end
+  #
+  # s.subspec 'Survey-RSRPOhmageBackend' do |obes|
+  #   obes.source_files = 'source/Survey/RSRPOhmageBackendSupport/Classes/**/*'
+  #   obes.dependency 'sdlrkx/Survey-RSRPSupport'
+  #   obes.dependency 'OMHClient'
+  #   obes.dependency 'ResearchSuiteResultsProcessor/OMHHelper'
+  # end
 
 end
