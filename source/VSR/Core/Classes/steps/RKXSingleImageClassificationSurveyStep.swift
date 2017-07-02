@@ -17,7 +17,7 @@ open class RKXSingleImageClassificationSurveyStep: ORKQuestionStep {
         return RKXSingleImageClassificationSurveyViewController.self
     }
 
-    init(identifier: String,
+    public init(identifier: String,
          title: String?,
          text: String?,
          image: UIImage?,
