@@ -77,18 +77,18 @@ Pod::Spec.new do |s|
     obes.dependency 'ResearchSuiteResultsProcessor/OMHHelper'
   end
 
-  # s.subspec 'Survey' do |q|
-  #   q.source_files = 'source/Survey/Core/Classes/**/*'
-  #   q.dependency 'sdlrkx/Helpers'
-  #   q.dependency 'ResearchKit', '~> 1.4'
-  # end
-  #
-  # s.subspec 'Survey-RSTBSupport' do |rstb|
-  #   rstb.source_files = 'source/Survey/RSTBSupport/Classes/**/*'
-  #   rstb.dependency 'sdlrkx/Survey'
-  #   rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.4'
-  #   rstb.dependency 'Gloss', '~> 1'
-  # end
+  s.subspec 'Survey' do |q|
+    q.source_files = 'source/Survey/Core/Classes/**/*'
+    q.dependency 'sdlrkx/Helpers'
+    q.dependency 'ResearchKit', '~> 1.4'
+  end
+
+  s.subspec 'Survey-RSTBSupport' do |rstb|
+    rstb.source_files = 'source/Survey/RSTBSupport/Classes/**/*'
+    rstb.dependency 'sdlrkx/Survey'
+    rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.4'
+    rstb.dependency 'Gloss', '~> 1'
+  end
   #
   # s.subspec 'Survey-RSRPSupport' do |rsrp|
   #   rsrp.source_files = 'source/Survey/RSRPSupport/Classes/**/*'
