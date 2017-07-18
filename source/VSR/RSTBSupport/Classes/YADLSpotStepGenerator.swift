@@ -10,6 +10,8 @@ import UIKit
 import ResearchSuiteTaskBuilder
 import ResearchKit
 import Gloss
+import ResearchSuiteExtensions
+
 
 open class YADLSpotStepGenerator: RSTBBaseStepGenerator {
 

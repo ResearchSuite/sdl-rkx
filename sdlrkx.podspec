@@ -32,6 +32,7 @@ Pod::Spec.new do |s|
   s.subspec 'VSR-RSTBSupport' do |rstb|
     rstb.source_files = 'source/VSR/RSTBSupport/Classes/**/*'
     rstb.dependency 'sdlrkx/VSR'
+    rstb.dependency 'ResearchSuiteExtensions/Common', '~> 0.1'
     rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.4'
     rstb.dependency 'Gloss', '~> 1'
   end
