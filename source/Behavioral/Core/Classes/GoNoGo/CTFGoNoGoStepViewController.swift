@@ -8,6 +8,7 @@
 
 import UIKit
 import ResearchKit
+import ResearchSuiteExtensions
 
 class CTFGoNoGoStepViewController: ORKStepViewController, CTFGoNoGoViewDelegate {
 
