@@ -9,7 +9,7 @@
 import UIKit
 import Gloss
 
-open class CTFBARTStepParamsDescriptor: Decodable {
+open class CTFBARTStepParamsDescriptor: Gloss.Decodable {
     
     //number of trials
     let numTrials:Int

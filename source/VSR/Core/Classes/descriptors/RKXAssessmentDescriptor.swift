@@ -48,7 +48,7 @@ func colorForOptionsAndKey(_ options: [String: AnyObject], key: String) -> UICol
     else { return nil }
 }
 
-open class RKXMultipleImageSelectionSurveyOptions: NSObject, Decodable {
+open class RKXMultipleImageSelectionSurveyOptions: NSObject, Gloss.Decodable {
     public var somethingSelectedButtonColor: UIColor?
     public var nothingSelectedButtonColor: UIColor?
     public var itemCellSelectedColor:UIColor?

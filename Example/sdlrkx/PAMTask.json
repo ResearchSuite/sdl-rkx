@@ -3,31 +3,9 @@
   "identifier": "PAMTask",
   "elements"         : [
     {
-      "identifier": "introduction",
-      "type": "instruction",
-      "title": "PAM",
-      "text": "Welcome to the Photographic Affect Meter (PAM) Task."
-    },
-    {
       "identifier"   :   "PAM",
       "type"            : "PAM",
-                        "optional": true
-    },
-    {
-      "identifier": "thanks",
-      "type": "singleChoiceText",
-      "title": "Thanks!",
-      "text": "Did you like using PAM?",
-      "items": [
-        {
-          "prompt": "Yes",
-          "value": "true"
-        },
-        {
-          "prompt": "No",
-          "value": "false"
-        }
-      ]
-    },
+      "optional": true
+    }
   ]
 }

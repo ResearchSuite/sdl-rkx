@@ -9,7 +9,7 @@
 import UIKit
 import Gloss
 
-open class CTFDelayDiscountingParamsDescriptor: Decodable {
+open class CTFDelayDiscountingParamsDescriptor: Gloss.Decodable {
     
     let maxAmount: Double
     let numQuestions: Int

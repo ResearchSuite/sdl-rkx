@@ -10,7 +10,7 @@ import UIKit
 import Gloss
 import ResearchSuiteTaskBuilder
 
-public struct YADLDifficultyChoice: Decodable {
+public struct YADLDifficultyChoice: Gloss.Decodable {
     public let text: String
     public let value: String
     public let color: UIColor
@@ -30,7 +30,7 @@ public struct YADLDifficultyChoice: Decodable {
     }
 }
 
-public struct YADLItem: Decodable {
+public struct YADLItem: Gloss.Decodable {
     public let identifier: String
     public let description: String
     public let imageTitle: String
