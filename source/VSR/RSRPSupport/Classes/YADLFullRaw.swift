@@ -49,6 +49,20 @@ open class YADLFullRaw: RSRPIntermediateResult, RSRPFrontEndTransformer {
             resultMap[pair.0] = pair.1
         }
         
+        let keyParameters = Array(parameters.keys)
+        let keyResults = Array(resultMap.keys)
+        
+        let skippedKeys  = keyParameters.filter{ !keyResults.contains($0) }
+        
+        for each in skippedKeys {
+            if each != "schemaID"{
+                resultMap[each] = "skipped";
+            }
+            
+        }
+        
+    
+        
         return YADLFullRaw(
             uuid: UUID(),
             taskIdentifier: taskIdentifier,
