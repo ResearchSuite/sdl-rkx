@@ -65,6 +65,17 @@ open class MEDLFullStepGenerator: RSTBBaseStepGenerator {
         }
     }
     
+    open func getAllIdentifiers(items: [MEDLItem]) -> [String]{
+        
+        var allIdentifiers : [String] = []
+        
+        for item in items {
+           allIdentifiers.append(item.identifier)
+        }
+        
+        return ["identifiers"]
+    }
+    
     open func getCategories(items: [MEDLItem]) -> [String] {
         
         var categories : [String] = []
@@ -102,6 +113,7 @@ open class MEDLFullStepGenerator: RSTBBaseStepGenerator {
             let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: imageChoices)
             let options = RKXMultipleImageSelectionSurveyOptions(json: jsonObject)
             let identifier = "medl_full." + category
+            let currentIdentifiers = self.getAllIdentifiers(items: currentItems)
             
             let medlFullAssessmentStep = MEDLFullAssessmentCategoryStep(
                 identifier: identifier,
@@ -109,6 +121,7 @@ open class MEDLFullStepGenerator: RSTBBaseStepGenerator {
                 category: category,
                 answerFormat: answerFormat,
                 options: options
+               
                 
             )
             

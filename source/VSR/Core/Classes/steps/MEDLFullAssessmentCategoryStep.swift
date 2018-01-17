@@ -17,7 +17,6 @@ open class MEDLFullAssessmentCategoryStep: RKXMultipleImageSelectionSurveyStep {
         return MEDLFullAssessmentCategoryStepViewController.self
     }
     
-    init(identifier: String,
     public init(identifier: String,
          title: String?,
          category: String?,
