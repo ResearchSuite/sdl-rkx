@@ -69,12 +69,21 @@ extension YADLSpotRaw: OMHDataPointBuilder {
     
     open var body: [String: Any] {
         
-        return [
-            "selected" : self.selected,
-            "notSelected": self.notSelected,
-            "excluded": self.excluded
-        ]
+        var results = [String:String]()
         
+        for each in self.selected {
+            results[each] = "selected"
+        }
+        
+        for each in self.notSelected {
+            results[each] = "not selected"
+        }
+        
+        for each in self.excluded {
+            results[each] = "excluded"
+        }
+        
+        return ["results" : results]
     }
     
 }
