@@ -10,7 +10,7 @@ import UIKit
 import Gloss
 import ResearchSuiteTaskBuilder
 
-public struct MEDLItem: Decodable {
+public struct MEDLItem: Gloss.Decodable {
     public let identifier: String
     public let generalDescription: String
     public let specificDescription: String

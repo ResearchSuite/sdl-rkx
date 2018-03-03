@@ -251,7 +251,7 @@ open class CTFBARTStepViewController: ORKStepViewController {
         self.collectButton.isEnabled = false
         self.pumpButton.isEnabled = false
         
-        self.taskProgressLabel.text = "Ballon 1 out of \(self.trialsCount)."
+        self.taskProgressLabel.text = "Balloon 1 out of \(self.trialsCount):"
         self.totalPayoutLabel.text = "$0.00"
     }
     
@@ -291,7 +291,7 @@ open class CTFBARTStepViewController: ORKStepViewController {
         self.pendingResults = results
         
         //set the task progress label and total payout label
-        self.taskProgressLabel.text = "Ballon \(results.count + 1) out of \(self.trialsCount)."
+        self.taskProgressLabel.text = "Balloon \(results.count + 1) out of \(self.trialsCount):"
         
         let totalPayout: Float = results.reduce(0.0) { (acc, trialResult) -> Float in
             return acc + trialResult.payout
