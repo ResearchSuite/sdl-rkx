@@ -21,5 +21,13 @@ open class RKXMultipleImageSelectionSurveyResult: ORKChoiceQuestionResult {
         (self.notSelectedIdentifiers != nil ? "\nnotSelectedIdentifiers: \(self.notSelectedIdentifiers!)" : "") +
         (self.excludedIdentifiers != nil ? "\nexcludedIdentifiers: \(self.excludedIdentifiers!)" : "")
     }
+    
+    override open func copy(with zone: NSZone? = nil) -> Any {
+        let theCopy = super.copy(with: zone) as! RKXMultipleImageSelectionSurveyResult
+        theCopy.selectedIdentifiers = self.selectedIdentifiers
+        theCopy.notSelectedIdentifiers = self.notSelectedIdentifiers
+        theCopy.excludedIdentifiers = self.excludedIdentifiers
+        return theCopy
+    }
 
 }

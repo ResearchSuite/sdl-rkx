@@ -8,8 +8,14 @@
 
 import ResearchKit
 
-public class CTFDelayDiscountingResult: ORKResult {
+open class CTFDelayDiscountingResult: ORKResult {
     
     public var trialResults: [CTFDelayDiscountingTrialResult]?
+    
+    override open func copy(with zone: NSZone? = nil) -> Any {
+        let theCopy = super.copy(with: zone) as! CTFDelayDiscountingResult
+        theCopy.trialResults = self.trialResults
+        return theCopy
+    }
 
 }

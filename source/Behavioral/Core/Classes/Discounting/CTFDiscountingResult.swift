@@ -10,5 +10,11 @@ import ResearchKit
 public class CTFDiscountingResult: ORKResult {
     
     public var trialResults: [CTFDiscountingTrialResult]?
+    
+    override open func copy(with zone: NSZone? = nil) -> Any {
+        let theCopy = super.copy(with: zone) as! CTFDiscountingResult
+        theCopy.trialResults = self.trialResults
+        return theCopy
+    }
 
 }
