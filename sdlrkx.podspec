@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
   s.subspec 'VSR' do |vsr|
     vsr.source_files = 'source/VSR/Core/Classes/**/*'
     vsr.dependency 'sdlrkx/Helpers'
-    vsr.dependency 'ResearchSuiteExtensions/Common', '~> 0.1'
+    vsr.dependency 'ResearchSuiteExtensions/Common', '~> 0.14'
     vsr.resources = 'source/VSR/Core/Assets/PAM.xcassets', 'source/VSR/Core/Assets/PAM.json'
     vsr.dependency 'ResearchKit', '~> 1.4'
     vsr.dependency 'Gloss', '~> 2'
@@ -33,7 +33,7 @@ Pod::Spec.new do |s|
   s.subspec 'VSR-RSTBSupport' do |rstb|
     rstb.source_files = 'source/VSR/RSTBSupport/Classes/**/*'
     rstb.dependency 'sdlrkx/VSR'
-    rstb.dependency 'ResearchSuiteExtensions/Common', '~> 0.1'
+    rstb.dependency 'ResearchSuiteExtensions/Common', '~> 0.14'
     rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.4'
     rstb.dependency 'Gloss', '~> 2'
   end
@@ -54,7 +54,7 @@ Pod::Spec.new do |s|
   s.subspec 'Behavioral' do |behavioral|
     behavioral.source_files = 'source/Behavioral/Core/Classes/**/*'
     behavioral.dependency 'sdlrkx/Helpers'
-    behavioral.dependency 'ResearchSuiteExtensions/Common', '~> 0.1'
+    behavioral.dependency 'ResearchSuiteExtensions/Common', '~> 0.14'
     behavioral.resources = 'source/Behavioral/Core/Assets/BART/BART.xcassets'
     behavioral.dependency 'ResearchKit', '~> 1.4'
   end
