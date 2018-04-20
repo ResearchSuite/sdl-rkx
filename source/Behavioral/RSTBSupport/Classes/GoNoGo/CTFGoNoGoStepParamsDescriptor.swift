@@ -9,7 +9,7 @@
 import UIKit
 import Gloss
 
-class CTFGoNoGoStepParamsDescriptor: Gloss.Decodable {
+class CTFGoNoGoStepParamsDescriptor: JSONDecodable {
     
     // time vars for step
     let waitTime: TimeInterval

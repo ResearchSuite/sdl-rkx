@@ -10,7 +10,7 @@ import UIKit
 import Gloss
 import ResearchSuiteTaskBuilder
 
-public struct YADLDifficultyChoice: Gloss.Decodable {
+public struct YADLDifficultyChoice: JSONDecodable {
     public let text: String
     public let value: String
     public let color: UIColor
@@ -30,7 +30,7 @@ public struct YADLDifficultyChoice: Gloss.Decodable {
     }
 }
 
-public struct YADLItem: Gloss.Decodable {
+public struct YADLItem: JSONDecodable {
     public let identifier: String
     public let description: String
     public let imageTitle: String
@@ -62,8 +62,8 @@ open class YADLFullStepDescriptor: RSTBElementDescriptor {
                 return nil
         }
         
-        self.choices = choices.flatMap({YADLDifficultyChoice(json: $0)})
-        self.items = items.flatMap({YADLItem(json: $0)})
+        self.choices = choices.compactMap({YADLDifficultyChoice(json: $0)})
+        self.items = items.compactMap({YADLItem(json: $0)})
         self.optional = "optional" <~~ json ?? true
         self.text = "text" <~~ json
         

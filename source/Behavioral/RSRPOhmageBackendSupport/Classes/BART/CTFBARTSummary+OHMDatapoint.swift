@@ -10,7 +10,7 @@ import UIKit
 import OMHClient
 
 extension CTFBARTSummary: OMHDataPointBuilder {
-    
+
     open var creationDateTime: Date {
         return self.startDate ?? Date()
     }
@@ -19,20 +19,20 @@ extension CTFBARTSummary: OMHDataPointBuilder {
         return self.uuid.uuidString
     }
     
-    open var acquisitionModality: OMHAcquisitionProvenanceModality? {
+    open var acquisitionModality: OMHAcquisitionProvenanceModality {
         return .Sensed
     }
     
-    open var acquisitionSourceCreationDateTime: Date? {
-        return self.startDate
+    open var acquisitionSourceCreationDateTime: Date {
+        return self.startDate ?? Date()
     }
     
-    open var acquisitionSourceName: String? {
-        return Bundle.main.infoDictionary![kCFBundleNameKey as String] as? String
+    open var acquisitionSourceName: String {
+        return OMHAcquisitionProvenance.defaultAcquisitionSourceName
     }
     
     open var schema: OMHSchema {
-        return OMHSchema(name: "BARTSummary", version: "1.1", namespace: "Cornell")
+        return OMHSchema(name: "BARTSummary", version: "1.1.0", namespace: "Cornell")
     }
     
     open var body: [String: Any] {

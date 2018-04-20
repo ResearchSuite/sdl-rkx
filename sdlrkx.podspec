@@ -4,7 +4,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "sdlrkx"
-  s.version          = "0.15.0"
+  s.version          = "0.16.0"
   s.summary          = "SDL visual self-report for ResearchKit"
 
   s.description      = "The Small Data Lab ResearchKit Extensions package is the easiest way to include SDL visual self-report (YADL, MEDL, PAM) and Behavioral extensions (Go / No Go, Delayed Discounting, BART)into a ResearchKit application."
@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
     vsr.dependency 'ResearchSuiteExtensions/Common', '~> 0.1'
     vsr.resources = 'source/VSR/Core/Assets/PAM.xcassets', 'source/VSR/Core/Assets/PAM.json'
     vsr.dependency 'ResearchKit', '~> 1.4'
-    vsr.dependency 'Gloss', '~> 1'
+    vsr.dependency 'Gloss', '~> 2'
   end
 
   s.subspec 'VSR-RSTBSupport' do |rstb|
@@ -34,7 +34,7 @@ Pod::Spec.new do |s|
     rstb.dependency 'sdlrkx/VSR'
     rstb.dependency 'ResearchSuiteExtensions/Common', '~> 0.1'
     rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.4'
-    rstb.dependency 'Gloss', '~> 1'
+    rstb.dependency 'Gloss', '~> 2'
   end
 
   s.subspec 'VSR-RSRPSupport' do |rsrp|
@@ -62,7 +62,7 @@ Pod::Spec.new do |s|
     rstb.source_files = 'source/Behavioral/RSTBSupport/Classes/**/*'
     rstb.dependency 'sdlrkx/Behavioral'
     rstb.dependency 'ResearchSuiteTaskBuilder', '~> 0.4'
-    rstb.dependency 'Gloss', '~> 1'
+    rstb.dependency 'Gloss', '~> 2'
   end
 
   s.subspec 'Behavioral-RSRPSupport' do |rsrp|

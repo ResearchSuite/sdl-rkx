@@ -155,7 +155,7 @@ class RKXSingleImageClassificationSurveyViewController: ORKStepViewController {
     }
     
     
-    func textChoiceButtonSelected(_ button: UIButton) {
+    @objc func textChoiceButtonSelected(_ button: UIButton) {
         
         
         if let buttonIndex = self.buttons?.index(of: button),

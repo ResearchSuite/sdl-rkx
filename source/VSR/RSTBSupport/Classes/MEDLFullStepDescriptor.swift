@@ -10,7 +10,7 @@ import UIKit
 import Gloss
 import ResearchSuiteTaskBuilder
 
-public struct MEDLItem: Gloss.Decodable {
+public struct MEDLItem: JSONDecodable {
     public let identifier: String
     public let generalDescription: String
     public let specificDescription: String
@@ -48,7 +48,7 @@ open class MEDLFullStepDescriptor: RSTBElementDescriptor {
             return nil
         }
         
-        self.items = items.flatMap({MEDLItem(json: $0)})
+        self.items = items.compactMap { MEDLItem(json: $0)}
         self.optional = "optional" <~~ json ?? true
         self.text = "text" <~~ json
         

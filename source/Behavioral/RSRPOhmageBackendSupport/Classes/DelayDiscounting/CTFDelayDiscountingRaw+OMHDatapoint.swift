@@ -18,16 +18,16 @@ extension CTFDelayDiscountingRaw: OMHDataPointBuilder {
         return self.uuid.uuidString
     }
     
-    open var acquisitionModality: OMHAcquisitionProvenanceModality? {
+    open var acquisitionModality: OMHAcquisitionProvenanceModality {
         return .Sensed
     }
     
-    open var acquisitionSourceCreationDateTime: Date? {
-        return self.startDate
+    open var acquisitionSourceCreationDateTime: Date {
+        return self.startDate ?? Date()
     }
     
-    open var acquisitionSourceName: String? {
-        return Bundle.main.infoDictionary![kCFBundleNameKey as String] as? String
+    open var acquisitionSourceName: String {
+        return OMHAcquisitionProvenance.defaultAcquisitionSourceName
     }
     
     open var schema: OMHSchema {
