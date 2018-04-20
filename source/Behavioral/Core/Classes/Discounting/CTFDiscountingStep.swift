@@ -10,7 +10,7 @@ import ResearchKit
 
 open class CTFDiscountingStep: ORKStep {
     
-    static let defaultNextAmountClosure: ([CTFDiscountingTrialResult]) -> Double? = { trialResults in
+    public static let defaultNextAmountClosure: ([CTFDiscountingTrialResult]) -> Double? = { trialResults in
         
         //assume at least one trial result
         

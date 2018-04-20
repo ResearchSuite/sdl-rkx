@@ -4,7 +4,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "sdlrkx"
-  s.version          = "0.16.0"
+  s.version          = "0.16.1"
   s.summary          = "SDL visual self-report for ResearchKit"
 
   s.description      = "The Small Data Lab ResearchKit Extensions package is the easiest way to include SDL visual self-report (YADL, MEDL, PAM) and Behavioral extensions (Go / No Go, Delayed Discounting, BART)into a ResearchKit application."
@@ -13,6 +13,7 @@ Pod::Spec.new do |s|
   s.license          = { :type => "Apache 2", :file => "LICENSE" }
   s.author           = { "James Kizer, Cornell Tech Foundry" => "jdk288 at cornell dot edu" }
   s.source           = { :git => "https://github.com/ResearchSuite/sdl-rkx.git", :tag => s.version.to_s }
+  s.swift_version    = '4.1'
 
   s.ios.deployment_target = '9.0'
 
@@ -44,11 +45,11 @@ Pod::Spec.new do |s|
     rsrp.dependency 'ResearchKit', '~> 1.4'
   end
 
-  s.subspec 'VSR-RSRPOhmageBackend' do |obes|
-    obes.source_files = 'source/VSR/RSRPOhmageBackendSupport/Classes/**/*'
-    obes.dependency 'sdlrkx/VSR-RSRPSupport'
-    obes.dependency 'OMHClient'
-  end
+  # s.subspec 'VSR-RSRPOhmageBackend' do |obes|
+  #   obes.source_files = 'source/VSR/RSRPOhmageBackendSupport/Classes/**/*'
+  #   obes.dependency 'sdlrkx/VSR-RSRPSupport'
+  #   obes.dependency 'OMHClient'
+  # end
 
   s.subspec 'Behavioral' do |behavioral|
     behavioral.source_files = 'source/Behavioral/Core/Classes/**/*'
@@ -72,11 +73,11 @@ Pod::Spec.new do |s|
     rsrp.dependency 'ResearchKit', '~> 1.4'
   end
 
-  s.subspec 'Behavioral-RSRPOhmageBackend' do |obes|
-    obes.source_files = 'source/Behavioral/RSRPOhmageBackendSupport/Classes/**/*'
-    obes.dependency 'sdlrkx/Behavioral-RSRPSupport'
-    obes.dependency 'OMHClient'
-  end
+  # s.subspec 'Behavioral-RSRPOhmageBackend' do |obes|
+  #   obes.source_files = 'source/Behavioral/RSRPOhmageBackendSupport/Classes/**/*'
+  #   obes.dependency 'sdlrkx/Behavioral-RSRPSupport'
+  #   obes.dependency 'OMHClient'
+  # end
 
   # s.subspec 'Survey' do |q|
   #   q.source_files = 'source/Survey/Core/Classes/**/*'
