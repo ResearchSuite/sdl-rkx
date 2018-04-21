@@ -97,7 +97,6 @@ class CTFGoNoGoView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-//        fatalError("init(coder:) has not been implemented")
     }
     
     override func awakeFromNib() {
@@ -137,26 +136,7 @@ class CTFGoNoGoView: UIView {
     }
     
     func screenTapped() {
-        print("Screen tapped: \(self.RFC3339DateFormatter.string(from: Date()))")
         self.delegate?.goNoGoViewDidTap(self)
-        
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//    override func sizeThatFits(size: CGSize) -> CGSize {
-//        let minDimension: CGFloat = min(size.height, size.width)
-//        return CGSizeMake(minDimension, minDimension)
-//    }
-    
-//    override func intrinsicContentSize() -> CGSize {
-//        return CGSizeMake(375.0, 375.0)
-//    }
 
 }

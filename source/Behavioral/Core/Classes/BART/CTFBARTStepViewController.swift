@@ -9,19 +9,6 @@
 import UIKit
 import ResearchKit
 
-//extension Array where Element: Integer {
-//    /// Returns the sum of all elements in the array
-//    var total: Element {
-//        return reduce(0, +)
-//    }
-//}
-//extension Collection where Iterator.Element == Int, Index == Int {
-//    /// Returns the average of all elements in the array
-//    var average: Float {
-//        return isEmpty ? 0 : Float(reduce(0, +)) / Float(endIndex-startIndex)
-//    }
-//}
-
 open class CTFBARTStepViewController: ORKStepViewController {
 
     let initialScalingFactor: CGFloat = 10.0

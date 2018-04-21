@@ -54,8 +54,6 @@ class RKXSingleImageClassificationSurveyViewController: ORKStepViewController {
             return nil
         }
         
-        debugPrint(parentResult)
-        
         if let answer = self.answer {
             let step = self.step as? RKXSingleImageClassificationSurveyStep
             

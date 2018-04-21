@@ -14,12 +14,10 @@ open class MEDLFullAssessmentTask: RKXMultipleImageSelectionSurveyTask {
     open class func fullAssessmentResults(_ taskResult: ORKTaskResult) -> [ORKChoiceQuestionResult]? {
         if let stepResults = taskResult.results as? [ORKStepResult]
         {
-            print(stepResults)
-            stepResults.forEach { print($0) }
             return stepResults.map { stepResult in
                 return stepResult.firstResult as? ORKChoiceQuestionResult
                 }
-                .flatMap{ $0 }
+                .compactMap { $0 }
         }
         else { return nil }
     }
@@ -67,7 +65,7 @@ open class MEDLFullAssessmentTask: RKXMultipleImageSelectionSurveyTask {
                 return nil
             }
             return RKXCopingMechanismDescriptor(itemDictionary: itemDictionary)
-            }.flatMap { $0 }
+            }.compactMap { $0 }
         
         let categories = items.reduce([String](), { (acc, item) -> [String] in
             if acc.contains(item.category) {
@@ -108,7 +106,7 @@ open class MEDLFullAssessmentTask: RKXMultipleImageSelectionSurveyTask {
                     let imageChoices: [ORKImageChoice] = items
                         .map(RKXImageDescriptor.imageChoiceForDescriptor())
                         //dont forget to unwrap optionals!!
-                        .flatMap { $0 }
+                        .compactMap { $0 }
                     
                     let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: imageChoices)
                     

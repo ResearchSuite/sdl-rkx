@@ -289,7 +289,6 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
                 return Array(notSelectedSet)
             }()
             
-            print(questionResult)
             parentResult.results = [questionResult]
         }
         
@@ -301,7 +300,7 @@ open class RKXMultipleImageSelectionSurveyViewController: ORKStepViewController,
     //TODO: load up results
     //rethink how to handle things like PAM that don;t support multiple selection
     func initializeAnswersForResult(result: ORKResult) {
-        print(result)
+        
     }
     
     func getSelectedForImageChoice(imageChoice: ORKImageChoice) -> Bool? {
