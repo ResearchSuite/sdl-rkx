@@ -8,7 +8,6 @@
 
 import UIKit
 import ResearchKit
-import sdlrkx
 import ResearchSuiteResultsProcessor
 
 public class CTFGoNoGoSummaryResultsTransformer: RSRPFrontEndTransformer {

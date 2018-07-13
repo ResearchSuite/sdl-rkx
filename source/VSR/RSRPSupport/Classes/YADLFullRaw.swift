@@ -27,63 +27,54 @@ open class YADLFullRaw: RSRPIntermediateResult, RSRPFrontEndTransformer {
         taskRunUUID: UUID,
         parameters: [String: AnyObject]
         ) -> RSRPIntermediateResult? {
+
+        guard let results = parameters["results"] as? [ORKStepResult] else {
+            return nil
+        }
         
         
-        guard let schemaID = parameters["schemaID"] as? JSON else {
+        let resultPairs: [(String, String)] = results.compactMap { (stepResult) -> (String, String)? in
+            
+            guard let identifier = stepResult.identifier.components(separatedBy: ".").last else {
                 return nil
-        }
-        
-        let results: [(String, String)] = parameters.flatMap { (pair) -> (String, String)? in
-            guard let stepResult = pair.value as? ORKStepResult,
-                let choiceResult = stepResult.firstResult as? ORKChoiceQuestionResult,
-                let answer = choiceResult.choiceAnswers?.first as? String,
-                let identifier = stepResult.identifier.components(separatedBy: ".").last else {
+            }
+            
+            if let choiceResult = stepResult.firstResult as? ORKChoiceQuestionResult {
+                guard let answer = choiceResult.choiceAnswers?.first as? String else {
                     return nil
+                }
+                
+                return (identifier, answer)
             }
-            
-            return (identifier, answer)
-        }
-        
-        var resultMap: [String: String] = [:]
-        results.forEach { (pair) in
-            resultMap[pair.0] = pair.1
-        }
-        
-        let keyParameters = Array(parameters.keys)
-        let keyResults = Array(resultMap.keys)
-        
-        let skippedKeys  = keyParameters.filter{ !keyResults.contains($0) }
-        
-        for each in skippedKeys {
-            if each != "schemaID"{
-                resultMap[each] = "skipped";
+            else {
+                return (identifier, "skipped")
             }
             
         }
-        
-    
-        
+
+        let resultMap = Dictionary.init(uniqueKeysWithValues: resultPairs)
+
         return YADLFullRaw(
             uuid: UUID(),
             taskIdentifier: taskIdentifier,
             taskRunUUID: taskRunUUID,
-            schemaID: schemaID,
+            parameters: parameters,
             resultMap: resultMap
         )
     }
     
     public let resultMap: [String: String]
-    public let schemaID: JSON
+    public let parameters: [String: AnyObject]
     
     public init?(
         uuid: UUID,
         taskIdentifier: String,
         taskRunUUID: UUID,
-        schemaID: JSON,
+        parameters: [String: AnyObject],
         resultMap: [String: String]
         ) {
         
-        self.schemaID = schemaID
+        self.parameters = parameters
         self.resultMap = resultMap
         
         super.init(

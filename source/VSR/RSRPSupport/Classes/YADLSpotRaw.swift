@@ -28,11 +28,6 @@ open class YADLSpotRaw: RSRPIntermediateResult, RSRPFrontEndTransformer {
         parameters: [String: AnyObject]
         ) -> RSRPIntermediateResult? {
         
-        
-        guard let schemaID = parameters["schemaID"] as? JSON else {
-                return nil
-        }
-        
         guard let stepResult = parameters["result"] as? ORKStepResult,
             let yadlSpotResult = stepResult.results?.first as? RKXMultipleImageSelectionSurveyResult,
             let selected = yadlSpotResult.selectedIdentifiers,
@@ -45,14 +40,14 @@ open class YADLSpotRaw: RSRPIntermediateResult, RSRPFrontEndTransformer {
             uuid: UUID(),
             taskIdentifier: taskIdentifier,
             taskRunUUID: taskRunUUID,
-            schemaID: schemaID,
+            parameters: parameters,
             selected: selected,
             notSelected: notSelected,
             excluded: excluded
         )
     }
     
-    public let schemaID: JSON
+    public let parameters: [String: AnyObject]
     public let selected: [String]
     public let notSelected: [String]
     public let excluded: [String]
@@ -61,13 +56,13 @@ open class YADLSpotRaw: RSRPIntermediateResult, RSRPFrontEndTransformer {
         uuid: UUID,
         taskIdentifier: String,
         taskRunUUID: UUID,
-        schemaID: JSON,
+        parameters: [String: AnyObject],
         selected: [String],
         notSelected: [String],
         excluded: [String]
         ) {
         
-        self.schemaID = schemaID
+        self.parameters = parameters
         self.selected = selected
         self.notSelected = notSelected
         self.excluded = excluded
