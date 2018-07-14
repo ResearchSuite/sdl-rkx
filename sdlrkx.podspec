@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.version          = "0.17.0"
   s.summary          = "SDL visual self-report for ResearchKit"
 
-  s.description      = "The Small Data Lab ResearchKit Extensions package is the easiest way to include SDL visual self-report (YADL, MEDL, PAM) and Behavioral extensions (Go / No Go, Delayed Discounting, BART)into a ResearchKit application."
+  s.description      = "The Small Data Lab ResearchKit Extensions package is the easiest way to include SDL AVA (YADL, MEDL, PAM) and Behavioral extensions (Go / No Go, Delayed Discounting, BART) into a ResearchKit application."
 
   s.homepage         = "https://github.com/ResearchSuite/sdl-rkx"
   s.license          = { :type => "Apache 2", :file => "LICENSE" }

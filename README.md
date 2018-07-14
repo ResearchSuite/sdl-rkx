@@ -1,10 +1,10 @@
 # sdlrkx
 
-The [Small Data Lab](http://smalldata.io) ResearchKit Extensions package is the easiest way to include SDL visual surveys ([YADL](http://yadl.smalldata.io), MEDL, PAM) into a ResearchKit application.
+The [Small Data Lab](http://smalldata.io) ResearchKit Extensions package is the easiest way to include SDL AVA ([YADL](http://yadl.smalldata.io), MEDL, PAM) and Behavioral extensions (Go / No Go, Delayed Discounting, BART) into a ResearchKit application.
 
 ## Requirements
 
- - iOS 9.0+
+ - iOS 10.0+
  - Xcode 7.3+
 
 ## Installation
@@ -22,10 +22,10 @@ $ gem install cocoapods
 To integrate sdlrkx into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
-platform :ios, '9.0'
+platform :ios, '10.0'
 use_frameworks!
 
-pod 'sdlrkx', '~> 0.11'
+pod 'sdlrkx', '~> 0.17'
 ```
 
 Then, run the following command:
